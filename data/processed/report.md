@@ -8,12 +8,12 @@
 | pdpl_ir | ar | 38 | 40 | 25 | articles 1..38 |
 | pdpl_transfer | en | 9 | 11 | 7 | articles 1..9 |
 | pdpl_transfer | ar | 9 | 10 | 6 | articles 1..9 |
-| ecc | en | 136 | 136 | 19 |  |
+| ecc | en | 136 | 136 | 18 |  |
 | ecc | ar | 138 | 138 | 16 |  |
 | ccc | en | 79 | 79 | 17 |  |
 | ccc | ar | 79 | 79 | 17 |  |
 | dcc | en | 30 | 30 | 7 |  |
-| dcc | ar | 30 | 30 | 8 |  |
+| dcc | ar | 30 | 30 | 7 |  |
 
 ## Graphics-only pages recovered with grid OCR
 

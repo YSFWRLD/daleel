@@ -242,7 +242,13 @@ def parse_controls(lines: list[Line], lang: str, id_position: str, collect: list
             u.lines.append(nid)  # keep subcontrol numbers inline in the text
         return u.lines
 
+    # "Objective To ensure ..." on one line: split the label off so the title/objective split works
+    expanded: list[Line] = []
     for ln in lines[start:]:
+        lm = re.match(r"^(Objective|Controls|الهدف|الضوابط)\s*:?\s+(\S.*)$", ln.text, re.I)
+        expanded += [Line(lm.group(1), ln.page), Line(lm.group(2), ln.page)] if lm else [ln]
+
+    for ln in expanded:
         t = ln.text
         low = t.lower()
         if seen and len(t) < 40 and APPENDIX.match(t):
