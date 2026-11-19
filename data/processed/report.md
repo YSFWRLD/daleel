@@ -8,11 +8,11 @@
 | pdpl_ir | ar | 38 | 40 | 25 | articles 1..38 |
 | pdpl_transfer | en | 9 | 11 | 7 | articles 1..9 |
 | pdpl_transfer | ar | 9 | 10 | 6 | articles 1..9 |
-| ecc | en | 136 | 146 | 30 |  |
+| ecc | en | 136 | 136 | 19 |  |
 | ecc | ar | 138 | 138 | 16 |  |
 | ccc | en | 79 | 79 | 17 |  |
 | ccc | ar | 79 | 79 | 17 |  |
-| dcc | en | 30 | 30 | 8 |  |
+| dcc | en | 30 | 30 | 7 |  |
 | dcc | ar | 30 | 30 | 8 |  |
 
 ## Graphics-only pages recovered with grid OCR
@@ -25,11 +25,11 @@
 - ecc/ar page 26: OK — 17 IDs
 - ecc/ar page 34: SKIPPED — subdomain 2-3 split across pages
 
-## English vs Arabic structure (ref keys present in one language only)
+## English vs Arabic structure (canonical keys present in one language only)
 
 - **pdpl**: only EN —; only AR —
 - **pdpl_ir**: only EN —; only AR —
 - **pdpl_transfer**: only EN —; only AR —
-- **ecc**: only EN —; only AR ['ctl-1-7-2', 'ctl-2-7-4']
+- **ecc**: only EN —; only AR ['ctl-1-7-1', 'ctl-2-7-3']
 - **ccc**: only EN —; only AR —
 - **dcc**: only EN —; only AR —

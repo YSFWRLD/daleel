@@ -102,12 +102,17 @@ def main() -> int:
             a, f = structural_chunks(units, d["doc_id"], title, lang), fixed_chunks(units, d["doc_id"], title, lang)
             notes_for = {k: v.get(lang, "") for k, v in (d.get("version_notes") or {}).items()}
             scanned = ocr_pages.get((d["doc_id"], lang), set())
+            alias = ((d.get("aliases") or {}).get(lang)) or {}
             for c in a + f:
                 c.source = "ocr" if c.page in scanned else "text"
                 c.note = " ".join(n for r in c.refs if (n := notes_for.get(r)))
+                c.authority = (d.get("authority") or {}).get(lang, "")
+                c.canonical_refs = [alias.get(r, r) for r in c.refs]
+                c.canonical_key = alias.get(c.ref_key, c.ref_key) if c.ref_key else None
             out["article"] += a
             out["fixed"] += f
-            keys = {u.ref_key for u in units}
+            alias = ((d.get("aliases") or {}).get(lang)) or {}
+            keys = {alias.get(u.ref_key, u.ref_key) for u in units}  # compare in canonical numbering
             keys_by_doc.setdefault(d["doc_id"], {})[lang] = keys
             notes = ""
             if d["unit"] == "article":
@@ -117,7 +122,7 @@ def main() -> int:
 
     if grid_notes:
         report += ["", "## Graphics-only pages recovered with grid OCR", ""] + grid_notes
-    report += ["", "## English vs Arabic structure (ref keys present in one language only)", ""]
+    report += ["", "## English vs Arabic structure (canonical keys present in one language only)", ""]
     for doc, by_lang in keys_by_doc.items():
         if len(by_lang) == 2:
             en, ar = by_lang.get("en", set()), by_lang.get("ar", set())

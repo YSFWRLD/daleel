@@ -160,3 +160,16 @@ def test_fixed_chunks_track_refs():
 def test_clean_ocr_arabic():
     assert clean_ocr_arabic("يجب أن تغطي المتطلبات بحد Gol ما tah") == "يجب أن تغطي المتطلبات بحد أدنى ما يلي:"
     assert "(Domain Keys Identified Mail)" in clean_ocr_arabic("إطار (Domain Keys Identified Mail) آمن")
+
+
+def test_parse_controls_stops_at_appendices_heading():
+    lines = L("4-2 Cloud", "4-2-1 real control text.", "Appendices", "Appendix (A): Terms and Definitions", "Term text")
+    units = {u.ref_key: u for u in parse_controls(lines, "en", "before")}
+    assert units["ctl-4-2-1"].text == "real control text."
+
+
+def test_parse_controls_joins_id_split_by_stray_space():
+    # CCC Arabic writes 2-3-P-1-10 as "2-٣-م-1-1 0"
+    lines = L("2-3 Sub", "2-3-P-1 parent:", "2-3-P-1-1 first", "2-3-P-1-9 ninth", "2-٣-م-1-1 0 tenth item")
+    units = {u.ref_key: u for u in parse_controls(lines, "ar", "before")}
+    assert "2-3-P-1-10 tenth item" in units["ctl-2-3-P-1"].text

@@ -65,6 +65,10 @@ def _ocr_page(page: pymupdf.Page, ocr) -> list[str]:
     ids = [i for i in items if ID_ONLY.match(i["t"])]
     labels = [i for i in items if i["t"].lower() in STRUCTURAL_LABELS]
     texts = [i for i in items if i not in ids and i not in labels and i["t"].lower() not in CLASSIFICATION_LABELS]
+    # DCC tables have per-classification-level columns on the right ("At least annually", ...).
+    # Keep them out of the paragraph flow and attach them to the row they belong to.
+    side = [i for i in texts if i["x0"] > 0.55 * pix.w]
+    texts = [i for i in texts if i["x0"] <= 0.55 * pix.w]
 
     # group text lines into paragraphs (same column, small vertical gap)
     texts.sort(key=lambda i: i["y0"])
@@ -93,6 +97,10 @@ def _ocr_page(page: pymupdf.Page, ocr) -> list[str]:
                         grp = items[s:e]
                         mid = (grp[0]["y0"] + grp[-1]["y1"]) / 2
                         cost = best[(s, j - 1)][0] + abs(mid - cents[j - 1])
+                        # a cell should start after a finished sentence, not mid-sentence
+                        # (strong: some IDs are top-aligned rather than centred, which skews the centres)
+                        if s > 0 and not items[s - 1]["t"].rstrip().endswith((".", ":", ";")):
+                            cost += 100
                         opts.append((cost, best[(s, j - 1)][1] + [e]))
                 if opts:
                     best[(e, j)] = min(opts, key=lambda o: o[0])
@@ -134,9 +142,23 @@ def _ocr_page(page: pymupdf.Page, ocr) -> list[str]:
                 leftover.remove((k, m))
                 p["tag"] = m["t"]
 
+    for it in side:  # attach right-hand column values to the overlapping tagged row
+        rows = [p for p in paras if p["tag"] and p["y0"] - 25 <= centre(it) <= p["y1"] + 25]
+        if rows:
+            min(rows, key=lambda p: abs((p["y0"] + p["y1"]) / 2 - centre(it))).setdefault("side", []).append(it)
+
     out = []
     for p in sorted(paras, key=lambda p: p["y0"]):
         body = " ".join(p["lines"])
+        if p.get("side"):
+            cols: list[list[dict]] = []
+            for it in sorted(p["side"], key=lambda i: i["x0"]):
+                if cols and abs(it["x0"] - cols[-1][0]["x0"]) < 60:
+                    cols[-1].append(it)
+                else:
+                    cols.append([it])
+            vals = [" ".join(i["t"] for i in sorted(c, key=lambda i: i["y0"])) for c in cols]
+            body += " (by data classification level: " + " / ".join(vals) + ")"
         if p["tag"] and p["tag"].lower() in STRUCTURAL_LABELS:
             out += [p["tag"], body]  # "Objective" / "Controls" stay on their own line
         elif p["tag"]:

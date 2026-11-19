@@ -6,12 +6,19 @@
 #               extracted text stream (ECC/DCC Arabic PDFs emit the ID after the text).
 # pages:        optional [first, last] page range (1-based, inclusive)
 # ocr:          OCR the file instead of reading its text layer
+# authority:    standing of each language version (see docs/decisions/001-arabic-is-binding.md)
+#               binding     = the document itself says this version prevails
+#               official    = original-language text; the PDFs do not state which version prevails
+#               translation = English rendering of the Arabic text
+# aliases:      map a ref_key in one language to the canonical (Arabic) ref_key where NCA's two
+#               files number the same control differently
 
 documents:
   - doc_id: pdpl
     title: Personal Data Protection Law (amended by Royal Decree M/148, 5/9/1444H)
     short: {en: PDPL, ar: نظام حماية البيانات الشخصية}
     issuer: SDAIA
+    authority: {ar: official, en: translation}   # not stated in the SDAIA PDFs
     unit: article
     files:
       en: raw/pdpl/en/pdpl_law_en.pdf        # 16 pages, 43 articles
@@ -21,6 +28,7 @@ documents:
     title: Implementing Regulation of the Personal Data Protection Law
     short: {en: PDPL Implementing Regulation, ar: اللائحة التنفيذية لنظام حماية البيانات الشخصية}
     issuer: SDAIA
+    authority: {ar: official, en: translation}   # not stated in the SDAIA PDFs
     unit: article
     files:
       en: raw/pdpl_ir/en/pdpl_ir_en.pdf
@@ -34,6 +42,7 @@ documents:
     title: Regulation on Personal Data Transfer outside the Kingdom (v2.0, Aug 2024)
     short: {en: Personal Data Transfer Regulation, ar: لائحة نقل البيانات الشخصية إلى خارج المملكة}
     issuer: SDAIA
+    authority: {ar: official, en: translation}   # not stated in the SDAIA PDFs
     unit: article
     files:
       en: raw/pdpl_transfer/en/pdpl_transfer_en.pdf   # 11 pages, 9 articles
@@ -43,6 +52,7 @@ documents:
     title: Essential Cybersecurity Controls (ECC-2:2024)
     short: {en: NCA ECC-2:2024, ar: الضوابط الأساسية للأمن السيبراني ECC-2:2024}
     issuer: NCA
+    authority: {ar: binding, en: translation}     # stated in the English NCA PDFs
     unit: control
     files:
       en: raw/nca_ecc/en/ecc-2-2024_en.pdf
@@ -53,6 +63,8 @@ documents:
     grid_ocr: {ar: true}
     # NCA's Arabic and English ECC-2:2024 files number these controls differently (checked by
     # reading both). NCA states the Arabic version is binding. Attached to the chunks as `note`.
+    aliases:
+      en: {ctl-1-7-1: ctl-1-7-2, ctl-2-7-3: ctl-2-7-4}
     version_notes:
       ctl-1-7-1:
         en: "The Arabic ECC-2:2024 numbers this control 1-7-2; its Arabic 1-7-1 (comply with national cybersecurity legislation) is listed as deleted in the English version's appendix."
@@ -69,6 +81,7 @@ documents:
     title: Cloud Cybersecurity Controls (CCC-2:2024)
     short: {en: NCA CCC-2:2024, ar: ضوابط الأمن السيبراني للحوسبة السحابية CCC-2:2024}
     issuer: NCA
+    authority: {ar: binding, en: translation}     # stated in the English NCA PDFs
     unit: control
     files:
       en: raw/nca_ccc/en/ccc-2-2024_en.pdf
@@ -78,6 +91,7 @@ documents:
     title: Data Cybersecurity Controls (DCC-1:2022)
     short: {en: NCA DCC-1:2022, ar: ضوابط الأمن السيبراني للبيانات DCC-1:2022}
     issuer: NCA
+    authority: {ar: binding, en: translation}     # stated in the English NCA PDFs
     unit: control
     files:
       en: raw/nca_dcc/en/dcc-1-2022_en.pdf   # control tables are drawn as graphics -> needs OCR

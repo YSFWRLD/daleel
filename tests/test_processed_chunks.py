@@ -16,10 +16,10 @@ def load(strategy):
     return [json.loads(line) for line in path.open(encoding="utf-8")]
 
 
-def refs(chunks):
+def refs(chunks, key="canonical_key"):
     out = defaultdict(set)
     for c in chunks:
-        out[(c["doc_id"], c["lang"])].add(c["ref_key"])
+        out[(c["doc_id"], c["lang"])].add(c[key])
     return out
 
 
@@ -35,7 +35,9 @@ def test_controls_mostly_aligned_across_languages(doc):
     r = refs(load("article"))
     en, ar = r[(doc, "en")], r[(doc, "ar")]
     assert len(en) > 25
-    assert len(en ^ ar) <= 3, sorted(en ^ ar)
+    # in canonical (Arabic) numbering the only gaps are the controls absent from the English ECC
+    allowed = {("ecc", "ctl-1-7-1"), ("ecc", "ctl-2-7-3")}
+    assert {(doc, k) for k in en ^ ar} <= allowed, sorted(en ^ ar)
 
 
 def test_ids_unique_and_text_present():
@@ -70,3 +72,20 @@ def test_version_differences_are_noted():
 def test_no_lam_alef_extraction_bug_left():
     bad = [c["id"] for c in load("article") if c["lang"] == "ar" and "األ" in c["text"]]
     assert not bad, bad[:5]
+
+
+def test_authority_and_canonical_keys():
+    by_id = {c["id"]: c for c in load("article")}
+    assert by_id["ecc:ar:ctl-1-7-1:0"]["authority"] == "binding"
+    assert by_id["ecc:en:ctl-1-7-1:0"]["authority"] == "translation"
+    assert by_id["pdpl:ar:art-29:0"]["authority"] == "official"
+    # English 1-7-1 is the same control as Arabic 1-7-2
+    assert by_id["ecc:en:ctl-1-7-1:0"]["canonical_key"] == "ctl-1-7-2"
+    assert by_id["ecc:en:ctl-2-7-3:0"]["canonical_key"] == "ctl-2-7-4"
+    assert by_id["ecc:ar:ctl-1-7-1:0"]["canonical_key"] == "ctl-1-7-1"
+
+
+def test_no_control_swallows_appendices():
+    long = [c["id"] for c in load("article") if len(c["text"].split()) > 400]
+    assert not long, long
+    assert "Appendix" not in {c["id"]: c for c in load("article")}["ecc:en:ctl-4-2-4:0"]["text"]

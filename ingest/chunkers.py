@@ -43,6 +43,9 @@ class Chunk:
     text: str
     source: str = "text"  # "ocr" when the text came from OCR (numbers inside may be misread)
     note: str = ""  # e.g. known differences between the Arabic and English versions
+    authority: str = ""  # binding | official | translation (see data/sources.yaml)
+    canonical_key: str | None = None  # ref_key in the Arabic numbering; pairs EN and AR chunks
+    canonical_refs: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -158,6 +161,7 @@ def parse_articles(lines: list[Line], lang: str) -> list[Unit]:
 
 # --- controls ------------------------------------------------------------------------------------
 ID_PREFIX = re.compile(rf"^({ID_TOKEN})(?:\s+(.*))?$")
+APPENDIX = re.compile(r"^(Appendices|Appendix\b|الملاحق|ملحق\b)", re.I)
 
 
 def norm_id(raw: str) -> str:
@@ -241,9 +245,18 @@ def parse_controls(lines: list[Line], lang: str, id_position: str, collect: list
     for ln in lines[start:]:
         t = ln.text
         low = t.lower()
+        if seen and len(t) < 40 and APPENDIX.match(t):
+            break  # appendices (definitions, change log) follow the last control
         m = match_id(t)
         if m and id_level(m[0]) >= 2:
             nid, inline = m
+            # "2-٣-م-1-1 0 ..." : a stray space split the last number (should be 2-3-P-1-10)
+            if inline and re.match(r"^\d(\s|$)", inline) and nid in seen:
+                cand = nid + inline[0]
+                parts = cand.split("-")
+                sibling = "-".join([*parts[:-1], str(int(parts[-1]) - 1)])
+                if cand not in seen and sibling in seen:
+                    nid, inline = cand, inline[1:].strip()
             key = id_sort_key(nid)
             # Accept any ID not seen yet: some PDFs store a whole subdomain out of order in the
             # text stream (CCC Arabic puts 2-8 after 2-10).
