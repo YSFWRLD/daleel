@@ -23,8 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: pip
@@ -54,8 +54,8 @@ jobs:
       # the 7B model needs a GPU to be practical; CI checks the pipeline with the 1.5B model
       OLLAMA_MODEL: qwen2.5:1.5b
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: pip
@@ -65,7 +65,7 @@ jobs:
         run: psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f db/init.sql
 
       - name: Cache Ollama models
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ${{ runner.temp }}/ollama
           key: ollama-${{ env.OLLAMA_IMAGE }}-bge-m3-qwen2.5-1.5b
@@ -80,7 +80,7 @@ jobs:
           sudo chmod -R a+rX "${{ runner.temp }}/ollama"
 
       - name: Cache chunk embeddings
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .cache/embeddings
           key: embeddings-bge-m3-${{ hashFiles('data/processed/chunks_article.jsonl') }}
@@ -99,7 +99,12 @@ jobs:
           python -m eval.run_eval --name ci-answers --answers --out-dir ci-runs --max-errors 0
           --ids q-01 q-08 u-01 s-02
 
-      - uses: actions/upload-artifact@v4
+      - name: Let the cache step read Ollama's files
+        # Ollama (root, in the container) writes metadata while answering, after the pull step's chmod
+        if: always()
+        run: sudo chmod -R a+rX "${{ runner.temp }}/ollama"
+
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: eval-runs
@@ -112,15 +117,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Build and start the database and API
         run: docker compose up -d --build --wait db && docker compose up -d --build api
-      - name: API serves the chat page and reports the database as healthy
+      - name: API serves the chat page and reaches Postgres with pgvector
         run: |
           for i in $(seq 1 30); do curl -sf localhost:8000/health > health.json && break; sleep 2; done
           cat health.json
-          # Ollama is not running in this job, so only the database check must pass
-          python3 -c "import json, sys; h = json.load(open('health.json')); sys.exit(0 if h['db']['ok'] else 1)"
+          # No Ollama and no loaded chunks in this job, so "ok" is false; the API must still reach the database
+          python3 -c "import json, sys; h = json.load(open('health.json')); sys.exit(0 if h['db'].get('pgvector') else 1)"
           curl -sf localhost:8000/ | grep -q "<html"
       - name: Logs on failure
         if: failure()
