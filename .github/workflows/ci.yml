@@ -1,0 +1,127 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: "3.12"
+  OLLAMA_IMAGE: ollama/ollama:0.40.16
+
+jobs:
+  lint-test:
+    name: Lint and unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+      - run: pip install ".[dev]"
+      - run: ruff check .
+      - run: pytest
+
+  integration:
+    name: Retrieval + answer pipeline (pgvector, Ollama on CPU)
+    needs: lint-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    services:
+      db:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: rag
+          POSTGRES_PASSWORD: rag
+          POSTGRES_DB: compliance
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U rag -d compliance"
+          --health-interval 5s --health-retries 10
+    env:
+      DATABASE_URL: postgresql://rag:rag@localhost:5432/compliance
+      OLLAMA_URL: http://localhost:11434
+      # the 7B model needs a GPU to be practical; CI checks the pipeline with the 1.5B model
+      OLLAMA_MODEL: qwen2.5:1.5b
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+      - run: pip install ".[dev]"
+
+      - name: Create the schema
+        run: psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f db/init.sql
+
+      - name: Cache Ollama models
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/ollama
+          key: ollama-${{ env.OLLAMA_IMAGE }}-bge-m3-qwen2.5-1.5b
+
+      - name: Start Ollama and pull models
+        run: |
+          docker run -d --name ollama -p 11434:11434 -v "${{ runner.temp }}/ollama:/root/.ollama" "$OLLAMA_IMAGE"
+          for i in $(seq 1 30); do curl -sf "$OLLAMA_URL/api/version" && break; sleep 2; done
+          docker exec ollama ollama pull bge-m3
+          docker exec ollama ollama pull qwen2.5:1.5b
+          # files written by the container are root-owned; let the cache step read them
+          sudo chmod -R a+rX "${{ runner.temp }}/ollama"
+
+      - name: Cache chunk embeddings
+        uses: actions/cache@v4
+        with:
+          path: .cache/embeddings
+          key: embeddings-bge-m3-${{ hashFiles('data/processed/chunks_article.jsonl') }}
+
+      - name: Embed and load the chunks
+        run: python -m ingest.load --strategy article --cache .cache/embeddings
+
+      - name: Integration tests
+        run: pytest -m "integration and not llm"
+
+      - name: Retrieval evaluation (fails below Hit@5 0.90)
+        run: python -m eval.run_eval --name ci-retrieval --out-dir ci-runs --min-hit5 0.90 --max-errors 0
+
+      - name: Answer pipeline smoke test (4 questions, Qwen 1.5B)
+        run: >-
+          python -m eval.run_eval --name ci-answers --answers --out-dir ci-runs --max-errors 0
+          --ids q-01 q-08 u-01 s-02
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eval-runs
+          path: ci-runs/
+          if-no-files-found: ignore
+
+  docker:
+    name: Docker image
+    needs: lint-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and start the database and API
+        run: docker compose up -d --build --wait db && docker compose up -d --build api
+      - name: API serves the chat page and reports the database as healthy
+        run: |
+          for i in $(seq 1 30); do curl -sf localhost:8000/health > health.json && break; sleep 2; done
+          cat health.json
+          # Ollama is not running in this job, so only the database check must pass
+          python3 -c "import json, sys; h = json.load(open('health.json')); sys.exit(0 if h['db']['ok'] else 1)"
+          curl -sf localhost:8000/ | grep -q "<html"
+      - name: Logs on failure
+        if: failure()
+        run: docker compose logs

@@ -164,6 +164,10 @@ def main() -> None:
     p.add_argument("--ids", nargs="*")
     p.add_argument("--limit", type=int)
     p.add_argument("--sleep", type=float, default=0.0, help="pause between questions (API rate limits)")
+    p.add_argument("--out-dir", type=Path, default=RUNS, help="where to write <name>.json")
+    # quality gates (CI): exit 1 when a threshold is missed
+    p.add_argument("--min-hit5", type=float, help="fail if retrieval Hit@5 is below this (0-1)")
+    p.add_argument("--max-errors", type=int, help="fail if more questions than this raised an error")
     args = p.parse_args()
 
     from app.config import get_settings
@@ -222,12 +226,30 @@ def main() -> None:
         config["prompt"] = PROMPT_VERSION
         config["judge_model"] = get_llm("ollama", args.judge_model).name if args.judge else None
     summary = summarize(rows, args.answers)
-    RUNS.mkdir(exist_ok=True)
-    out = RUNS / f"{args.name}.json"
+    args.out_dir.mkdir(parents=True, exist_ok=True)
+    out = args.out_dir / f"{args.name}.json"
     out.write_text(json.dumps({"name": args.name, "config": config, "summary": summary, "rows": rows},
                               ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps(summary["all"], indent=1))
     print(f"wrote {out}")
+
+    failures = gate(summary, rows, args.min_hit5, args.max_errors)
+    for f in failures:
+        print(f"FAIL: {f}")
+    if failures:
+        raise SystemExit(1)
+
+
+def gate(summary: dict, rows: list[dict], min_hit5: float | None, max_errors: int | None) -> list[str]:
+    """Threshold checks for CI; returns the failed ones."""
+    failures = []
+    hit5 = summary["all"].get("hit@5")
+    if min_hit5 is not None and (hit5 is None or hit5 < min_hit5):
+        failures.append(f"Hit@5 {hit5} is below {min_hit5}")
+    errors = sum(bool(r.get("error")) for r in rows)
+    if max_errors is not None and errors > max_errors:
+        failures.append(f"{errors} questions failed with an error (allowed: {max_errors})")
+    return failures
 
 
 if __name__ == "__main__":

@@ -42,3 +42,14 @@ def test_question_set_is_well_formed():
     for q in qs:
         assert q["lang"] in ("en", "ar") and q["question"].strip()
         assert bool(q["gold"]) == q["answerable"], q["id"]
+
+
+def test_gate_reports_missed_thresholds_only():
+    from eval.run_eval import gate
+
+    summary = {"all": {"hit@5": 0.92}}
+    rows = [{"id": "a"}, {"id": "b", "error": "LLMError: timed out"}]
+    assert gate(summary, rows, 0.90, 1) == []
+    assert gate(summary, rows, None, None) == []
+    failed = gate(summary, rows, 0.95, 0)
+    assert len(failed) == 2 and "Hit@5" in failed[0] and "1 questions" in failed[1]

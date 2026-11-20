@@ -26,6 +26,8 @@ def _retrieve(q, **kw):
 )
 @pytest.mark.parametrize("use_reranker", [False, True])
 def test_expected_source_in_top5(question, doc, key, use_reranker):
+    if use_reranker:
+        pytest.importorskip("sentence_transformers", reason="reranker extra not installed")
     r = _retrieve(question, top_k=5, use_reranker=use_reranker)
     got = [(h.chunk["doc_id"], h.chunk["canonical_key"]) for h in r.hits]
     assert (doc, key) in got, got
@@ -52,6 +54,7 @@ def test_one_hit_per_article():
         ("هل يمكننا تخزين بيانات العملاء على خادم خارج المملكة؟", "art-29"),
     ],
 )
+@pytest.mark.llm
 def test_answer_cites_transfer_article(question, key):
     from app.answer import answer_question
 
@@ -64,6 +67,7 @@ def test_answer_cites_transfer_article(question, key):
     assert all(c.text_ar for c in a.citations if c.canonical_key == key)
 
 
+@pytest.mark.llm
 def test_off_topic_question_abstains():
     from app.answer import answer_question
 
