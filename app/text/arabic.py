@@ -95,6 +95,40 @@ def fix_lam_alef(text: str, aggressive: bool = True) -> str:
     )
 
 
+def fix_mirrored_brackets(text: str) -> str:
+    """Some Arabic PDFs store brackets mirrored: "الفقرة )2 (" instead of "الفقرة (2)". A ')' with no open
+    '(' before it, followed within 40 characters by a '(' (no other bracket between), is a mirrored pair:
+    swap it. Correct text such as "(أ) نص (ب)" never has an unopened ')' so it is left alone.
+    A number in reversed brackets between Arabic words (")2 (") is fixed first: the scanner alone misses it
+    when an earlier '(' was left unclosed because the PDF lost its number."""
+    ar = "؀-ۿ"
+    text = re.sub(rf"(?<=[{ar}])\s*\)\s*([0-9٠-٩]{{1,3}})\s*\(\s*(?=[{ar}])", r" (\1) ", text)
+    # scrambled lists of paragraph numbers: "الفقرات )1 () و2 () و4 (من" -> "الفقرات (1) و(2) و(4) من"
+    text = re.sub(
+        r"(الفقرات|الفقرتين)\s*([()\s0-9و]*\d[()\s0-9و]*?)\s*(?=من)",
+        lambda m: m[1] + " " + " و".join(f"({n})" for n in re.findall(r"\d+", m[2])) + " "
+        if m[2].count("(") + m[2].count(")") else m[0],
+        text,
+    )
+    chars = list(text)
+    depth, i = 0, 0
+    while i < len(chars):
+        ch = chars[i]
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            if depth > 0:
+                depth -= 1
+            else:
+                j = next((k for k in range(i + 1, min(len(chars), i + 41)) if chars[k] in "()"), None)
+                if j is not None and chars[j] == "(":
+                    chars[i], chars[j] = "(", ")"
+                    i = j
+        i += 1
+    out = "".join(chars)
+    return re.sub(r"\(\s+", "(", re.sub(r"\s+\)", ")", out)) if out != text else text
+
+
 # --- reversed-line repair ------------------------------------------------------------------------
 def build_vocab(texts: list[str]) -> Counter:
     vocab: Counter = Counter()

@@ -6,7 +6,7 @@ from ingest.chunkers import (
     parse_controls,
     structural_chunks,
 )
-from ingest.extract import Line
+from ingest.extract import Line, merge_markers
 from ingest.grid_ocr import clean_ocr_arabic
 
 
@@ -173,3 +173,8 @@ def test_parse_controls_joins_id_split_by_stray_space():
     lines = L("2-3 Sub", "2-3-P-1 parent:", "2-3-P-1-1 first", "2-3-P-1-9 ninth", "2-٣-م-1-1 0 tenth item")
     units = {u.ref_key: u for u in parse_controls(lines, "ar", "before")}
     assert "2-3-P-1-10 tenth item" in units["ctl-2-3-P-1"].text
+
+
+def test_merge_markers_glues_split_paragraph_markers_but_not_page_numbers():
+    lines = ["1", "-", " ", "تُشعر جهة التحكم", "أ-", "وصف", "14", "نص", "-", "3", "-", "عنوان"]
+    assert merge_markers(lines) == ["1- تُشعر جهة التحكم", "أ- وصف", "14", "نص", "-", "3- عنوان"]

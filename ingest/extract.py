@@ -168,6 +168,42 @@ def _ocr_page(page: pymupdf.Page, ocr) -> list[str]:
     return out
 
 
+# "1-", "1." and "أ-"; not "أ." or "4)", which also occur as broken words and page furniture
+MARKER_PIECE = re.compile(r"^(?:[0-9٠-٩]{1,2}\s*[-.]?|[أبجدهوزحطي]\s*-?|[-.])$")
+MARKER_DONE = re.compile(r"^(?:[0-9٠-٩]{1,2}\s*[-.]|[أبجدهوزحطي]\s*-)$")
+
+
+def merge_markers(lines: list[str]) -> list[str]:
+    """Arabic PDFs put paragraph markers on their own lines ("1", "-", then the text; or "أ-"). Alone they look
+    like page numbers or repeated headers and get filtered out, so glue them onto the text that follows.
+    A bare number or letter only counts when a "-" completes it, so page numbers stay apart."""
+    out: list[str] = []
+    pending = ""
+    for t in lines:
+        s = t.strip()
+        if not s:
+            continue
+        if MARKER_PIECE.match(s) and (pending or s[0] not in "-."):  # a marker starts with its number/letter
+            cand = pending + s
+            if len(cand) <= 4 and MARKER_PIECE.match(cand):
+                pending = cand
+                continue
+            if pending:  # e.g. "-" followed by "3": drop the stray piece, start a new marker
+                out.append(pending)
+            pending = s
+            continue
+        if pending:
+            if MARKER_DONE.match(pending):
+                s = f"{pending} {s}"
+            else:
+                out.append(pending)  # not a marker after all (e.g. a page number); leave it to the filters
+            pending = ""
+        out.append(s)
+    if pending:
+        out.append(pending)
+    return out
+
+
 def extract_lines(
     path: str,
     lang: str,
@@ -195,7 +231,8 @@ def extract_lines(
         joined = "\n".join("\n".join(p) for p in pages)
         aggressive = arabic.lam_alef_bug_count(joined) > 5
         pages = [[arabic.fix_lam_alef(t, aggressive) for t in p] for p in pages]
-        pages = [[arabic.JUNK_GLYPHS.sub(" ", t).strip() for t in p] for p in pages]
+        pages = [[arabic.fix_mirrored_brackets(arabic.JUNK_GLYPHS.sub(" ", t).strip()) for t in p] for p in pages]
+        pages = [merge_markers(p) for p in pages]
 
     # running headers / footers: short lines repeated on many pages
     def key(t: str) -> str:  # ignore a page number glued to the start/end of a header line

@@ -11,6 +11,7 @@ from pathlib import Path
 
 import yaml
 
+from app.text import arabic
 from ingest.chunkers import fixed_chunks, parse_articles, parse_controls, structural_chunks
 from ingest.extract import extract_lines, repair_reversed
 
@@ -104,6 +105,8 @@ def main() -> int:
             scanned = ocr_pages.get((d["doc_id"], lang), set())
             alias = ((d.get("aliases") or {}).get(lang)) or {}
             for c in a + f:
+                if lang == "ar":  # brackets split across lines are only fixable on the joined text
+                    c.text = arabic.fix_mirrored_brackets(c.text)
                 c.source = "ocr" if c.page in scanned else "text"
                 c.note = " ".join(n for r in c.refs if (n := notes_for.get(r)))
                 c.authority = (d.get("authority") or {}).get(lang, "")
