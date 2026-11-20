@@ -67,3 +67,11 @@ def test_normalize_for_search():
 def test_detect_lang():
     assert arabic.detect_lang("هل يمكن تخزين بيانات العملاء خارج المملكة؟") == "ar"
     assert arabic.detect_lang("Can we store customer data outside KSA?") == "en"
+
+
+def test_join_split_suffix():
+    assert arabic.join_split_suffix("من وقت علم ها بالحادثة") == "من وقت علمها بالحادثة"
+    assert arabic.join_split_suffix("أغراض معالجت ها.") == "أغراض معالجتها."
+    assert arabic.join_split_suffix("ها هو النص") == "ها هو النص"  # demonstrative at the start
+    assert arabic.join_split_suffix("قال ها هو النص") == "قال ها هو النص"  # "ها هو" is kept
+    assert arabic.join_split_suffix("جهاتها المختصة") == "جهاتها المختصة"

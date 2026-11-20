@@ -41,8 +41,9 @@ Hit@k: a gold source is among the first k distinct articles/controls. MRR over t
 | ans-qwen1.5b-article | qwen2.5:1.5b | v2 | article | on | 78% | 33% | 70% | 51% / 63% | 94% | 77% | 6.6 s | 9.9 s |
 | ans-qwen7b-article-baseline | qwen2.5:7b-instruct-q4_K_M | v2 | article | on | 90% | 78% | 83% | 69% / 72% | 98% | 86% | 7.8 s | 11.4 s |
 | ans-qwen7b-article-prompt-v1 | qwen2.5:7b-instruct-q4_K_M | v1 | article | on | 80% | 89% | 77% | 78% / 84% | 99% | 91% | 9.6 s | 13.6 s |
+| ans-qwen7b-article-prompt-v2 | qwen2.5:7b-instruct-q4_K_M | v2 | article | off | 100% | 78% | 95% | 71% / 76% | 100% | 86% | 5.5 s | 9.2 s |
 | ans-qwen7b-article-rerank | qwen2.5:7b-instruct-q4_K_M | v2 | article | on | 100% | 78% | 93% | 66% / 71% | 96% | 90% | 8.5 s | 11.9 s |
-| ans-qwen7b-article | qwen2.5:7b-instruct-q4_K_M | v2 | article | off | 100% | 78% | 95% | 71% / 76% | 100% | 86% | 5.5 s | 9.2 s |
+| ans-qwen7b-article | qwen2.5:7b-instruct-q4_K_M | v3 | article | off | 100% | 78% | 93% | 75% / 79% | 100% | 90% | 5.2 s | 9.3 s |
 | ans-qwen7b-fixed | qwen2.5:7b-instruct-q4_K_M | v2 | fixed | on | 98% | 78% | 87% | 70% / 73% | 96% | 88% | 9.3 s | 13.2 s |
 
 ## Breakdown (default configuration: article chunks, hybrid search, no reranker, Qwen 2.5 7B)
@@ -51,11 +52,11 @@ Scenario questions describe a company practice and ask whether it complies.
 
 | Subset | Retrieval Hit@5 | MRR | Answered (answerable) | Abstained (unanswerable) | Citation hit | Faithfulness |
 |---|---|---|---|---|---|---|
-| Direct questions | 100% | 0.87 | 100% | 88% | 100% | 89% |
-| Scenario questions | 77% | 0.65 | 100% | 0% | 77% | 76% |
-| English | 94% | 0.83 | 100% | 100% | 94% | 88% |
-| Arabic | 96% | 0.81 | 100% | 60% | 96% | 84% |
-| All | 95% | 0.82 | 100% | 78% | 95% | 86% |
+| Direct questions | 100% | 0.87 | 100% | 88% | 100% | 92% |
+| Scenario questions | 77% | 0.65 | 100% | 0% | 69% | 82% |
+| English | 94% | 0.83 | 100% | 100% | 94% | 86% |
+| Arabic | 96% | 0.81 | 100% | 60% | 93% | 94% |
+| All | 95% | 0.82 | 100% | 78% | 93% | 90% |
 
 ## Error analysis
 

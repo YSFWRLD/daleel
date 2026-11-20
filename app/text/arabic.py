@@ -95,6 +95,15 @@ def fix_lam_alef(text: str, aggressive: bool = True) -> str:
     )
 
 
+_SPLIT_HA = re.compile(r"([ء-ي])\s+ها(?=[\s.،؛:)]|$)(?!\s+(?:هو|هي|هم|هما|هن|نحن|أنا|أنت))")
+
+
+def join_split_suffix(text: str) -> str:
+    """The extractor sometimes splits the pronoun suffix ها from its word ("علم ها" for "علمها"). A standalone
+    ها is not a word in formal Arabic except before a pronoun ("ها هو"), so it is joined back."""
+    return _SPLIT_HA.sub(r"\1ها", text)
+
+
 def fix_mirrored_brackets(text: str) -> str:
     """Some Arabic PDFs store brackets mirrored: "الفقرة )2 (" instead of "الفقرة (2)". A ')' with no open
     '(' before it, followed within 40 characters by a '(' (no other bracket between), is a mirrored pair:

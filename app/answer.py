@@ -18,7 +18,7 @@ from app.policy import DISCLAIMER
 from app.retrieval.hybrid import Hit, chunk_keys, retrieve
 from app.text import arabic
 
-PROMPT_VERSION = "v2"  # v1: answerable first, no scenario/out-of-scope rules
+PROMPT_VERSION = "v3"  # v1: answerable first, no scenario rules; v2: "does not comply" used on direct questions
 
 # Size limits stop a known failure of small models under constrained decoding: repeating the same list item
 # until the request times out (seen on 8 of 276 eval calls before the limits were added).
@@ -50,20 +50,22 @@ Answer ONLY from the numbered sources in the user message. Never use outside kno
 
 Rules:
 1. Every claim in "answer" must cite its source ids in square brackets, e.g. [S1] or [S1][S3].
-2. If no source contains a rule that addresses the question, set "answerable" to false, explain in one
-   sentence that the provided regulations do not cover it, and return an empty "citations" list. Do not guess.
+2. If no source contains a rule that addresses the question, set "answerable" to false and explain in one
+   sentence that the provided regulations do not cover it. Do not guess.
    If the question asks about a regulator, framework or law that is not one of the sources (for example
    SAMA frameworks, labour law or tax law), it is not answerable: never present these sources as if they
    were that other regulation.
 3. Many questions describe the asker's own situation or practice and ask whether it is allowed or compliant.
    These ARE answerable when a source states the relevant rule, even though the sources do not mention the
-   asker: apply the rule to the situation. Start "answer" with a clear verdict (for example "No, this does
-   not comply" or "Yes, provided that ..."), then list in "points" what the rule requires.
+   asker: apply the rule to the situation, and list in "points" what the rule requires.
+   When the question asks whether something is allowed, required or compliant, begin "answer" with Yes or
+   No and the main condition or exception. For any other question, begin with the answer itself.
 4. "citations": one entry per source you relied on, with its id and a SHORT quote (under 30 words)
    copied character-for-character from that source's text.
 5. Write in {language}. Be concise and practical for a compliance officer.
    Include the conditions and exceptions the sources state.
-   "answer": a direct answer in 1-2 sentences with its source ids.
+   "answer": a direct answer in 1-2 sentences with its source ids. It starts with Yes or No only if the
+   question can be answered with yes or no; a "what" question starts with the answer itself.
    "points": the conditions, exceptions or steps, one short item each with its source ids ([] if none).
 6. If a source has a NOTE about differences between language versions, the Arabic text prevails; say so."""
 
@@ -166,9 +168,25 @@ def quote_in_source(quote: str, sources: list[str]) -> bool:
     return False
 
 
-def finalize(raw: dict, ids: dict[str, Hit], lang: str) -> tuple[str, bool, list[Citation]]:
+WH_QUESTION = re.compile(
+    r"^\s*(?:(?:within|in|under|for|to|from|by|at|on|خلال|في|إلى|الى|على|عن|ب|ل)\s*)?"  # "within how many", "خلال كم"
+    r"(what|which|when|where|who|whom|how|why|ما|ماذا|متى|كيف|أين|اين|من|كم|لماذا|لم|أي|اي)\b",
+    re.IGNORECASE,
+)
+LEADING_YES = re.compile(r"^\s*(yes|نعم)\b\s*[,،.:]?\s*", re.IGNORECASE)
+
+
+def drop_stray_yes(answer: str, question: str) -> str:
+    """The 7B model starts many answers with "Yes," even for "what" questions, whatever the prompt says."""
+    if not WH_QUESTION.match(question) or not LEADING_YES.match(answer):
+        return answer
+    rest = LEADING_YES.sub("", answer, count=1)
+    return rest[:1].upper() + rest[1:]
+
+
+def finalize(raw: dict, ids: dict[str, Hit], lang: str, question: str = "") -> tuple[str, bool, list[Citation]]:
     """Validate the model output: keep citations that point at real sources, check quotes, abstain otherwise."""
-    answer = str(raw.get("answer", "")).strip()
+    answer = drop_stray_yes(str(raw.get("answer", "")).strip(), question)
     points = [str(p).strip().lstrip("-•* ").strip() for p in raw.get("points") or [] if str(p).strip()]
     points = list(dict.fromkeys(points))  # drop repeated items
     if points:  # rendered as a Markdown list by the chat page
@@ -248,6 +266,6 @@ def answer_question(
     schema["properties"]["citations"]["items"]["properties"]["source"]["enum"] = list(ids)
     raw = llm.complete_json(SYSTEM.replace("{language}", LANG_NAME[lang]), user, schema)
     timings["llm"] = time.perf_counter() - t0
-    text, abstained, cites = finalize(raw, ids, lang)
+    text, abstained, cites = finalize(raw, ids, lang, question)
     timings["total"] = sum(v for k, v in timings.items() if k in ("retrieval_total", "llm"))
     return Answer(question, lang, text, abstained, cites, related, DISCLAIMER[lang], llm.name, timings)

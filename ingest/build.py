@@ -106,7 +106,7 @@ def main() -> int:
             alias = ((d.get("aliases") or {}).get(lang)) or {}
             for c in a + f:
                 if lang == "ar":  # brackets split across lines are only fixable on the joined text
-                    c.text = arabic.fix_mirrored_brackets(c.text)
+                    c.text = arabic.join_split_suffix(arabic.fix_mirrored_brackets(c.text))
                 c.source = "ocr" if c.page in scanned else "text"
                 c.note = " ".join(n for r in c.refs if (n := notes_for.get(r)))
                 c.authority = (d.get("authority") or {}).get(lang, "")

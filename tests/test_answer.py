@@ -111,3 +111,17 @@ def test_fix_mirrored_brackets():
         "الفقرة (من هذه المادة. ورد في الفقرة (2) من"
     )
     assert fix_mirrored_brackets("في الفقرات )1 () و2 () و4 (من المادة") == "في الفقرات (1) و(2) و(4) من المادة"
+
+
+def test_drop_stray_yes_only_on_wh_questions():
+    from app.answer import drop_stray_yes
+
+    got = drop_stray_yes("Yes, a data subject has the right to be informed [S1].", "What rights does a subject have?")
+    assert got == "A data subject has the right to be informed [S1]."
+    assert drop_stray_yes("نعم، يجب الإبلاغ خلال 72 ساعة.", "متى يجب الإبلاغ عن التسرب؟") == "يجب الإبلاغ خلال 72 ساعة."
+    assert drop_stray_yes("نعم، يجب الإبلاغ خلال 72 ساعة.", "خلال كم ساعة يجب الإبلاغ؟") == "يجب الإبلاغ خلال 72 ساعة."
+    assert drop_stray_yes("Yes, within 72 hours.", "Within how many hours must we report?") == "Within 72 hours."
+    assert drop_stray_yes("Yes, provided that ...", "Can we store data abroad?") == "Yes, provided that ..."
+    assert drop_stray_yes("نعم، بشرط ...", "هل يجوز نقل البيانات؟") == "نعم، بشرط ..."
+    assert drop_stray_yes("Yes, ...", "Is it within the scope?") == "Yes, ..."
+    assert drop_stray_yes("Yesterday's rule ...", "What changed?") == "Yesterday's rule ..."
