@@ -1,0 +1,3885 @@
+{
+ "name": "ans-qwen1.5b-article",
+ "config": {
+  "strategy": "article",
+  "mode": "hybrid",
+  "reranker": "on",
+  "answers": true,
+  "provider": "ollama",
+  "model": "ollama:qwen2.5:1.5b",
+  "judge": true,
+  "per_lang": "on",
+  "rerank_top": 10,
+  "per_list": 2,
+  "prompt": "v2",
+  "judge_model": "ollama:qwen2.5:7b-instruct-q4_K_M"
+ },
+ "summary": {
+  "n": 69,
+  "n_answerable": 60,
+  "n_unanswerable": 9,
+  "all": {
+   "answered_when_answerable": 0.7833333333333333,
+   "abstained_when_unanswerable": 0.3333333333333333,
+   "abstention_accuracy": 0.7246376811594203,
+   "cite_precision": 0.5134751773049645,
+   "cite_precision_lenient": 0.6283687943262412,
+   "cite_hit": 0.8936170212765957,
+   "cite_hit_all": 0.7,
+   "cite_recall": 0.8209219858156029,
+   "quote_verified": 0.936046511627907,
+   "faithfulness": 0.7724168912848158,
+   "latency_p50": 6.561964799999259,
+   "latency_p95": 9.88607759999286
+  },
+  "en": {
+   "answered_when_answerable": 0.90625,
+   "abstained_when_unanswerable": 0.0,
+   "abstention_accuracy": 0.8055555555555556,
+   "cite_precision": 0.593103448275862,
+   "cite_precision_lenient": 0.7241379310344828,
+   "cite_hit": 0.896551724137931,
+   "cite_hit_all": 0.8125,
+   "cite_recall": 0.8132183908045977,
+   "quote_verified": 0.956989247311828,
+   "faithfulness": 0.737012987012987,
+   "latency_p50": 6.077653700005612,
+   "latency_p95": 9.939406699995743
+  },
+  "ar": {
+   "answered_when_answerable": 0.6428571428571429,
+   "abstained_when_unanswerable": 0.6,
+   "abstention_accuracy": 0.6363636363636364,
+   "cite_precision": 0.3851851851851852,
+   "cite_precision_lenient": 0.4740740740740741,
+   "cite_hit": 0.8888888888888888,
+   "cite_hit_all": 0.5714285714285714,
+   "cite_recall": 0.8333333333333334,
+   "quote_verified": 0.9113924050632911,
+   "faithfulness": 0.8308333333333333,
+   "latency_p50": 7.208582999999635,
+   "latency_p95": 9.88607759999286
+  },
+  "scenario": {
+   "answered_when_answerable": 0.6153846153846154,
+   "abstained_when_unanswerable": 0.0,
+   "abstention_accuracy": 0.5714285714285714,
+   "cite_precision": 0.3375,
+   "cite_precision_lenient": 0.425,
+   "cite_hit": 0.75,
+   "cite_hit_all": 0.46153846153846156,
+   "cite_recall": 0.59375,
+   "quote_verified": 1.0,
+   "faithfulness": 0.6574074074074074,
+   "latency_p50": 6.986922700001742,
+   "latency_p95": 10.3442725000059
+  },
+  "direct": {
+   "answered_when_answerable": 0.8297872340425532,
+   "abstained_when_unanswerable": 0.375,
+   "abstention_accuracy": 0.7636363636363637,
+   "cite_precision": 0.5495726495726496,
+   "cite_precision_lenient": 0.67008547008547,
+   "cite_hit": 0.9230769230769231,
+   "cite_hit_all": 0.7659574468085106,
+   "cite_recall": 0.8675213675213675,
+   "quote_verified": 0.917910447761194,
+   "faithfulness": 0.7959415584415584,
+   "latency_p50": 6.386998000001768,
+   "latency_p95": 9.88607759999286
+  }
+ },
+ "rows": [
+  {
+   "id": "q-01",
+   "lang": "en",
+   "question": "What rights does a data subject have under the PDPL?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-4"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "answer": "A data subject has the following rights under the PDPL: 1. The right to be informed about the legal basis and purpose of the collection of their personal data. 2. The right to access their personal data held by the controller, in accordance with the rules and procedures set out in the regulations. 3. The right to request obtaining their personal data held by the controller in a readable and clear format. 4. The right to request correction, completion, or updating of their personal data held by the controller. 5. The right to request the destruction of their personal data held by the controller\n\n- The rights are explicitly stated in Article 4 of the PDPL and the implementing regulations.\n- The rights are not limited to the scope of Article 4 but include additional rights as specified in the implementing regulations. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-4",
+    "pdpl_ir:art-6",
+    "pdpl_ir:art-3",
+    "pdpl_ir:art-7",
+    "pdpl_ir:art-5"
+   ],
+   "citation_ok": [
+    true,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 8.263656099996297,
+   "timings": {
+    "embed": 0.5114287999895168,
+    "vector": 0.19903799999156035,
+    "bm25": 0.01109139999607578,
+    "rerank": 3.2869941999961156,
+    "retrieval_total": 4.009059799995157,
+    "llm": 4.249112699995749,
+    "total": 8.258172499990906
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 0.2,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 0.8571428571428571,
+   "claims": [
+    {
+     "claim": "A data subject has the following rights under the PDPL: 1. The right to be informed about the legal basis and purpose of the collection of their personal data.",
+     "supported": true
+    },
+    {
+     "claim": "2. The right to access their personal data held by the controller, in accordance with the rules and procedures set out in the regulations.",
+     "supported": true
+    },
+    {
+     "claim": "3. The right to request obtaining their personal data held by the controller in a readable and clear format.",
+     "supported": true
+    },
+    {
+     "claim": "4. The right to request correction, completion, or updating of their personal data held by the controller.",
+     "supported": true
+    },
+    {
+     "claim": "5. The right to request the destruction of their personal data held by the controller.",
+     "supported": true
+    },
+    {
+     "claim": "The rights are explicitly stated in Article 4 of the PDPL and the implementing regulations.",
+     "supported": true
+    },
+    {
+     "claim": "The rights are not limited to the scope of Article 4 but include additional rights as specified in the implementing regulations.",
+     "supported": false
+    }
+   ]
+  },
+  {
+   "id": "q-02",
+   "lang": "ar",
+   "question": "ما الحالات التي يجوز فيها معالجة البيانات الشخصية دون موافقة صاحبها؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-6"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "answer": "معالجة البيانات الشخصية دون موافقة صاحبها يمكن أن تتم في الأحوال المحددة في نظام حماية البيانات الشخصية، مثل عدم وجود البيانات الشخصية التي يمكن تحديدها على وجه التحديد، عدم إتلاف البيانات الشخصية التي يمكن تحديدها على وجه التحديد خلال عملية معالجتها، أو جمع البيانات الشخصية أو معالجتها لأغراض نظام آخر أو تنفيذ اتفاق سابق يكون صاحبها طرفاً فيه. لا يجوز معالجة البيانات الشخصية أو تغيير الغرض من معالجتها إلا بعد موافقة صاحبها، وتحدد اللوائح الضوابط اللازمة لهذا الغرض.\n\n- لا يجوز معالجة البيانات الشخصية أو تغيير الغرض من معالجتها إلا بعد موافقة صاحبها. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-27",
+    "pdpl:art-5",
+    "pdpl:art-10",
+    "pdpl_ir:art-30",
+    "pdpl:art-6"
+   ],
+   "citation_ok": [
+    false,
+    false,
+    false,
+    false,
+    true
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 6.680679200013401,
+   "timings": {
+    "embed": 0.24807549999968614,
+    "vector": 0.15000679998775013,
+    "bm25": 0.002819899993482977,
+    "rerank": 2.868279200003599,
+    "retrieval_total": 3.2694268000050215,
+    "llm": 3.409922999999253,
+    "total": 6.679349800004275
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 0.2,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "معالجة البيانات الشخصية دون موافقة صاحبها يمكن أن تتم في الأحوال المحددة في نظام حماية البيانات الشخصية.",
+     "supported": true
+    },
+    {
+     "claim": "مثل عدم وجود البيانات الشخصية التي يمكن تحديدها على وجه التحديد، عدم إتلاف البيانات الشخصية التي يمكن تحديدها على وجه التحديد خلال عملية معالجتها، أو جمع البيانات الشخصية أو معالجتها لأغراض نظام آخر أو تنفيذ اتفاق سابق يكون صاحبها طرفاً فيه.",
+     "supported": true
+    },
+    {
+     "claim": "لا يجوز معالجة البيانات الشخصية أو تغيير الغرض من معالجتها إلا بعد موافقة صاحبها.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-03",
+   "lang": "en",
+   "question": "Can a company make consent to personal data processing a condition for providing its service?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-7"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "answer": "Yes, a company can make consent to personal data processing a condition for providing its service, provided that the service or benefit is directly related to the processing of personal data for which the consent is given.\n\n- The consent referred to in paragraph (1) of Article (5) of this Law may not form a condition of providing a service or a benefit, unless such service or benefit is directly related to the Processing of Personal Data for which the consent is given. [S1]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-7"
+   ],
+   "citation_ok": [
+    true
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 4.893120000007912,
+   "timings": {
+    "embed": 0.23792179999873042,
+    "vector": 0.1547019999998156,
+    "bm25": 0.002099000004818663,
+    "rerank": 2.903226499998709,
+    "retrieval_total": 3.2982118999934755,
+    "llm": 1.594437099993229,
+    "total": 4.892648999986704
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 0.5,
+   "claims": [
+    {
+     "claim": "Yes, a company can make consent to personal data processing a condition for providing its service, provided that the service or benefit is directly related to the processing of personal data for which the consent is given.",
+     "supported": false
+    },
+    {
+     "claim": "The consent referred to in paragraph (1) of Article (5) of this Law may not form a condition of providing a service or a benefit, unless such service or benefit is directly related to the Processing of Personal Data for which the consent is given.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-04",
+   "lang": "ar",
+   "question": "متى يجب على جهة التحكم إتلاف البيانات الشخصية؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-18"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-8"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "answer": "لا أعلم. الأنظمة المتوفرة لدي (نظام حماية البيانات الشخصية ولائحته التنفيذية ولائحة نقل البيانات، وضوابط الهيئة الوطنية للأمن السيبراني ECC وCCC وDCC) لا تجيب عن هذا السؤال بوضوح.",
+   "abstained": true,
+   "abstain_correct": false,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 6.764296200009994,
+   "timings": {
+    "embed": 0.21851609999430366,
+    "vector": 0.15279249999730382,
+    "bm25": 0.0015070999943418428,
+    "rerank": 3.114704100007657,
+    "retrieval_total": 3.487790099999984,
+    "llm": 3.275629099996877,
+    "total": 6.763419199996861
+   }
+  },
+  {
+   "id": "q-05",
+   "lang": "en",
+   "question": "Do we need a privacy policy before collecting personal data?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-12"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "answer": "Yes, a privacy policy is required before collecting personal data.\n\n- [S1] PDPL — Article 12",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-12"
+   ],
+   "citation_ok": [
+    true
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 4.732214000003296,
+   "timings": {
+    "embed": 0.24661830000695772,
+    "vector": 0.15270700000110082,
+    "bm25": 0.001407700008712709,
+    "rerank": 3.1362991999922087,
+    "retrieval_total": 3.537223000006634,
+    "llm": 1.1946472999989055,
+    "total": 4.731870300005539
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "Yes, a privacy policy is required before collecting personal data.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-06",
+   "lang": "ar",
+   "question": "ما الذي يجب على جهة التحكم إبلاغ صاحب البيانات به عند جمع بياناته منه مباشرة؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-13"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-4"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "answer": "جهة التحكم يجب على صاحب البيانات أن تبلغه قبل أو عند جمع البيانات الشخصية مباشرةً.\n\n- جهة التحكم يجب على صاحب البيانات أن تبلغه قبل أو عند جمع البيانات الشخصية مباشرةً. [S1]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl_ir:art-4"
+   ],
+   "citation_ok": [
+    true
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 4.719996499989065,
+   "timings": {
+    "embed": 0.22838349999801721,
+    "vector": 0.13059050000447314,
+    "bm25": 0.002319599996553734,
+    "rerank": 2.847116399992956,
+    "retrieval_total": 3.2086169000103837,
+    "llm": 1.510790399988764,
+    "total": 4.719407299999148
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 0.5,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "جهة التحكم يجب على صاحب البيانات أن تبلغه قبل أو عند جمع البيانات الشخصية مباشرةً.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-07",
+   "lang": "en",
+   "question": "What is the maximum penalty for disclosing sensitive data with the intent to harm the data subject?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-35"
+    }
+   ],
+   "tags": [
+    "pdpl",
+    "penalty"
+   ],
+   "answer": "The maximum penalty for disclosing sensitive data with the intent to harm the data subject is imprisonment for a period not exceeding two years, or a fine not exceeding three million Riyals, or both.\n\n- The maximum penalty for disclosing sensitive data with the intent to harm the data subject is imprisonment for a period not exceeding two years, or a fine not exceeding three million Riyals, or both. [S1]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-35"
+   ],
+   "citation_ok": [
+    true
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 5.041333099987241,
+   "timings": {
+    "embed": 0.2296889999997802,
+    "vector": 0.14932659998885356,
+    "bm25": 0.002111099995090626,
+    "rerank": 2.9511891000001924,
+    "retrieval_total": 3.332509600004414,
+    "llm": 1.7082775000017136,
+    "total": 5.040787100006128
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "The maximum penalty for disclosing sensitive data with the intent to harm the data subject is imprisonment for a period not exceeding two years, or a fine not exceeding three million Riyals, or both.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-08",
+   "lang": "ar",
+   "question": "ما مقدار الغرامة على مخالفة أحكام نظام حماية البيانات الشخصية في غير حالات إفشاء البيانات الحساسة؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-36"
+    }
+   ],
+   "tags": [
+    "pdpl",
+    "penalty"
+   ],
+   "answer": "لا يوجد مقدار محدد للغرامة على مخالفة أحكام نظام حماية البيانات الشخصية في غير حالات إفشاء البيانات الحساسة.\n\n- النظام ينص على أن الغرامة تصل إلى ثلاث ملايين ريال، مع الإخلال بأي عقوبة أشد منصوص عليها في نظام آخر. [S1]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-35"
+   ],
+   "citation_ok": [
+    false
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 5.046680200000992,
+   "timings": {
+    "embed": 0.2384794000099646,
+    "vector": 0.13553980000142474,
+    "bm25": 0.002667599997948855,
+    "rerank": 2.850285900000017,
+    "retrieval_total": 3.2271923999942373,
+    "llm": 1.8190261999989161,
+    "total": 5.0462185999931535
+   },
+   "cite_precision": 0.0,
+   "cite_precision_lenient": 0.0,
+   "cite_hit": 0.0,
+   "cite_recall": 0.0,
+   "faithfulness": 0.5,
+   "claims": [
+    {
+     "claim": "لا يوجد مقدار محدد للغرامة على مخالفة أحكام نظام حماية البيانات الشخصية في غير حالات إفشاء البيانات الحساسة.",
+     "supported": false
+    },
+    {
+     "claim": "النظام ينص على أن الغرامة تصل إلى ثلاث ملايين ريال، مع الإخلال بأي عقوبة أشد منصوص عليها في نظام آخر.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-09",
+   "lang": "en",
+   "question": "Can personal data be used for marketing purposes?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-26"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-29"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "answer": "Yes, personal data can be used for marketing purposes, provided it is collected directly from the Data Subject and their consent is given in accordance with the provisions of Law.\n\n- Article 26 of the PDPL allows the processing of Personal Data for marketing purposes, provided it is collected directly from the Data Subject and their consent is given in accordance with the provisions of Law. [S1]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-26"
+   ],
+   "citation_ok": [
+    true
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 4.979668100000708,
+   "timings": {
+    "embed": 0.23858499999914784,
+    "vector": 0.1284138999908464,
+    "bm25": 0.0011602000013226643,
+    "rerank": 3.0592944999953033,
+    "retrieval_total": 3.4276437999942573,
+    "llm": 1.5517015999939758,
+    "total": 4.979345399988233
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 0.5,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "Yes, personal data can be used for marketing purposes, provided it is collected directly from the Data Subject and their consent is given in accordance with the provisions of Law.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-10",
+   "lang": "ar",
+   "question": "هل يجوز تصوير أو نسخ الوثائق الرسمية التي تحدد هوية أصحاب البيانات الشخصية؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-28"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-31"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "answer": "لا يجوز تصوير أو نسخ الوثائق الرسمية التي تحدد هوية صاحب البيانات الشخصية، باستثناء الحالات المحددة في المادة 28 من نظام حماية البيانات الشخصية.\n\n- لا يجوز تصوير الوثائق الرسمية التي تحدد هوية صاحب البيانات الشخصية أو نسخها، إلاَّ بناءً على طلب من جهة عامة مختصة أو تنفيذاً لأحكام نظام، وتحت الإلتزام بضمانات واجبة. [S1][S2]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-28",
+    "pdpl_ir:art-31"
+   ],
+   "citation_ok": [
+    true,
+    true
+   ],
+   "quote_verified": [
+    true,
+    true
+   ],
+   "latency": 5.7897471000032965,
+   "timings": {
+    "embed": 0.23212810000404716,
+    "vector": 0.139160400009132,
+    "bm25": 0.0021032000076957047,
+    "rerank": 2.7785932999977376,
+    "retrieval_total": 3.152300200003083,
+    "llm": 2.63685439999972,
+    "total": 5.789154600002803
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "لا يجوز تصوير أو نسخ الوثائق الرسمية التي تحدد هوية صاحب البيانات الشخصية، باستثناء الحالات المحددة في المادة 28 من نظام حماية البيانات الشخصية.",
+     "supported": true
+    },
+    {
+     "claim": "لا يجوز تصوير الوثائق الرسمية التي تحدد هوية صاحب البيانات الشخصية أو نسخها، إلاَّ بناءً على طلب من جهة عامة مختصة أو تنفيذاً لأحكام نظام، وتحت الإلتزام بضمانات واجبة.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-11",
+   "lang": "en",
+   "question": "Can personal data be processed for scientific research without the consent of the data subject?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-27"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-30"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "answer": "Yes, personal data can be processed for scientific research without the consent of the data subject under certain conditions as outlined in PDPL Article 27 and PDPL Implementing Regulation Article 30.\n\n- The processing is for scientific, research, or statistical purposes.\n- It does not specifically identify the data subject.\n- Evidence of the data subject's identity will be destroyed during the processing.\n- Personal data is not sensitive data.\n- The processing is required by another law or in implementation of a previous agreement to which the data subject is a party.\n- The processing is necessary for the purpose of legitimate interest of the controller, provided that no sensitive data is processed. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-27",
+    "pdpl_ir:art-30",
+    "pdpl:art-5",
+    "pdpl:art-6",
+    "pdpl_ir:art-12"
+   ],
+   "citation_ok": [
+    true,
+    true,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 7.063594200008083,
+   "timings": {
+    "embed": 0.2614361000014469,
+    "vector": 0.16388920000463258,
+    "bm25": 0.001946400007000193,
+    "rerank": 2.863242400009767,
+    "retrieval_total": 3.2906927000003634,
+    "llm": 3.770166500005871,
+    "total": 7.0608592000062345
+   },
+   "cite_precision": 0.4,
+   "cite_precision_lenient": 0.4,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 0.7142857142857143,
+   "claims": [
+    {
+     "claim": "Personal data can be processed for scientific research without the consent of the data subject under certain conditions as outlined in PDPL Article 27 and PDPL Implementing Regulation Article 30.",
+     "supported": true
+    },
+    {
+     "claim": "The processing is for scientific, research, or statistical purposes.",
+     "supported": true
+    },
+    {
+     "claim": "It does not specifically identify the data subject.",
+     "supported": true
+    },
+    {
+     "claim": "Evidence of the data subject's identity will be destroyed during the processing.",
+     "supported": true
+    },
+    {
+     "claim": "Personal data is not sensitive data.",
+     "supported": false
+    },
+    {
+     "claim": "The processing is required by another law or in implementation of a previous agreement to which the data subject is a party.",
+     "supported": true
+    },
+    {
+     "claim": "The processing is necessary for the purpose of legitimate interest of the controller, provided that no sensitive data is processed.",
+     "supported": false
+    }
+   ]
+  },
+  {
+   "id": "q-12",
+   "lang": "ar",
+   "question": "هل يجب على جهة التحكم إجراء تقييم للآثار المترتبة على معالجة البيانات الشخصية؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-22"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-25"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "answer": "نعم، يجب على جهة التحكم إجراء تقييم للآثار المترتبة على معالجة البيانات الشخصية.\n\n- جهة التحكم يجب أن تحدد الأغراض من المعالجة وتحدد طبيعتها ونوع البيانات الشخصية التي سيتم معالجتها. [S1][S2]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-22",
+    "pdpl_ir:art-25"
+   ],
+   "citation_ok": [
+    true,
+    true
+   ],
+   "quote_verified": [
+    true,
+    true
+   ],
+   "latency": 5.750779499998316,
+   "timings": {
+    "embed": 0.23890160000883043,
+    "vector": 0.18366919999243692,
+    "bm25": 0.0021415999945020303,
+    "rerank": 2.970500199997332,
+    "retrieval_total": 3.3954424999974435,
+    "llm": 2.3545747000025585,
+    "total": 5.750017200000002
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "نعم، يجب على جهة التحكم إجراء تقييم للآثار المترتبة على معالجة البيانات الشخصية.",
+     "supported": true
+    },
+    {
+     "claim": "جهة التحكم يجب أن تحدد الأغراض من المعالجة وتحدد طبيعتها ونوع البيانات الشخصية التي سيتم معالجتها.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-13",
+   "lang": "en",
+   "question": "Where can a data subject file a complaint about a violation of the PDPL?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-34"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-37"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "answer": "A data subject can file a complaint about a violation of the PDPL with the Competent Authority.\n\n- The Competent Authority is the designated authority for receiving and processing complaints under the PDPL. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-34",
+    "pdpl_ir:art-37",
+    "pdpl:art-35",
+    "pdpl_ir:art-24",
+    "pdpl:art-4"
+   ],
+   "citation_ok": [
+    true,
+    true,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 5.997377899999265,
+   "timings": {
+    "embed": 0.21508609999727923,
+    "vector": 0.1360493999964092,
+    "bm25": 0.0015356999938376248,
+    "rerank": 2.8296956999984104,
+    "retrieval_total": 3.182553899998311,
+    "llm": 2.812872399998014,
+    "total": 5.995426299996325
+   },
+   "cite_precision": 0.4,
+   "cite_precision_lenient": 0.4,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "A data subject can file a complaint about a violation of the PDPL with the Competent Authority.",
+     "supported": true
+    },
+    {
+     "claim": "The Competent Authority is the designated authority for receiving and processing complaints under the PDPL.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-14",
+   "lang": "en",
+   "question": "Can we store customer data on a server outside KSA?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-29"
+    }
+   ],
+   "tags": [
+    "pdpl",
+    "transfer"
+   ],
+   "answer": "Yes, you can store customer data on a server outside KSA provided that the conditions in Article 29 of the Personal Data Protection Law are met.\n\n- The conditions for transferring or disclosing personal data outside the Kingdom must be met, including ensuring adequate protection, adherence to the Law and Regulations, and limiting the amount of data transferred.\n- The regulations do not explicitly prohibit storing data on servers outside KSA, but they require adherence to the Law and Regulations and ensuring appropriate protection. [S1]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-29"
+   ],
+   "citation_ok": [
+    true
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 6.062547800000175,
+   "timings": {
+    "embed": 0.22319590000552125,
+    "vector": 0.13426989999425132,
+    "bm25": 0.0018791999900713563,
+    "rerank": 2.9103149000002304,
+    "retrieval_total": 3.2699609999981476,
+    "llm": 2.7909039000078337,
+    "total": 6.060864900005981
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "Yes, you can store customer data on a server outside KSA provided that the conditions in Article 29 of the Personal Data Protection Law are met.",
+     "supported": true
+    },
+    {
+     "claim": "The conditions for transferring or disclosing personal data outside the Kingdom must be met, including ensuring adequate protection, adherence to the Law and Regulations, and limiting the amount of data transferred.",
+     "supported": true
+    },
+    {
+     "claim": "The regulations do not explicitly prohibit storing data on servers outside KSA, but they require adherence to the Law and Regulations and ensuring appropriate protection.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-15",
+   "lang": "ar",
+   "question": "هل يمكننا تخزين بيانات العملاء على خادم خارج المملكة؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-29"
+    }
+   ],
+   "tags": [
+    "pdpl",
+    "transfer"
+   ],
+   "answer": "لا أعلم. الأنظمة المتوفرة لدي (نظام حماية البيانات الشخصية ولائحته التنفيذية ولائحة نقل البيانات، وضوابط الهيئة الوطنية للأمن السيبراني ECC وCCC وDCC) لا تجيب عن هذا السؤال بوضوح.",
+   "abstained": true,
+   "abstain_correct": false,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 6.064464499999303,
+   "timings": {
+    "embed": 0.21093469999323133,
+    "vector": 0.15210590000788216,
+    "bm25": 0.0016902000061236322,
+    "rerank": 2.8844544000021415,
+    "retrieval_total": 3.249469300004421,
+    "llm": 2.8144470999977784,
+    "total": 6.063916400002199
+   }
+  },
+  {
+   "id": "q-16",
+   "lang": "en",
+   "question": "How quickly must we notify the authority of a personal data breach?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-24"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-20"
+    }
+   ],
+   "tags": [
+    "pdpl_ir",
+    "breach"
+   ],
+   "answer": "The Controller must notify the Competent Authority within a delay not exceeding 72 hours of becoming aware of a personal data breach.\n\n- The Competent Authority shall publish on its official website a list of countries or international organizations that provide an appropriate level of protection for personal data not less than that prescribed by the Law and Regulations.\n- The competent authority shall review this list every four years, or as necessary, based on the following criteria: A. The existence of regulations that ensure the protection of personal data and the rights of data subjects, including the right to seek compensation for damages caused by violations of [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl_ir:art-24",
+    "pdpl:art-20",
+    "pdpl_transfer:art-3",
+    "pdpl:art-17",
+    "pdpl_ir:art-8"
+   ],
+   "citation_ok": [
+    true,
+    true,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 7.4834200000041164,
+   "timings": {
+    "embed": 0.23403500000131316,
+    "vector": 0.1642095999995945,
+    "bm25": 0.0017040999955497682,
+    "rerank": 3.5448591000022134,
+    "retrieval_total": 3.9449992000008933,
+    "llm": 3.5361829999892507,
+    "total": 7.481182199990144
+   },
+   "cite_precision": 0.4,
+   "cite_precision_lenient": 0.4,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "The Controller must notify the Competent Authority within a delay not exceeding 72 hours of becoming aware of a personal data breach.",
+     "supported": true
+    },
+    {
+     "claim": "The Competent Authority shall publish on its official website a list of countries or international organizations that provide an appropriate level of protection for personal data not less than that prescribed by the Law and Regulations.",
+     "supported": true
+    },
+    {
+     "claim": "The competent authority shall review this list every four years, or as necessary, based on the following criteria: A. The existence of regulations that ensure the protection of personal data and the rights of data subjects, including the right to seek compensation for damages caused by violations of these rights.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-17",
+   "lang": "ar",
+   "question": "خلال كم يوماً يجب على جهة التحكم الاستجابة لطلب صاحب البيانات لممارسة حقوقه؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-3"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-21"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "answer": "يجب على جهة التحكم الاستجابة لطلب صاحب البيانات لممارسة حقوقه خلال مدة لا تتجاوز 30 يوماً، مع تمديد هذا التأخير في حالات معينة، ويشمل ذلك تقديم الوسائل التقنية والإدارية والتنظيمية اللازمة لضمان سرعة الاستجابة، واتخاذ الإجراءات والتدعيمات المناسبة للتحقق من هوية المقدم الطلب قبل تنفيذه، وتوثيق وحفظ الطلبات المقدمة لها، بما في ذلك الطلبات الشفهية.\n\n- جهة التحكم يجب أن تلتزم بتنفيذ طلبات ممارسة الحقوق خلال مدة لا تتجاوز 30 يوماً دون تأخير، مع تمديد هذا التأخير في حالات معينة.\n- جهة التحكم يجب أن تبني الوسائل التقنية والإدارية والتنظيمية اللازمة لضمان سرعة الاستجابة لطلبات ممارسة الحقوق.\n- جهة التحكم يجب أن تتخذ الإجراءات والتدعيمات المناسبة للتحقق من هوية المقدم الطلب قبل تنفيذه، بما في ذلك التحقق من هوية المقدم الطلب قبل تنفيذه.\n- جهة التحكم يجب أن توثق وحفظ الطلبات المقدمة لها، بما في ذلك الطلبات الشفهية. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl_ir:art-3",
+    "pdpl:art-21",
+    "pdpl_ir:art-37",
+    "pdpl_ir:art-24",
+    "pdpl_ir:art-7"
+   ],
+   "citation_ok": [
+    true,
+    true,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 9.020972700003767,
+   "timings": {
+    "embed": 0.23608259999309666,
+    "vector": 0.16325479999068193,
+    "bm25": 0.0024256000033346936,
+    "rerank": 3.109381000002031,
+    "retrieval_total": 3.5113416999956826,
+    "llm": 5.507981499991729,
+    "total": 9.019323199987411
+   },
+   "cite_precision": 0.4,
+   "cite_precision_lenient": 0.4,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "جهة التحكم يجب أن تلتزم بتنفيذ طلبات ممارسة الحقوق خلال مدة لا تتجاوز 30 يوماً دون تأخير، مع تمديد هذا التأخير في حالات معينة.",
+     "supported": true
+    },
+    {
+     "claim": "جهة التحكم يجب أن تبني الوسائل التقنية والإدارية والتنظيمية اللازمة لضمان سرعة الاستجابة لطلبات ممارسة الحقوق.",
+     "supported": true
+    },
+    {
+     "claim": "جهة التحكم يجب أن تتخذ الإجراءات والتدعيمات المناسبة للتحقق من هوية المقدم الطلب قبل تنفيذه، بما في ذلك التحقق من هوية المقدم الطلب قبل تنفيذه.",
+     "supported": true
+    },
+    {
+     "claim": "جهة التحكم يجب أن توثق وحفظ الطلبات المقدمة لها، بما في ذلك الطلبات الشفهية.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-18",
+   "lang": "en",
+   "question": "When is a company required to appoint a data protection officer?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-32"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "answer": "Yes, a company is required to appoint a data protection officer when it meets the criteria specified in Article 32 of the Personal Data Protection Law (PDPL). This includes public entities providing large-scale processing of personal data, primary activities involving large-scale processing of individuals, and core activities involving processing of sensitive personal data. The data protection officer is responsible for monitoring compliance with the Law and its Regulations, overseeing procedures, and addressing requests from the Competent Authority regarding personal data protection controls.\n\n- The Competent Authority shall issue rules for the appointment of the data protection officer, which shall include the circumstances under which a data protection officer shall be appointed. [S1]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl_ir:art-32"
+   ],
+   "citation_ok": [
+    true
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 6.347428900000523,
+   "timings": {
+    "embed": 0.22308809999958612,
+    "vector": 0.14676540000073146,
+    "bm25": 0.001444399997126311,
+    "rerank": 2.8692194999894127,
+    "retrieval_total": 3.240744299997459,
+    "llm": 3.1057120000041323,
+    "total": 6.346456300001591
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "A company is required to appoint a data protection officer when it meets the criteria specified in Article 32 of the Personal Data Protection Law (PDPL).",
+     "supported": true
+    },
+    {
+     "claim": "This includes public entities providing large-scale processing of personal data, primary activities involving large-scale processing of individuals, and core activities involving processing of sensitive personal data.",
+     "supported": true
+    },
+    {
+     "claim": "The data protection officer is responsible for monitoring compliance with the Law and its Regulations, overseeing procedures, and addressing requests from the Competent Authority regarding personal data protection controls.",
+     "supported": true
+    },
+    {
+     "claim": "The Competent Authority shall issue rules for the appointment of the data protection officer, which shall include the circumstances under which a data protection officer shall be appointed.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-19",
+   "lang": "ar",
+   "question": "ما المدة المتاحة لصاحب البيانات لتقديم شكوى إلى الجهة المختصة؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-37"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "answer": "لا أعلم. الأنظمة المتوفرة لدي (نظام حماية البيانات الشخصية ولائحته التنفيذية ولائحة نقل البيانات، وضوابط الهيئة الوطنية للأمن السيبراني ECC وCCC وDCC) لا تجيب عن هذا السؤال بوضوح.",
+   "abstained": true,
+   "abstain_correct": false,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 6.057365700005903,
+   "timings": {
+    "embed": 0.22444309999991674,
+    "vector": 0.15367980000155512,
+    "bm25": 0.0018754000047920272,
+    "rerank": 2.890021400002297,
+    "retrieval_total": 3.2702697000058834,
+    "llm": 2.7865858000004664,
+    "total": 6.05685550000635
+   }
+  },
+  {
+   "id": "q-20",
+   "lang": "en",
+   "question": "Can a data subject withdraw consent, and what must the controller do afterwards?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-12"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "answer": "Yes, a data subject can withdraw consent, and the controller must cease Processing without undue delay from the withdrawal request and notify those to whom the Personal Data has been disclosed and request their Destruction.\n\n- Article 12 of the PDPL Implementing Regulation\n- Article 8 of the PDPL Implementing Regulation\n- Article 29 of the PDPL Implementing Regulation\n- Article 5 of the PDPL Implementing Regulation\n- Article 4 of the PDPL Implementing Regulation [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl_ir:art-12",
+    "pdpl_ir:art-8",
+    "pdpl_ir:art-29",
+    "pdpl:art-5",
+    "pdpl_ir:art-4"
+   ],
+   "citation_ok": [
+    true,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 6.8775471999979345,
+   "timings": {
+    "embed": 0.21611539999139495,
+    "vector": 0.16079710000485647,
+    "bm25": 0.001701200002571568,
+    "rerank": 3.0457753999944543,
+    "retrieval_total": 3.4246088999934727,
+    "llm": 3.4506816000066465,
+    "total": 6.875290500000119
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 0.2,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "Yes, a data subject can withdraw consent, and the controller must cease Processing without undue delay from the withdrawal request and notify those to whom the Personal Data has been disclosed and request their Destruction.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-21",
+   "lang": "ar",
+   "question": "ما شروط التسويق المباشر باستخدام البيانات الشخصية؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-29"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-26"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "answer": "التسويق المباشر باستخدام البيانات الشخصية يجب أن يلتزم بحصول موافقة صاحب البيانات الشخصية وفقاً لأحكام المادة 11 من اللائحة التنفيذية لنظام حماية البيانات الشخصية. يجب توفير آلية لوقف تلقي المواد التسويقية عند رغبة صاحب البيانات الشخصية في ذلك. إذا عاد صاحب البيانات الشخصية عن موافقته على التسويق المباشر، يجب على جهة التحكم التوقف دون تأخير غير مبرر عن توجيه المواد التسويقية إليه.\n\n- الحصول على موافقة صاحب البيانات الشخصية\n- توفر آلية لوقف تلقي المواد التسويقية عند رغبة صاحب البيانات الشخصية في ذلك\n- جهة التحكم يجب التوقف عن توجيه المواد التسويقية إليه إذا عاد صاحب البيانات الشخصية عن موافقته على التسويق المباشر [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl_ir:art-29",
+    "pdpl:art-26",
+    "pdpl_ir:art-1",
+    "pdpl:art-25",
+    "pdpl:art-10"
+   ],
+   "citation_ok": [
+    true,
+    true,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "latency": 6.141243799997028,
+   "timings": {
+    "embed": 0.22034159999748226,
+    "vector": 0.15480980000575073,
+    "bm25": 0.00149049999890849,
+    "rerank": 2.9082895000028657,
+    "retrieval_total": 3.285155499994289,
+    "llm": 2.854175899992697,
+    "total": 6.139331399986986
+   },
+   "cite_precision": 0.4,
+   "cite_precision_lenient": 0.4,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 0.6666666666666666,
+   "claims": [
+    {
+     "claim": "التسويق المباشر باستخدام البيانات الشخصية يجب أن يلتزم بحصول موافقة صاحب البيانات الشخصية وفقاً لأحكام المادة 11 من اللائحة التنفيذية لنظام حماية البيانات الشخصية.",
+     "supported": false
+    },
+    {
+     "claim": "يجب توفير آلية لوقف تلقي المواد التسويقية عند رغبة صاحب البيانات الشخصية في ذلك.",
+     "supported": true
+    },
+    {
+     "claim": "جهة التحكم يجب التوقف عن توجيه المواد التسويقية إليه إذا عاد صاحب البيانات الشخصية عن موافقته على التسويق المباشر.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-22",
+   "lang": "en",
+   "question": "What must a controller verify when choosing a processor?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-17"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "answer": "The controller must verify that the Processor provides sufficient guarantees to protect Personal Data, including the purpose, categories of data, duration, notification of breaches, subcontractors, and compliance with applicable laws and regulations.\n\n- [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-8",
+    "pdpl_ir:art-17",
+    "pdpl:art-14",
+    "pdpl_transfer:art-4",
+    "ccc:ctl-2-3-T-1"
+   ],
+   "citation_ok": [
+    false,
+    true,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    false,
+    true,
+    true,
+    false,
+    true
+   ],
+   "latency": 6.881295800005319,
+   "timings": {
+    "embed": 0.2840017000125954,
+    "vector": 0.1546509000036167,
+    "bm25": 0.0013936999894212931,
+    "rerank": 3.4171078000072157,
+    "retrieval_total": 3.8574441999953706,
+    "llm": 3.021347499990952,
+    "total": 6.878791699986323
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 0.2,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "The controller must verify that the Processor provides sufficient guarantees to protect Personal Data, including the purpose, categories of data, duration, notification of breaches, subcontractors, and compliance with applicable laws and regulations.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-23",
+   "lang": "ar",
+   "question": "ما الضوابط التي يجب الالتزام بها عند إخفاء هوية البيانات الشخصية؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-9"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "answer": "عند إخفاء هوية البيانات الشخصية، يجب على الجهة التحكم القيام بالآتي: - التأكد من عدم إمكانية إعادة التعرف على هوية صاحب البيانات بعد إخفائه - تقويم الأثر بما في ذلك إمكانية إعادة تحديد هوية صاحب البيانات - تدابير التنظيم والإدارية والتقنية اللازمة لتجنب المخاطر مع مراعاة التطورات التقنية وأساليب إخفاء الهوية وتحديثها ومواءمتها مع تلك التطورات - تقويم فاعلية تقنيات إخفاء هوية صاحب البيانات الشخصية - إجراء التعديلات اللازمة لضمان عدم إمكانية إعادة التعرف على هوية صاحب البيانات الشخصية - عدم إخفاء البيانات الشخصية التي جرى إخفاء هويتها - عدم التسويق المباشر لصاحب البيانات الشخصية دون موافقة صاحبه\n\n- لا تعد البيانات التي جرى إخفاء هوية أصحابها بيانات شخصية\n- على جهة التحكم عند معالجة البيانات الشخصية من غير صاحبها مباشرة مراعاة أن تكون المعالجة ضرورية ومتناسبة مع الغرض المحدد\n- على جهة التحكم عند معالجتها للبيانات الشخصية وفقاً للفقرة2 ،(من المادة)العاشرة(من النظام مراعاة أن يكون جمعها من مصدر متاح للعموم قد تم بشكل نظامي\n- على جهة التحكم عند معالجتها للبيانات الشخصية وفقاً للفقرة6 ،(من المادة)العاشرة(من النظام مراعا ة ما ورد في المادة (التاسعة) من هذه اللائحة في شأن إخفاء الهوية\n- على جهة التحكم قبل القيام بمعالجة البيانات الشخصية لأغراض التسويق المباشر الحصول على موافقة صاحب البيانات الشخصية وفقاً لأحكام المادة 11 من هذه اللائحة\n- على جهة التحكم عند إرسال مواد التسويق المباشر لصاحب البيانات الشخصية، يجب ذكر اسم الجهة المرسلة بوضوح دون أي إخفاء لهويتها [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl_ir:art-9",
+    "pdpl_ir:art-15",
+    "pdpl_ir:art-29",
+    "pdpl_ir:art-23",
+    "pdpl:art-8"
+   ],
+   "citation_ok": [
+    true,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 9.88607759999286,
+   "timings": {
+    "embed": 0.21067719999700785,
+    "vector": 0.1341072999930475,
+    "bm25": 0.0019715999951586127,
+    "rerank": 2.9572759000002407,
+    "retrieval_total": 3.3042367000016384,
+    "llm": 6.580571200000122,
+    "total": 9.88480790000176
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 0.2,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "عند إخفاء هوية البيانات الشخصية، يجب على الجهة التحكم القيام بالآتي: - التأكد من عدم إمكانية إعادة التعرف على هوية صاحب البيانات بعد إخفائه - تقويم الأثر بما في ذلك إمكانية إعادة تحديد هوية صاحب البيانات - تدابير التنظيم والإدارية والتقنية اللازمة لتجنب المخاطر مع مراعاة التطورات التقنية وأساليب إخفاء الهوية وتحديثها ومواءمتها مع تلك التطورات - تقويم فاعلية تقنيات إخفاء هوية صاحب البيانات الشخصية - إجراء التعديلات اللازمة لضمان عدم إمكانية إعادة التعرف على هوية صاحب البيانات الشخصية",
+     "supported": true
+    },
+    {
+     "claim": "عدم إخفاء البيانات الشخصية التي جرى إخفاء هويتها",
+     "supported": true
+    },
+    {
+     "claim": "على جهة التحكم عند معالجة البيانات الشخصية من غير صاحبها مباشرة مراعاة أن تكون المعالجة ضرورية ومتناسبة مع الغرض المحدد",
+     "supported": true
+    },
+    {
+     "claim": "على جهة التحكم عند معالجتها للبيانات الشخصية وفقاً للفقرة2 ،(من المادة)العاشرة(من النظام مراعاة أن يكون جمعها من مصدر متاح للعموم قد تم بشكل نظامي",
+     "supported": true
+    },
+    {
+     "claim": "على جهة التحكم عند معالجتها للبيانات الشخصية وفقاً للفقرة6 ،(من المادة)العاشرة(من النظام مراعا ة ما ورد في المادة (التاسعة) من هذه اللائحة في شأن إخفاء الهوية",
+     "supported": true
+    },
+    {
+     "claim": "على جهة التحكم قبل القيام بمعالجة البيانات الشخصية لأغراض التسويق المباشر الحصول على موافقة صاحب البيانات الشخصية وفقاً لأحكام المادة 11 من هذه اللائحة",
+     "supported": true
+    },
+    {
+     "claim": "على جهة التحكم عند إرسال مواد التسويق المباشر لصاحب البيانات الشخصية، يجب ذكر اسم الجهة المرسلة بوضوح دون أي إخفاء لهويتها",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-24",
+   "lang": "en",
+   "question": "Can a private company process personal data based on its legitimate interest?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-16"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-6"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "answer": "I don't know. The regulations I have (PDPL, its Implementing Regulation, the Transfer Regulation, and NCA's ECC, CCC and DCC) don't clearly answer this question.",
+   "abstained": true,
+   "abstain_correct": false,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 5.511640700002317,
+   "timings": {
+    "embed": 0.22247150000475813,
+    "vector": 0.1522636000008788,
+    "bm25": 0.0015706999984104186,
+    "rerank": 2.8970842999988236,
+    "retrieval_total": 3.273620200008736,
+    "llm": 2.2371521000022767,
+    "total": 5.510772300011013
+   }
+  },
+  {
+   "id": "q-25",
+   "lang": "ar",
+   "question": "ما المعلومات التي يجب أن يتضمنها الإشعار بحادثة تسرب البيانات الشخصية؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-24"
+    }
+   ],
+   "tags": [
+    "pdpl_ir",
+    "breach"
+   ],
+   "answer": "يجب أن يتضمن الإشعار بحادثة تسرب البيانات الشخصية ما يلي: وصف للحادثة، الفئات والأعداد الفعلية أو التقريبية لأصحاب البيانات الشخصية المعنيين، وبيان المخاطر المحتملة، إشعار صاحب البيانات الشخصية، وبيانات التواصل مع جهة التحكم أو مسؤول حماية البيانات الشخصية، وتوثيق التدابير التصحيحية المتخذة، وتوثيق التحديثات على البيانات الشخصية. إذا لم يتم تقديم البيانات المطلوبة خلال 72 ساعة من علم جهة التحكم بتسرب البيانات الشخصية، يجب تقديمها في أقرب وقت ممكن مع إرفاق مبررات التأخير. على جهة التحكم الاحتفاظ بنسخة من التقارير المقدمة إليها وتوثيق التدابير التصحيحية المتخذة فيما يتعلق بتسرب البيانات الشخصية،\n\n- الجهة المختصة يجب أن تشعر في حالة وقوع حادثة تسرب للبيانات الشخصية خلال 72 ساعة من علمها بها، إذا كان من شأن تلك الحادثة الإضرار بالبيانات الشخصية أو صاحب البيانات الشخصية أو كانت تتعارض مع حقوقه أو مصالحه، على أن يتضمن الإشعار ما يأتي: وصف لحادثة تسرب البيانات الشخصية، الفئات والأعداد الفعلية أو تق [S1][S2][S3]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl_ir:art-24",
+    "pdpl:art-20",
+    "pdpl_ir:art-23"
+   ],
+   "citation_ok": [
+    true,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true
+   ],
+   "latency": 7.688118799997028,
+   "timings": {
+    "embed": 0.21845299999404233,
+    "vector": 0.13680160000512842,
+    "bm25": 0.001625200005946681,
+    "rerank": 2.8445016000041505,
+    "retrieval_total": 3.2016502999904333,
+    "llm": 4.483089100001962,
+    "total": 7.684739399992395
+   },
+   "cite_precision": 0.3333333333333333,
+   "cite_precision_lenient": 0.3333333333333333,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 0.75,
+   "claims": [
+    {
+     "claim": "يجب أن يتضمن الإشعار بحادثة تسرب البيانات الشخصية ما يلي: وصف للحادثة، الفئات والأعداد الفعلية أو التقريبية لأصحاب البيانات الشخصية المعنيين، وبيان المخاطر المحتملة، إشعار صاحب البيانات الشخصية، وبيانات التواصل مع جهة التحكم أو مسؤول حماية البيانات الشخصية، وتوثيق التدابير التصحيحية المتخذة، وتوثيق التحديثات على البيانات الشخصية.",
+     "supported": false
+    },
+    {
+     "claim": "الجهة المختصة يجب أن تشعر في حالة وقوع حادثة تسرب للبيانات الشخصية خلال 72 ساعة من علمها بها، إذا كان من شأن تلك الحادثة الإضرار بالبيانات الشخصية أو صاحب البيانات الشخصية أو كانت تتعارض مع حقوقه أو مصالحه، على أن يتضمن الإشعار ما يأتي: وصف لحادثة تسرب البيانات الشخصية، الفئات والأعداد الفعلية أو التقريبية لأصحاب البيانات الشخصية المعنيين، وبيان المخاطر المحتملة، إشعار صاحب البيانات الشخصية، وبيانات التواصل مع جهة التحكم أو مسؤول حماية البيانات الشخصية، وتوثيق التدابير التصحيحية المتخذة.",
+     "supported": true
+    },
+    {
+     "claim": "إذا لم يتم تقديم البيانات المطلوبة خلال 72 ساعة من علم جهة التحكم بتسرب البيانات الشخصية، يجب تقديمها في أقرب وقت ممكن مع إرفاق مبررات التأخير.",
+     "supported": true
+    },
+    {
+     "claim": "على جهة التحكم الاحتفاظ بنسخة من التقارير المقدمة إليها وتوثيق التدابير التصحيحية المتخذة فيما يتعلق بتسرب البيانات الشخصية.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-26",
+   "lang": "en",
+   "question": "Does the PDPL apply to an individual processing personal data for personal or family use?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-2"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-2"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "answer": "Yes, the PDPL applies to an individual processing personal data for personal or family use.\n\n- The PDPL Implementing Regulation [S1] states that the provisions of the Law and its Regulations shall not apply to an individual Processing Personal Data for purposes not exceeding personal or family use.",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl_ir:art-2"
+   ],
+   "citation_ok": [
+    true
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 5.40008740000485,
+   "timings": {
+    "embed": 0.2513639999961015,
+    "vector": 0.16380650000064634,
+    "bm25": 0.002609100003610365,
+    "rerank": 3.481971099987277,
+    "retrieval_total": 3.8999908000114374,
+    "llm": 1.4995950000011362,
+    "total": 5.399585800012574
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 0.5,
+   "faithfulness": 0.5,
+   "claims": [
+    {
+     "claim": "The PDPL applies to an individual processing personal data for personal or family use.",
+     "supported": false
+    },
+    {
+     "claim": "The PDPL Implementing Regulation states that the provisions of the Law and its Regulations shall not apply to an individual Processing Personal Data for purposes not exceeding personal or family use.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-27",
+   "lang": "en",
+   "question": "Which safeguards can a controller use to transfer personal data abroad when the destination does not offer an adequate level of protection?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_transfer",
+     "canonical_key": "art-4"
+    }
+   ],
+   "tags": [
+    "transfer"
+   ],
+   "answer": "I don't know. The regulations I have (PDPL, its Implementing Regulation, the Transfer Regulation, and NCA's ECC, CCC and DCC) don't clearly answer this question.",
+   "abstained": true,
+   "abstain_correct": false,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 9.939406699995743,
+   "timings": {
+    "embed": 0.4843391000031261,
+    "vector": 0.16885909999837168,
+    "bm25": 0.003672800012282096,
+    "rerank": 4.741626800008817,
+    "retrieval_total": 5.3991341999935685,
+    "llm": 4.539478599996073,
+    "total": 9.938612799989642
+   }
+  },
+  {
+   "id": "q-28",
+   "lang": "ar",
+   "question": "متى يجب على جهة التحكم إجراء تقويم للمخاطر قبل نقل البيانات الشخصية إلى خارج المملكة؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_transfer",
+     "canonical_key": "art-7"
+    }
+   ],
+   "tags": [
+    "transfer"
+   ],
+   "answer": "جهة التحكم يجب أن تجري تقويم للمخاطر قبل نقل البيانات الشخصية إلى خارج المملكة إذا كانت البيانات الحساسة أو الإفصاح عنها مستمر أو على نطاق واسع، أو إذا كان هناك حاجة لحماية البيانات الشخصية خارج المملكة بما لا يقل عن مستوى الحماية المقرر في النظام واللوائح.\n\n- جهة التحكم يجب أن تجري تقويم للمخاطر قبل نقل البيانات الشخصية إلى خارج المملكة إذا كانت البيانات الحساسة أو الإفصاح عنها مستمر أو على نطاق واسع، أو إذا كان هناك حاجة لحماية البيانات الشخصية خارج المملكة بما لا يقل عن مستوى الحماية المقرر في النظام واللوائح. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl_transfer:art-7",
+    "pdpl:art-29",
+    "pdpl_ir:art-25",
+    "pdpl_transfer:art-3",
+    "pdpl_transfer:art-1"
+   ],
+   "citation_ok": [
+    true,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 9.050690200005192,
+   "timings": {
+    "embed": 0.2372066999960225,
+    "vector": 0.16620019999390934,
+    "bm25": 0.0025440999888814986,
+    "rerank": 3.360741299999063,
+    "retrieval_total": 3.7669820000010077,
+    "llm": 5.280987399994046,
+    "total": 9.047969399995054
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 0.2,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "جهة التحكم يجب أن تجري تقويم للمخاطر قبل نقل البيانات الشخصية إلى خارج المملكة إذا كانت البيانات الحساسة أو الإفصاح عنها مستمر أو على نطاق واسع،",
+     "supported": true
+    },
+    {
+     "claim": "أو إذا كان هناك حاجة لحماية البيانات الشخصية خارج المملكة بما لا يقل عن مستوى الحماية المقرر في النظام واللوائح.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-29",
+   "lang": "en",
+   "question": "How often does the competent authority review the list of countries with an adequate level of data protection?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_transfer",
+     "canonical_key": "art-3"
+    }
+   ],
+   "tags": [
+    "transfer"
+   ],
+   "answer": "The competent authority reviews the list of countries with an adequate level of data protection every four years, or as necessary, based on the criteria provided in the Personal Data Transfer Regulation.\n\n- The competent authority reviews the list of countries with an adequate level of data protection every four years, or as necessary, based on the criteria provided in the Personal Data Transfer Regulation. [S1]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl_transfer:art-3"
+   ],
+   "citation_ok": [
+    true
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 4.927176800003508,
+   "timings": {
+    "embed": 0.21613430000434164,
+    "vector": 0.1644656999997096,
+    "bm25": 0.002053499993053265,
+    "rerank": 3.181880200005253,
+    "retrieval_total": 3.5647820999874966,
+    "llm": 1.3615757999941707,
+    "total": 4.926357899981667
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "The competent authority reviews the list of countries with an adequate level of data protection every four years, or as necessary, based on the criteria provided in the Personal Data Transfer Regulation.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-30",
+   "lang": "ar",
+   "question": "متى لا ينطبق الإعفاء الممنوح لجهة التحكم عند نقل البيانات الشخصية إلى خارج المملكة؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_transfer",
+     "canonical_key": "art-6"
+    }
+   ],
+   "tags": [
+    "transfer"
+   ],
+   "answer": "لا أعلم. الأنظمة المتوفرة لدي (نظام حماية البيانات الشخصية ولائحته التنفيذية ولائحة نقل البيانات، وضوابط الهيئة الوطنية للأمن السيبراني ECC وCCC وDCC) لا تجيب عن هذا السؤال بوضوح.",
+   "abstained": true,
+   "abstain_correct": false,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 7.3710033999959705,
+   "timings": {
+    "embed": 0.226638100008131,
+    "vector": 0.15103999999701045,
+    "bm25": 0.0025284000003011897,
+    "rerank": 3.1055609000031836,
+    "retrieval_total": 3.485996500006877,
+    "llm": 3.883818499991321,
+    "total": 7.369814999998198
+   }
+  },
+  {
+   "id": "q-31",
+   "lang": "en",
+   "question": "Is multi-factor authentication required for remote access?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-2-3"
+    },
+    {
+     "doc_id": "ccc",
+     "canonical_key": "ctl-2-2-P-1"
+    },
+    {
+     "doc_id": "dcc",
+     "canonical_key": "ctl-2-1-1"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "answer": "Yes, multi-factor authentication is required for remote access.\n\n- [S1][S3]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "ecc:ctl-2-2-3",
+    "ccc:ctl-2-2-T-1"
+   ],
+   "citation_ok": [
+    true,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true
+   ],
+   "latency": 5.063295499989181,
+   "timings": {
+    "embed": 0.22426059999270365,
+    "vector": 0.14594620000571012,
+    "bm25": 0.00149940000846982,
+    "rerank": 3.113676499997382,
+    "retrieval_total": 3.485857199993916,
+    "llm": 1.5764452000003075,
+    "total": 5.062302399994223
+   },
+   "cite_precision": 0.5,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 0.3333333333333333,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "Yes, multi-factor authentication is required for remote access.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-32",
+   "lang": "ar",
+   "question": "ما متطلبات النسخ الاحتياطي في الضوابط الأساسية للأمن السيبراني؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-9-3"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "answer": "لا أعلم. الأنظمة المتوفرة لدي (نظام حماية البيانات الشخصية ولائحته التنفيذية ولائحة نقل البيانات، وضوابط الهيئة الوطنية للأمن السيبراني ECC وCCC وDCC) لا تجيب عن هذا السؤال بوضوح.",
+   "abstained": true,
+   "abstain_correct": false,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 7.171584199997596,
+   "timings": {
+    "embed": 0.3270237999968231,
+    "vector": 0.13652790000196546,
+    "bm25": 0.0018207999964943156,
+    "rerank": 3.3317703000066103,
+    "retrieval_total": 3.797524699999485,
+    "llm": 3.3734789000009187,
+    "total": 7.171003600000404
+   }
+  },
+  {
+   "id": "q-33",
+   "lang": "en",
+   "question": "How long must cybersecurity event logs be retained under the ECC?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-12-3"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "answer": "Yes, cybersecurity event logs must be retained for at least 12 months.\n\n- [S1]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "ecc:ctl-2-12-3"
+   ],
+   "citation_ok": [
+    true
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 4.595362699998077,
+   "timings": {
+    "embed": 0.22583020001184195,
+    "vector": 0.1336553000001004,
+    "bm25": 0.0017783999937819317,
+    "rerank": 3.0096190000040224,
+    "retrieval_total": 3.3712063999992097,
+    "llm": 1.2236406000010902,
+    "total": 4.5948470000003
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "Yes, cybersecurity event logs must be retained for at least 12 months.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-34",
+   "lang": "ar",
+   "question": "هل يجب أن تُشغل وظائف الأمن السيبراني بمواطنين سعوديين؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-1-2-2"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "answer": "نعم، يجب أن تشغل وظائف الأمن السيبراني بمواطنين سعوديين مؤهلين. هذه المقتطفات من الضوابط الأساسية للأمن السيبراني ECC-2:2024 وضعت هذه الrequirement. [S1][S3][S4][S5]\n\n- 1-4-P-1-1: يجب أن يشغل وظائف الأمن السيبراني مواطنون سعوديون مؤهلون.\n- 1-4-P-1-2: يجب إجراء المسح الأمني للعاملين داخل المملكة الذين لهم حق الوصول إلى الأنظمة التقنية دوريًا.\n- 1-4-P-1-3: يجب إقرار وتوقيع العاملين على جميع سياسات الأمن السيبراني كشرط مسبق للوصول إلى الأنظمة التقنية السحابية.\n- 2-1-1-1: يجب التقييد الحازم بالسماح للحد الأدنى من العاملين للوصول والاطلاع ومشاركة البيانات بناءً على قوائم صلاحيات مقتصرة على موظفين سعوديين.\n- 2-1-1-2: يجب منع مشاركة قوائم الصلاحيات المعتمدة مع الأشخاص غير المصرح لهم.",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "ccc:ctl-1-4-P-1",
+    "dcc:ctl-2-1-1",
+    "ecc:ctl-1-9-3",
+    "ecc:ctl-1-9-4"
+   ],
+   "citation_ok": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 7.630007200001273,
+   "timings": {
+    "embed": 0.2246476000000257,
+    "vector": 0.14732410000578966,
+    "bm25": 0.001445600006263703,
+    "rerank": 2.634530100011034,
+    "retrieval_total": 3.0082572999963304,
+    "llm": 4.620710999995936,
+    "total": 7.628968299992266
+   },
+   "cite_precision": 0.0,
+   "cite_precision_lenient": 0.0,
+   "cite_hit": 0.0,
+   "cite_recall": 0.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "1-4-P-1-1: يجب أن يشغل وظائف الأمن السيبراني مواطنون سعوديون مؤهلون.",
+     "supported": true
+    },
+    {
+     "claim": "1-4-P-1-2: يجب إجراء المسح الأمني للعاملين داخل المملكة الذين لهم حق الوصول إلى الأنظمة التقنية دوريًا.",
+     "supported": true
+    },
+    {
+     "claim": "1-4-P-1-3: يجب إقرار وتوقيع العاملين على جميع سياسات الأمن السيبراني كشرط مسبق للوصول إلى الأنظمة التقنية السحابية.",
+     "supported": true
+    },
+    {
+     "claim": "2-1-1-1: يجب التقييد الحازم بالسماح للحد الأدنى من العاملين للوصول والاطلاع ومشاركة البيانات بناءً على قوائم صلاحيات مقتصرة على موظفين سعوديين.",
+     "supported": true
+    },
+    {
+     "claim": "2-1-1-2: يجب منع مشاركة قوائم الصلاحيات المعتمدة مع الأشخاص غير المصرح لهم.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-35",
+   "lang": "en",
+   "question": "When must a cybersecurity risk assessment be performed under the ECC?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-1-5-3"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "answer": "A cybersecurity risk assessment must be performed at the early stage of technology projects, before major changes to technology infrastructure, during planning to obtain third-party services, and before the release of new technology services and products.\n\n- [S1]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "ecc:ctl-1-5-3"
+   ],
+   "citation_ok": [
+    true
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 4.999103299996932,
+   "timings": {
+    "embed": 0.21082000000751577,
+    "vector": 0.14286550000542775,
+    "bm25": 0.0016651999903842807,
+    "rerank": 3.060259899997618,
+    "retrieval_total": 3.4159123999997973,
+    "llm": 1.5827791000047,
+    "total": 4.998691500004497
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "A cybersecurity risk assessment must be performed at the early stage of technology projects.",
+     "supported": true
+    },
+    {
+     "claim": "A cybersecurity risk assessment must be performed before major changes to technology infrastructure.",
+     "supported": true
+    },
+    {
+     "claim": "A cybersecurity risk assessment must be performed during planning to obtain third-party services.",
+     "supported": true
+    },
+    {
+     "claim": "A cybersecurity risk assessment must be performed before the release of new technology services and products.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-36",
+   "lang": "ar",
+   "question": "ما نطاق اختبار الاختراق المطلوب في الضوابط الأساسية للأمن السيبراني؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-11-3"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "answer": "اختبار الاختراق المطلوب في الضوابط الأساسية للأمن السيبراني يشمل جميع الخدمات المقدمة خارجياً (عن طريق الإنترنت) ومكوناتها التقنية، بما في ذلك البنية التحتية، المواقع الإلكترونية، تطبيقات الهواتف ASL واللوحية، البريد الإلكتروني والدخول عن بعد. اختبار الاختراق يجب أن يشمل جميع الخدمات المقدمة خارجياً ويجري كل ستة أشهر، على الأقل.\n\n- يجب أن يشمل جميع الخدمات المقدمة خارجياً ويجري كل ستة أشهر، على الأقل. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "ecc:ctl-2-11-3",
+    "ccc:ctl-2-10-P-1",
+    "ecc:sub-2-11",
+    "ecc:ctl-2-11-1",
+    "ecc:ctl-2-11-2"
+   ],
+   "citation_ok": [
+    true,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 6.543089400001918,
+   "timings": {
+    "embed": 0.21671790000982583,
+    "vector": 0.13016510001034476,
+    "bm25": 0.0018572999979369342,
+    "rerank": 2.3991590999939945,
+    "retrieval_total": 2.7481123999896226,
+    "llm": 3.794211600004928,
+    "total": 6.542323999994551
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 0.8,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 0.5,
+   "claims": [
+    {
+     "claim": "اختبار الاختراق المطلوب في الضوابط الأساسية للأمن السيبراني يشمل جميع الخدمات المقدمة خارجياً (عن طريق الإنترنت) ومكوناتها التقنية، بما في ذلك البنية التحتية، المواقع الإلكترونية، تطبيقات الهواتف ASL واللوحية، البريد الإلكتروني والدخول عن بعد.",
+     "supported": true
+    },
+    {
+     "claim": "اختبار الاختراق يجب أن يشمل جميع الخدمات المقدمة خارجياً ويجري كل ستة أشهر، على الأقل.",
+     "supported": false
+    }
+   ]
+  },
+  {
+   "id": "q-37",
+   "lang": "en",
+   "question": "Which cryptographic standards must an entity follow under the ECC?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-8-3"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "answer": "The entity must follow the cryptographic standards specified in the National Cryptographic Standards (NCS) as approved by the National Cryptographic Control (NCC). The appropriate standard level should be implemented based on the nature and sensitivity of the data, systems, and networks, as well as the entity's risk assessment, and in accordance with relevant legislative and regulatory requirements.\n\n- The entity must follow the cryptographic standards specified in the National Cryptographic Standards (NCS) as approved by the National Cryptographic Control (NCC).\n- The appropriate standard level should be implemented based on the nature and sensitivity of the data, systems, and networks, as well as the entity's risk assessment, and in accordance with relevant legislative and regulatory requirements. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "ecc:ctl-2-8-3",
+    "dcc:ctl-2-5-1",
+    "ecc:sub-2-8",
+    "ccc:ctl-2-7-T-1",
+    "ccc:ctl-2-7-P-1"
+   ],
+   "citation_ok": [
+    true,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 7.058139500004472,
+   "timings": {
+    "embed": 0.22451189999992494,
+    "vector": 0.16729490000579972,
+    "bm25": 0.0015331999893533066,
+    "rerank": 3.2283473999996204,
+    "retrieval_total": 3.6219677999906708,
+    "llm": 3.434658700003638,
+    "total": 7.056626499994309
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 0.4,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 0.5,
+   "claims": [
+    {
+     "claim": "The entity must follow the cryptographic standards specified in the National Cryptographic Standards (NCS) as approved by the National Cryptographic Control (NCC).",
+     "supported": false
+    },
+    {
+     "claim": "The appropriate standard level should be implemented based on the nature and sensitivity of the data, systems, and networks, as well as the entity's risk assessment, and in accordance with relevant legislative and regulatory requirements.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-38",
+   "lang": "ar",
+   "question": "هل يجب أن تكون إدارة الأمن السيبراني مستقلة عن إدارة تقنية المعلومات؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-1-2-1"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "answer": "لا، يجب أن تكون إدارة الأمن السيبراني مستقلة عن إدارة تقنية المعلومات.\n\n- الضوابط الأساسية للأمن السيبراني ECC-2:2024 - الضابط 1-2-1: إدارة الأمن السيبراني\n- يجب إنشاء إدارة معنية بالأمن السيبراني في الجهة مستقلة عن إدارة تقنية المعلومات والاتصالات (ICT/ IT)وفقأً للأمر السامي الكريم رقم 37140 وتاريخ 14/ 8/ 1438 ه. ويفضل ارتباطها مباشرة برئيس الجهة أو من ينيبه، مع الأخذ بالاعتبار عدم تعارض المصالح. [S1]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "ecc:ctl-1-2-1"
+   ],
+   "citation_ok": [
+    true
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 7.430548199990881,
+   "timings": {
+    "embed": 0.22704100000555627,
+    "vector": 0.17475979999289848,
+    "bm25": 0.001872299995739013,
+    "rerank": 4.83256780001102,
+    "retrieval_total": 5.2365082000033,
+    "llm": 2.193708799997694,
+    "total": 7.430217000000994
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "إدارة الأمن السيبراني يجب أن تكون مستقلة عن إدارة تقنية المعلومات والاتصالات (ICT/IT).",
+     "supported": true
+    },
+    {
+     "claim": "إدارة الأمن السيبراني يجب أن تكون مستقلة وفقًا للأمر السامي الكريم رقم 37140 وتاريخ 14/ 8/ 1438 ه.",
+     "supported": true
+    },
+    {
+     "claim": "يفضل ارتباط إدارة الأمن السيبراني مباشرة برئيس الجهة أو من ينيبه.",
+     "supported": true
+    },
+    {
+     "claim": "يجب الأخذ بالاعتبار عدم تعارض المصالح.",
+     "supported": true
+    },
+    {
+     "claim": "إدارة الأمن السيبراني يجب أن تكون مستقلة عن إدارة تقنية المعلومات.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-39",
+   "lang": "en",
+   "question": "What does the ECC require from cloud computing and hosting service providers that hold the entity's data?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-4-2-3"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "answer": "The ECC requires cloud computing and hosting service providers to protect the entity's data by ensuring it is returned in a usable format upon service completion and to separate the entity's environment from other environments within the cloud computing service provider.\n\n- The ECC requires cloud computing and hosting service providers to protect the entity's data by ensuring it is returned in a usable format upon service completion and to separate the entity's environment from other environments within the cloud computing service provider. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "ecc:ctl-4-2-3",
+    "ecc:sub-4-2",
+    "ecc:ctl-4-2-2",
+    "ecc:ctl-4-2-1",
+    "ecc:ctl-4-2-4"
+   ],
+   "citation_ok": [
+    true,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 6.657922400001553,
+   "timings": {
+    "embed": 0.23763599999074358,
+    "vector": 0.15337329999601934,
+    "bm25": 0.002432499997667037,
+    "rerank": 3.429247600011877,
+    "retrieval_total": 3.8229776000080165,
+    "llm": 2.8338626000040676,
+    "total": 6.656840200012084
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "The ECC requires cloud computing and hosting service providers to protect the entity's data by ensuring it is returned in a usable format upon service completion.",
+     "supported": true
+    },
+    {
+     "claim": "The ECC requires cloud computing and hosting service providers to separate the entity's environment from other environments within the cloud computing service provider.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-40",
+   "lang": "en",
+   "question": "What cryptographic key management requirements apply to cloud service providers?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ccc",
+     "canonical_key": "ctl-2-15-P-3"
+    }
+   ],
+   "tags": [
+    "ccc"
+   ],
+   "answer": "Cloud service providers (CSPs) and cloud storage providers (CSTs) must ensure well-defined ownership for cryptographic keys and implement a secure key retrieval mechanism in case of key loss, such as key backups and trusted key storage outside the cloud. Additionally, they must activate and monitor all audit trails of keys.\n\n- Key Management Subcontrol 2-15-P-3-1: Ensure well-defined ownership for cryptographic keys.\n- Key Management Subcontrol 2-15-P-3-2: Implement a secure key retrieval mechanism in case of key loss.\n- Key Management Subcontrol 2-15-P-3-3: Activate and monitor all audit trails of keys. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "ccc:ctl-2-15-P-3",
+    "ccc:ctl-2-15-T-3",
+    "ccc:ctl-2-15-T-2",
+    "ecc:ctl-2-8-3",
+    "ccc:sub-2-15"
+   ],
+   "citation_ok": [
+    true,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 6.386998000001768,
+   "timings": {
+    "embed": 0.23822990000189748,
+    "vector": 0.15088810000452213,
+    "bm25": 0.001716999991913326,
+    "rerank": 2.83320970000932,
+    "retrieval_total": 3.2242986999917775,
+    "llm": 3.1615958999900613,
+    "total": 6.385894599981839
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 0.8,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "Cloud service providers (CSPs) and cloud storage providers (CSTs) must ensure well-defined ownership for cryptographic keys.",
+     "supported": true
+    },
+    {
+     "claim": "Implement a secure key retrieval mechanism in case of key loss, such as key backups and trusted key storage outside the cloud.",
+     "supported": true
+    },
+    {
+     "claim": "Activate and monitor all audit trails of keys.",
+     "supported": true
+    },
+    {
+     "claim": "Key Management Subcontrol 2-15-P-3-1: Ensure well-defined ownership for cryptographic keys.",
+     "supported": true
+    },
+    {
+     "claim": "Key Management Subcontrol 2-15-P-3-2: Implement a secure key retrieval mechanism in case of key loss.",
+     "supported": true
+    },
+    {
+     "claim": "Key Management Subcontrol 2-15-P-3-3: Activate and monitor all audit trails of keys.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-41",
+   "lang": "ar",
+   "question": "ما متطلبات الأمن السيبراني لإدارة التغيير لدى مقدم الخدمات السحابية؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ccc",
+     "canonical_key": "ctl-1-5-P-3"
+    }
+   ],
+   "tags": [
+    "ccc"
+   ],
+   "answer": "يجب أن تغطي الأمن السيبراني لإدارة التغيير لدى مقدمي الخدمات بحد أدنى ما يلي: إجراءات تنفيذ التغييرات بطرق آمنة في أنظمة الإنتاج مع إعطاء أولوية للملاحظات المتعلقة بالأمن السيبراني، إجراءات تنفيذ التغييرات الاستثنائية ذات العلاقة بالأمن السيبراني، مثل التغييرات أثناء التعافي من الحوادث.\n\n- يجب تحديد متطلبات الأمن السيبراني لإدارة التغيير لدى مقدمي الخدمات، وتوثيقها، واعتمادها. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "ccc:sub-1-5",
+    "ccc:ctl-1-5-P-1",
+    "ccc:ctl-1-5-P-3",
+    "ccc:ctl-1-5-P-2",
+    "ccc:ctl-1-5-P-4"
+   ],
+   "citation_ok": [
+    false,
+    false,
+    true,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 7.208582999999635,
+   "timings": {
+    "embed": 0.23691710000275634,
+    "vector": 0.13284079999721143,
+    "bm25": 0.0024242999934358522,
+    "rerank": 3.0713606999925105,
+    "retrieval_total": 3.4438417999917874,
+    "llm": 3.7640162000025157,
+    "total": 7.207857999994303
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "يجب أن تغطي الأمن السيبراني لإدارة التغيير لدى مقدمي الخدمات بحد أدنى ما يلي: إجراءات تنفيذ التغييرات بطرق آمنة في أنظمة الإنتاج مع إعطاء أولوية للملاحظات المتعلقة بالأمن السيبراني، إجراءات تنفيذ التغييرات الاستثنائية ذات العلاقة بالأمن السيبراني، مثل التغييرات أثناء التعافي من الحوادث.",
+     "supported": true
+    },
+    {
+     "claim": "يجب تحديد متطلبات الأمن السيبراني لإدارة التغيير لدى مقدمي الخدمات، وتوثيقها، واعتمادها.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-42",
+   "lang": "en",
+   "question": "How long must usage logs of printers, scanners and copy machines be kept under the DCC?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "dcc",
+     "canonical_key": "ctl-2-7-3"
+    }
+   ],
+   "tags": [
+    "dcc"
+   ],
+   "answer": "According to the NCA DCC-1:2022, the usage logs of printers, scanners, and copy machines must be retained securely for a period not less than 12 months.\n\n- The regulations require at least 12 months of retention for usage logs. [S1]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "dcc:ctl-2-7-3"
+   ],
+   "citation_ok": [
+    true
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 4.411489799997071,
+   "timings": {
+    "embed": 0.21499429999676067,
+    "vector": 0.16229249999742024,
+    "bm25": 0.0020386000105645508,
+    "rerank": 2.7078045000089332,
+    "retrieval_total": 3.0873850000061793,
+    "llm": 1.3235263999958988,
+    "total": 4.410911400002078
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "The regulations require at least 12 months of retention for usage logs.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "q-43",
+   "lang": "ar",
+   "question": "ما متطلبات الإتلاف الآمن للبيانات في ضوابط الأمن السيبراني للبيانات؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "dcc",
+     "canonical_key": "ctl-2-6-1"
+    }
+   ],
+   "tags": [
+    "dcc"
+   ],
+   "answer": "لا أعلم. الأنظمة المتوفرة لدي (نظام حماية البيانات الشخصية ولائحته التنفيذية ولائحة نقل البيانات، وضوابط الهيئة الوطنية للأمن السيبراني ECC وCCC وDCC) لا تجيب عن هذا السؤال بوضوح.",
+   "abstained": true,
+   "abstain_correct": false,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 9.254027200004202,
+   "timings": {
+    "embed": 0.23640540000633337,
+    "vector": 0.13348319999931846,
+    "bm25": 0.0017462999967392534,
+    "rerank": 4.728805399994599,
+    "retrieval_total": 5.100758600005065,
+    "llm": 4.152159299992491,
+    "total": 9.252917899997556
+   }
+  },
+  {
+   "id": "vd-01",
+   "lang": "en",
+   "question": "Under the NCA Essential Cybersecurity Controls, which control requires compliance with nationally approved international agreements that include cybersecurity requirements?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-1-7-2"
+    }
+   ],
+   "tags": [
+    "version-difference"
+   ],
+   "answer": "The control that requires compliance with nationally approved international agreements that include cybersecurity requirements is Control 1-7-1 of the NCA Essential Cybersecurity Controls, as stated in [S1].\n\n- The control requires compliance with nationally approved international agreements that include cybersecurity requirements.",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "ecc:ctl-1-7-2"
+   ],
+   "citation_ok": [
+    true
+   ],
+   "quote_verified": [
+    false
+   ],
+   "latency": 3.9057730000058655,
+   "timings": {
+    "embed": 0.22444600000744686,
+    "vector": 0.16322060000675265,
+    "bm25": 0.002743599994573742,
+    "rerank": 2.3375706000078935,
+    "retrieval_total": 2.72832589999598,
+    "llm": 1.1770086999895284,
+    "total": 3.9053345999855082
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "The control that requires compliance with nationally approved international agreements that include cybersecurity requirements is Control 1-7-1 of the NCA Essential Cybersecurity Controls.",
+     "supported": true
+    },
+    {
+     "claim": "The control requires compliance with nationally approved international agreements that include cybersecurity requirements.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "vd-02",
+   "lang": "ar",
+   "question": "ما الضابط في الضوابط الأساسية للأمن السيبراني الذي يلزم الجهة بالالتزام بالمتطلبات التشريعية والتنظيمية الوطنية المتعلقة بالأمن السيبراني؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-1-7-1"
+    }
+   ],
+   "tags": [
+    "version-difference"
+   ],
+   "answer": "الضابط في الضوابط الأساسية للأمن السيبراني ECC-2:2024 يلزم الجهة بالالتزام بالمتطلبات التشريعية والتنظيمية الوطنية المتعلقة بالأمن السيبراني.\n\n- لا يوجد مصدر يذكر الضابط 1-7-1 في النسخة الإنجليزية. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "ecc:ctl-1-7-1",
+    "ecc:ctl-1-7-2",
+    "ecc:ctl-2-7-1",
+    "ccc:ctl-1-3-T-1",
+    "ecc:ctl-1-1-1"
+   ],
+   "citation_ok": [
+    true,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    false,
+    false,
+    true,
+    true,
+    true
+   ],
+   "latency": 5.676261400003568,
+   "timings": {
+    "embed": 0.21609620000526775,
+    "vector": 0.1337712999957148,
+    "bm25": 0.002882599990698509,
+    "rerank": 1.8761028000008082,
+    "retrieval_total": 2.2291318000061437,
+    "llm": 3.4462719000002835,
+    "total": 5.675403700006427
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 0.4,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "الضابط في الضوابط الأساسية للأمن السيبراني ECC-2:2024 يلزم الجهة بالالتزام بالمتطلبات التشريعية والتنظيمية الوطنية المتعلقة بالأمن السيبراني.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "vd-03",
+   "lang": "en",
+   "question": "Does ECC-2:2024 require an entity's data protection requirements to cover NCA's Data Cybersecurity Controls (DCC) as a minimum?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-7-3"
+    }
+   ],
+   "tags": [
+    "version-difference"
+   ],
+   "answer": "Yes, ECC-2:2024 requires an entity's data protection requirements to cover NCA's Data Cybersecurity Controls (DCC) as a minimum.\n\n- [S1][S2] The cybersecurity requirements for protecting data and information of the entity shall be implemented, based on its classification level and identified, documented, and approved as per relevant legislative and regulatory requirements.",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "ecc:ctl-2-7-2",
+    "ecc:ctl-2-7-1"
+   ],
+   "citation_ok": [
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true
+   ],
+   "latency": 6.374722599997767,
+   "timings": {
+    "embed": 0.2204982000112068,
+    "vector": 0.14501480000035372,
+    "bm25": 0.0022119999921415,
+    "rerank": 4.317766699998174,
+    "retrieval_total": 4.685746299990569,
+    "llm": 1.6885096000041813,
+    "total": 6.3742558999947505
+   },
+   "cite_precision": 0.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 0.0,
+   "cite_recall": 0.0,
+   "faithfulness": 0.6666666666666666,
+   "claims": [
+    {
+     "claim": "ECC-2:2024 requires an entity's data protection requirements to cover NCA's Data Cybersecurity Controls (DCC) as a minimum.",
+     "supported": false
+    },
+    {
+     "claim": "The cybersecurity requirements for protecting data and information of the entity shall be implemented, based on its classification level.",
+     "supported": true
+    },
+    {
+     "claim": "The cybersecurity requirements for protecting and handling data and information of the entity shall be identified, documented, and approved, as per the relevant legislative and regulatory requirements.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "vd-04",
+   "lang": "ar",
+   "question": "هل يجب مراجعة تطبيق متطلبات الأمن السيبراني لحماية بيانات ومعلومات الجهة دورياً؟ وما رقم الضابط؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-7-4"
+    }
+   ],
+   "tags": [
+    "version-difference"
+   ],
+   "answer": "نعم، يجب مراجعة تطبيق متطلبات الأمن السيبراني لحماية بيانات ومعلومات الجهة دورياً. هذا ينطبق على الضابط 2-7-4 في الضوابط الأساسية للأمن السيبراني ECC-2:2024، والذي ينص على مراجعة تطبيق متطلبات الأمن السيبراني لحماية البيانات والمعلومات لا جهة دورياً.\n\n- يجب مراجعة تطبيق متطلبات الأمن السيبراني لحماية بيانات ومعلومات الجهة دورياً. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "ecc:ctl-2-7-4",
+    "ecc:ctl-2-3-4",
+    "ecc:ctl-1-8-1",
+    "ecc:ctl-2-13-4",
+    "ecc:ctl-2-8-4"
+   ],
+   "citation_ok": [
+    true,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 6.195275899997796,
+   "timings": {
+    "embed": 0.32370769999397453,
+    "vector": 0.1354079000011552,
+    "bm25": 0.0029140999977244064,
+    "rerank": 2.655818700004602,
+    "retrieval_total": 3.1182742999953916,
+    "llm": 3.076132599991979,
+    "total": 6.194406899987371
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 0.2,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 0.2,
+   "claims": [
+    {
+     "claim": "يجب مراجعة تطبيق متطلبات الأمن السيبراني لحماية بيانات ومعلومات الجهة دورياً.",
+     "supported": true
+    },
+    {
+     "claim": "يجب مراجعة تطبيق متطلبات الأمن السيبراني لحماية الأنظمة وأجهزة معالجة المعلومات للجهة دورياً.",
+     "supported": false
+    },
+    {
+     "claim": "يجب على الإدارة المعنية بالأمن السيبراني في الجهة مراجعة تطبيق ضوابط الأمن السيبراني دورياً.",
+     "supported": false
+    },
+    {
+     "claim": "يجب مراجعة تطبيق متطلبات إدارة حوادث وتهديدات الأمن السيبراني في الجهة دورياً.",
+     "supported": false
+    },
+    {
+     "claim": "يجب مراجعة تطبيق متطلبات الأمن السيبراني للتشفير في الجهة دورياً.",
+     "supported": false
+    }
+   ]
+  },
+  {
+   "id": "u-01",
+   "lang": "en",
+   "question": "What is the penalty for running a red light in Riyadh?",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "answer": "The penalty for running a red light in Riyadh is a fine not exceeding five million Riyals, which may be doubled in the event of a repeat violation.\n\n- [S1][S3]",
+   "abstained": false,
+   "abstain_correct": false,
+   "citations": [
+    "pdpl:art-36",
+    "pdpl:art-42"
+   ],
+   "citation_ok": [
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true
+   ],
+   "latency": 6.561964799999259,
+   "timings": {
+    "embed": 0.24277370001072995,
+    "vector": 0.13682210000115447,
+    "bm25": 0.0011847000132547691,
+    "rerank": 4.033531600012793,
+    "retrieval_total": 4.414489599992521,
+    "llm": 2.1465788999921642,
+    "total": 6.561068499984685
+   },
+   "faithfulness": 0.0,
+   "claims": [
+    {
+     "claim": "The penalty for running a red light in Riyadh is a fine not exceeding five million Riyals, which may be doubled in the event of a repeat violation.",
+     "supported": false
+    }
+   ]
+  },
+  {
+   "id": "u-02",
+   "lang": "ar",
+   "question": "كم عدد ساعات العمل الأسبوعية المسموح بها في نظام العمل السعودي؟",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "answer": "لا أعلم. الأنظمة المتوفرة لدي (نظام حماية البيانات الشخصية ولائحته التنفيذية ولائحة نقل البيانات، وضوابط الهيئة الوطنية للأمن السيبراني ECC وCCC وDCC) لا تجيب عن هذا السؤال بوضوح.",
+   "abstained": true,
+   "abstain_correct": true,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 10.833547200003522,
+   "timings": {
+    "embed": 0.25510409999697004,
+    "vector": 0.134586300002411,
+    "bm25": 0.00235719999182038,
+    "rerank": 4.504601800013916,
+    "retrieval_total": 4.89691139999195,
+    "llm": 5.935405800002627,
+    "total": 10.832317199994577
+   }
+  },
+  {
+   "id": "u-03",
+   "lang": "en",
+   "question": "What is the VAT rate in Saudi Arabia?",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "answer": "The VAT rate in Saudi Arabia is 5%.\n\n- The VAT rate in Saudi Arabia is 5%. [S1]",
+   "abstained": false,
+   "abstain_correct": false,
+   "citations": [
+    "pdpl:art-30"
+   ],
+   "citation_ok": [
+    false
+   ],
+   "quote_verified": [
+    false
+   ],
+   "latency": 6.077653700005612,
+   "timings": {
+    "embed": 0.22516680000990164,
+    "vector": 0.166964400006691,
+    "bm25": 0.0010617000079946592,
+    "rerank": 4.521079099999042,
+    "retrieval_total": 4.914502100000391,
+    "llm": 1.162205200002063,
+    "total": 6.076707300002454
+   },
+   "faithfulness": 0.0,
+   "claims": [
+    {
+     "claim": "The VAT rate in Saudi Arabia is 5%.",
+     "supported": false
+    }
+   ]
+  },
+  {
+   "id": "u-04",
+   "lang": "ar",
+   "question": "ما متطلبات الإطار التنظيمي للأمن السيبراني الصادر عن البنك المركزي السعودي (ساما)؟",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "answer": "لا أعلم. الأنظمة المتوفرة لدي (نظام حماية البيانات الشخصية ولائحته التنفيذية ولائحة نقل البيانات، وضوابط الهيئة الوطنية للأمن السيبراني ECC وCCC وDCC) لا تجيب عن هذا السؤال بوضوح.",
+   "abstained": true,
+   "abstain_correct": true,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 7.605666700008442,
+   "timings": {
+    "embed": 0.28779499999654945,
+    "vector": 0.1510504000034416,
+    "bm25": 0.0023875000042608008,
+    "rerank": 4.07766699999047,
+    "retrieval_total": 4.519260100001702,
+    "llm": 3.084900600006222,
+    "total": 7.604160700007924
+   }
+  },
+  {
+   "id": "u-05",
+   "lang": "en",
+   "question": "What is the maximum GDPR fine as a percentage of global annual turnover?",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "answer": "The maximum GDPR fine as a percentage of global annual turnover is 5%.\n\n- The maximum GDPR fine as a percentage of global annual turnover is 5%. [S1]",
+   "abstained": false,
+   "abstain_correct": false,
+   "citations": [
+    "pdpl:art-36"
+   ],
+   "citation_ok": [
+    false
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 4.81874030000472,
+   "timings": {
+    "embed": 0.23213340000074822,
+    "vector": 0.16191450000042096,
+    "bm25": 0.0013881000049877912,
+    "rerank": 2.9949195999943186,
+    "retrieval_total": 3.390551600008621,
+    "llm": 1.427668000003905,
+    "total": 4.818219600012526
+   },
+   "faithfulness": 0.0,
+   "claims": [
+    {
+     "claim": "The maximum GDPR fine as a percentage of global annual turnover is 5%.",
+     "supported": false
+    }
+   ]
+  },
+  {
+   "id": "u-06",
+   "lang": "ar",
+   "question": "ما متطلبات الحصول على سجل تجاري لمتجر إلكتروني؟",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "answer": "لا أعلم. الأنظمة المتوفرة لدي (نظام حماية البيانات الشخصية ولائحته التنفيذية ولائحة نقل البيانات، وضوابط الهيئة الوطنية للأمن السيبراني ECC وCCC وDCC) لا تجيب عن هذا السؤال بوضوح.",
+   "abstained": true,
+   "abstain_correct": true,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 7.38834570000472,
+   "timings": {
+    "embed": 0.2269782000075793,
+    "vector": 0.13502149999840185,
+    "bm25": 0.0014355000021168962,
+    "rerank": 3.8537483000109205,
+    "retrieval_total": 4.217410299999756,
+    "llm": 3.1701092000002973,
+    "total": 7.387519500000053
+   }
+  },
+  {
+   "id": "u-07",
+   "lang": "en",
+   "question": "How many days of annual leave is a private-sector employee in Saudi Arabia entitled to?",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "answer": "A private-sector employee in Saudi Arabia is entitled to 720 days of annual leave per year.\n\n- The president of the Competent Authority shall issue the Regulations within a period not exceeding (seven hundred and twenty) days commencing on the date of publishing the Law provided that the president must coordinate with the following entities: Ministry of Communications and Information, etc.\n- The Law shall come into force after (seven hundred and twenty) days commencing on the date of its publication in the Official Gazette. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": false,
+   "citations": [
+    "pdpl:art-42",
+    "pdpl_ir:art-26",
+    "pdpl:art-43",
+    "dcc:ctl-2-1-1",
+    "pdpl_ir:art-27"
+   ],
+   "citation_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 7.235982600002899,
+   "timings": {
+    "embed": 0.24981670000124723,
+    "vector": 0.1599158000026364,
+    "bm25": 0.0018711000011535361,
+    "rerank": 3.6213220999925397,
+    "retrieval_total": 4.033149999988382,
+    "llm": 3.201302500005113,
+    "total": 7.234452499993495
+   },
+   "faithfulness": 0.6666666666666666,
+   "claims": [
+    {
+     "claim": "A private-sector employee in Saudi Arabia is entitled to 720 days of annual leave per year.",
+     "supported": false
+    },
+    {
+     "claim": "The president of the Competent Authority shall issue the Regulations within a period not exceeding (seven hundred and twenty) days commencing on the date of publishing the Law provided that the president must coordinate with the following entities: Ministry of Communications and Information, etc.",
+     "supported": true
+    },
+    {
+     "claim": "The Law shall come into force after (seven hundred and twenty) days commencing on the date of its publication in the Official Gazette.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "u-08",
+   "lang": "ar",
+   "question": "ما عقوبة التهرب الضريبي في المملكة؟",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "answer": "عقوبة التهرب الضريبي في المملكة العربية السعودية هي الغرامة المالية، والتي تصل إلى خمسة ملايين ريال، مع إمكانية مضاعفة الغرامة في حالة تكرار المخالفة.\n\n- العقوبة تنص على الغرامة المالية، والتي تصل إلى خمسة ملايين ريال، مع إمكانية مضاعفة الغرامة في حالة تكرار المخالفة. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": false,
+   "citations": [
+    "pdpl:art-36",
+    "pdpl:art-35",
+    "pdpl_transfer:art-6",
+    "pdpl:art-40",
+    "pdpl_transfer:art-1"
+   ],
+   "citation_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 8.416676299995743,
+   "timings": {
+    "embed": 0.22247059999790508,
+    "vector": 0.155801100001554,
+    "bm25": 0.0010551000013947487,
+    "rerank": 3.2230406000016956,
+    "retrieval_total": 3.6025613000092562,
+    "llm": 4.812566100008553,
+    "total": 8.41512740001781
+   },
+   "faithfulness": 0.0,
+   "claims": [
+    {
+     "claim": "الغرامة المالية تصل إلى خمسة ملايين ريال",
+     "supported": false
+    },
+    {
+     "claim": "يمكن مضاعفة الغرامة في حالة تكرار المخالفة",
+     "supported": false
+    }
+   ]
+  },
+  {
+   "id": "s-01",
+   "lang": "en",
+   "question": "We are a Saudi e-commerce company and plan to host our customer database with a cloud provider in Germany. Is that allowed, and what do we need to check first?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-29"
+    },
+    {
+     "doc_id": "pdpl_transfer",
+     "canonical_key": "art-3"
+    },
+    {
+     "doc_id": "pdpl_transfer",
+     "canonical_key": "art-4"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "answer": "Yes, hosting your customer database with a cloud provider in Germany is allowed, provided that you comply with the NCA ECC-2:2024 control 4-2-3: Cloud Computing and Hosting Cybersecurity requirements. Specifically, you must ensure that the data is protected by the cloud and hosting service provider in accordance with its classification level and return the data in a usable format upon service completion. Additionally, you must ensure that the separation of the entity's environment from other entities within the cloud computing service provider is maintained. Lastly, you must have qualified and\n\n- qualified and suitable Saudi nationals in positions of cybersecurity functions in CSP’s data centers within the Kingdom must be filled.\n- candidates of personnel working inside the Kingdom who have access to Cloud Technology Stack, periodically screened or vetted.\n- Cybersecurity policies as a prerequisite to access to Cloud Technology Stack, signed and appropriately approved. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "dcc:ctl-2-1-1",
+    "ecc:ctl-4-2-3",
+    "ccc:ctl-1-4-P-1",
+    "ecc:sub-4-2",
+    "ecc:ctl-4-1-3"
+   ],
+   "citation_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 6.75665840000147,
+   "timings": {
+    "embed": 0.23765490000369027,
+    "vector": 0.1673187999986112,
+    "bm25": 0.002516199994715862,
+    "rerank": 2.4680809999990743,
+    "retrieval_total": 2.8757962999952724,
+    "llm": 3.879277900006855,
+    "total": 6.755074200002127
+   },
+   "cite_precision": 0.0,
+   "cite_precision_lenient": 0.0,
+   "cite_hit": 0.0,
+   "cite_recall": 0.0,
+   "faithfulness": 0.6666666666666666,
+   "claims": [
+    {
+     "claim": "Yes, hosting your customer database with a cloud provider in Germany is allowed, provided that you comply with the NCA ECC-2:2024 control 4-2-3: Cloud Computing and Hosting Cybersecurity requirements.",
+     "supported": false
+    },
+    {
+     "claim": "Specifically, you must ensure that the data is protected by the cloud and hosting service provider in accordance with its classification level and return the data in a usable format upon service completion.",
+     "supported": true
+    },
+    {
+     "claim": "Additionally, you must ensure that the separation of the entity's environment from other entities within the cloud computing service provider is maintained.",
+     "supported": true
+    },
+    {
+     "claim": "qualified and suitable Saudi nationals in positions of cybersecurity functions in CSP’s data centers within the Kingdom must be filled.",
+     "supported": false
+    },
+    {
+     "claim": "candidates of personnel working inside the Kingdom who have access to Cloud Technology Stack, periodically screened or vetted.",
+     "supported": true
+    },
+    {
+     "claim": "Cybersecurity policies as a prerequisite to access to Cloud Technology Stack, signed and appropriately approved.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "s-02",
+   "lang": "ar",
+   "question": "تعرضت شركتنا لاختراق تسربت فيه بيانات العملاء قبل أسبوع، ولم نبلغ أي جهة حتى الآن. هل هذا مقبول؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-24"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-20"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "answer": "لا أعلم. الأنظمة المتوفرة لدي (نظام حماية البيانات الشخصية ولائحته التنفيذية ولائحة نقل البيانات، وضوابط الهيئة الوطنية للأمن السيبراني ECC وCCC وDCC) لا تجيب عن هذا السؤال بوضوح.",
+   "abstained": true,
+   "abstain_correct": false,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 5.493895699997665,
+   "timings": {
+    "embed": 0.23450710000179242,
+    "vector": 0.1498144999932265,
+    "bm25": 0.002777000001515262,
+    "rerank": 3.006365100009134,
+    "retrieval_total": 3.393729600007646,
+    "llm": 2.0997620999987703,
+    "total": 5.493491700006416
+   }
+  },
+  {
+   "id": "s-03",
+   "lang": "en",
+   "question": "We send promotional SMS messages to every customer in our database, including people who never opted in. Is that fine?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-25"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-28"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-29"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-26"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "answer": "Yes, sending promotional SMS messages to every customer in your database, including those who never opted in, is fine provided that you obtain their explicit consent and provide a mechanism for them to opt out of receiving marketing materials.\n\n- Article 29 of the PDPL Implementing Regulation states that before Processing Personal Data for Direct Marketing purposes, the Controller must obtain consent from the Data Subject in accordance with the provisions of Article 11 of the PDPL Implementing Regulation.\n- Article 1 of the PDPL Implementing Regulation defines Direct Marketing as communicating with the Data Subject by any direct physical or electronic means with the aim of directing marketing material, including advertisements or promotions.\n- Article 28 of the PDPL Implementing Regulation specifies that before using communication methods for the purpose of sending advertising or awareness materials, including the post and email of the Data Subject, the Controller must commit to providing a clear mechanism that enables the targeted user ( [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl_ir:art-29",
+    "pdpl_ir:art-1",
+    "pdpl_ir:art-28",
+    "pdpl:art-25",
+    "pdpl:art-35"
+   ],
+   "citation_ok": [
+    true,
+    false,
+    true,
+    true,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 10.3442725000059,
+   "timings": {
+    "embed": 0.30423519999021664,
+    "vector": 0.1383471000008285,
+    "bm25": 0.003079200003412552,
+    "rerank": 5.596958399997675,
+    "retrieval_total": 6.042826299992157,
+    "llm": 4.299273099997663,
+    "total": 10.34209939998982
+   },
+   "cite_precision": 0.6,
+   "cite_precision_lenient": 0.6,
+   "cite_hit": 1.0,
+   "cite_recall": 0.75,
+   "faithfulness": 0.75,
+   "claims": [
+    {
+     "claim": "Sending promotional SMS messages to every customer in your database, including those who never opted in, is fine provided that you obtain their explicit consent and provide a mechanism for them to opt out of receiving marketing materials.",
+     "supported": false
+    },
+    {
+     "claim": "Article 29 of the PDPL Implementing Regulation states that before Processing Personal Data for Direct Marketing purposes, the Controller must obtain consent from the Data Subject in accordance with the provisions of Article 11 of the PDPL Implementing Regulation.",
+     "supported": true
+    },
+    {
+     "claim": "Article 1 of the PDPL Implementing Regulation defines Direct Marketing as communicating with the Data Subject by any direct physical or electronic means with the aim of directing marketing material, including advertisements or promotions.",
+     "supported": true
+    },
+    {
+     "claim": "Article 28 of the PDPL Implementing Regulation specifies that before using communication methods for the purpose of sending advertising or awareness materials, including the post and email of the Data Subject, the Controller must commit to providing a clear mechanism that enables the targeted user to opt out of receiving advertising and awareness materials when desired, and ensure that the procedures for opting out of receiving such materials are easy, straightforward, and at least as easy as the procedures for giving consent to receive them.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "s-04",
+   "lang": "ar",
+   "question": "نحتفظ بنسخة من الهوية الوطنية لكل عميل عند فتح الحساب لأن ذلك أسهل لنا. هل هذا جائز؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-28"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-31"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "answer": "لا أعلم. الأنظمة المتوفرة لدي (نظام حماية البيانات الشخصية ولائحته التنفيذية ولائحة نقل البيانات، وضوابط الهيئة الوطنية للأمن السيبراني ECC وCCC وDCC) لا تجيب عن هذا السؤال بوضوح.",
+   "abstained": true,
+   "abstain_correct": false,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 5.656226000006427,
+   "timings": {
+    "embed": 0.2132837999961339,
+    "vector": 0.1605033999949228,
+    "bm25": 0.0027979000005871058,
+    "rerank": 2.896181699994486,
+    "retrieval_total": 3.273048100003507,
+    "llm": 2.3827809000067646,
+    "total": 5.655829000010272
+   }
+  },
+  {
+   "id": "s-05",
+   "lang": "en",
+   "question": "Our IT team shares one administrator account and logs in remotely with only a username and password. Does this comply with the ECC?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-2-3"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "answer": "Yes, this complies with the ECC.\n\n- The IT team's practice of using a single administrator account and remote login with username and password is consistent with the ECC-2:2024, Control 2-2-3-1, which requires single-factor authentication based on username and password. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "ecc:ctl-2-2-3",
+    "dcc:ctl-2-1-1",
+    "ccc:ctl-2-2-P-1",
+    "dcc:ctl-3-1-1",
+    "ecc:sub-2-2"
+   ],
+   "citation_ok": [
+    true,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 7.471632100001443,
+   "timings": {
+    "embed": 0.23532979999436066,
+    "vector": 0.15602310000394937,
+    "bm25": 0.0018764999986160547,
+    "rerank": 4.089825100003509,
+    "retrieval_total": 4.483273500009091,
+    "llm": 2.9861691999976756,
+    "total": 7.469442700006766
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 0.4,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 0.0,
+   "claims": [
+    {
+     "claim": "The IT team's practice of using a single administrator account and remote login with username and password is consistent with the ECC-2:2024, Control 2-2-3-1, which requires single-factor authentication based on username and password.",
+     "supported": false
+    }
+   ]
+  },
+  {
+   "id": "s-06",
+   "lang": "ar",
+   "question": "نحتفظ بسجلات أحداث الأمن السيبراني لمدة ستة أشهر فقط ثم نحذفها. هل هذا متوافق مع الضوابط الأساسية للأمن السيبراني؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-12-3"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "answer": "لا أعلم. الأنظمة المتوفرة لدي (نظام حماية البيانات الشخصية ولائحته التنفيذية ولائحة نقل البيانات، وضوابط الهيئة الوطنية للأمن السيبراني ECC وCCC وDCC) لا تجيب عن هذا السؤال بوضوح.",
+   "abstained": true,
+   "abstain_correct": false,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 9.842961000002106,
+   "timings": {
+    "embed": 0.23031389999960084,
+    "vector": 0.13601550000021234,
+    "bm25": 0.0030685999954584986,
+    "rerank": 2.971686699995189,
+    "retrieval_total": 3.3413804000010714,
+    "llm": 6.50078349999967,
+    "total": 9.842163900000742
+   }
+  },
+  {
+   "id": "s-07",
+   "lang": "en",
+   "question": "Our cybersecurity function reports to the IT director and is staffed by two contractors from an outsourcing firm. Does that meet the ECC?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-1-2-1"
+    },
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-1-2-2"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "answer": "Yes, the cybersecurity function staffed by two contractors from an outsourcing firm meets the ECC requirements. The function is staffed by contractors, which is acceptable under ECC 1-8-2, and the periodic review and audit is conducted by independent parties outside the organization's cybersecurity function, which is specified for each data classification level.\n\n- The function is staffed by contractors, which is acceptable under ECC 1-8-2.\n- The periodic review and audit is conducted by independent parties outside the organization's cybersecurity function, which is specified for each data classification level. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "dcc:ctl-1-1-1",
+    "ecc:ctl-4-1-3",
+    "ecc:sub-4-1",
+    "ecc:sub-1-9",
+    "dcc:ctl-1-1-2"
+   ],
+   "citation_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 9.195129800005816,
+   "timings": {
+    "embed": 0.29685430000245105,
+    "vector": 0.15428099999553524,
+    "bm25": 0.0027585000061662868,
+    "rerank": 5.071618600006332,
+    "retrieval_total": 5.525777200004086,
+    "llm": 3.6681439000094542,
+    "total": 9.19392110001354
+   },
+   "cite_precision": 0.0,
+   "cite_precision_lenient": 0.0,
+   "cite_hit": 0.0,
+   "cite_recall": 0.0,
+   "faithfulness": 0.5,
+   "claims": [
+    {
+     "claim": "The function is staffed by contractors, which is acceptable under ECC 1-8-2.",
+     "supported": false
+    },
+    {
+     "claim": "The periodic review and audit is conducted by independent parties outside the organization's cybersecurity function, which is specified for each data classification level.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "s-08",
+   "lang": "ar",
+   "question": "نجمع رقم الجوال وتاريخ الميلاد والعنوان والحالة الاجتماعية من كل من يشترك في نشرتنا البريدية. هل هذا مقبول؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-19"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-11"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "answer": "نعم، هذا مقبول.\n\n- هذا يتوافق مع المادة 25 نظام حماية البيانات الشخصية، حيث يسمح بجمع البيانات الشخصية لأغراض علمية أو بحثية أو إحصائية دون موافقة صاحبها. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-25",
+    "pdpl:art-11",
+    "pdpl_ir:art-1",
+    "pdpl:art-27",
+    "pdpl_ir:art-2"
+   ],
+   "citation_ok": [
+    false,
+    true,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 8.723980700000538,
+   "timings": {
+    "embed": 0.27964029999566264,
+    "vector": 0.13678030000301078,
+    "bm25": 0.002401799996732734,
+    "rerank": 3.944037199995364,
+    "retrieval_total": 4.363081299990881,
+    "llm": 4.35941059999459,
+    "total": 8.72249189998547
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 0.2,
+   "cite_hit": 1.0,
+   "cite_recall": 0.5,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": " هذا يتوافق مع المادة 25 نظام حماية البيانات الشخصية، حيث يسمح بجمع البيانات الشخصية لأغراض علمية أو بحثية أو إحصائية دون موافقة صاحبها.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "s-09",
+   "lang": "en",
+   "question": "A customer asked us to delete their personal data, but we must keep their invoices for tax purposes. What should we do?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-18"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-8"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "answer": "I don't know. The regulations I have (PDPL, its Implementing Regulation, the Transfer Regulation, and NCA's ECC, CCC and DCC) don't clearly answer this question.",
+   "abstained": true,
+   "abstain_correct": false,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 6.986922700001742,
+   "timings": {
+    "embed": 0.2546465000050375,
+    "vector": 0.15273320001142565,
+    "bm25": 0.0028191000019432977,
+    "rerank": 4.041936599998735,
+    "retrieval_total": 4.452347700003884,
+    "llm": 2.5337415999965742,
+    "total": 6.986089300000458
+   }
+  },
+  {
+   "id": "s-10",
+   "lang": "ar",
+   "question": "تطبيقنا يعالج البيانات الصحية للمستخدمين كنشاط أساسي، ولم نعيّن مسؤولاً لحماية البيانات الشخصية. هل يلزمنا تعيينه؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-32"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "answer": "لا أعلم. الأنظمة المتوفرة لدي (نظام حماية البيانات الشخصية ولائحته التنفيذية ولائحة نقل البيانات، وضوابط الهيئة الوطنية للأمن السيبراني ECC وCCC وDCC) لا تجيب عن هذا السؤال بوضوح.",
+   "abstained": true,
+   "abstain_correct": false,
+   "citations": [],
+   "citation_ok": [],
+   "quote_verified": [],
+   "latency": 6.098169599994435,
+   "timings": {
+    "embed": 0.23968099999183323,
+    "vector": 0.1332877999957418,
+    "bm25": 0.002749000006588176,
+    "rerank": 2.996869599999627,
+    "retrieval_total": 3.3728439999977127,
+    "llm": 2.724253200009116,
+    "total": 6.097097200006829
+   }
+  },
+  {
+   "id": "s-11",
+   "lang": "en",
+   "question": "We reuse hard drives from decommissioned servers after a quick format. Is that acceptable under the DCC?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "dcc",
+     "canonical_key": "ctl-2-6-1"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "answer": "Yes, this is acceptable under the DCC.\n\n- The reuse of hard drives from decommissioned servers after a quick format complies with the requirement to securely dispose of storage media when no longer needed [S1][S2].",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "dcc:ctl-2-6-1",
+    "dcc:sub-2-6"
+   ],
+   "citation_ok": [
+    true,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true
+   ],
+   "latency": 4.799333000002662,
+   "timings": {
+    "embed": 0.2322042000014335,
+    "vector": 0.13064869999652728,
+    "bm25": 0.00184830000216607,
+    "rerank": 2.940781600002083,
+    "retrieval_total": 3.3057458999974187,
+    "llm": 1.4928995999944163,
+    "total": 4.798645499991835
+   },
+   "cite_precision": 0.5,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 0.0,
+   "claims": [
+    {
+     "claim": "The reuse of hard drives from decommissioned servers after a quick format complies with the requirement to securely dispose of storage media when no longer needed.",
+     "supported": false
+    }
+   ]
+  },
+  {
+   "id": "s-12",
+   "lang": "ar",
+   "question": "نشترط على العملاء الموافقة على مشاركة بياناتهم مع شركائنا التسويقيين لكي نفتح لهم حساباً. هل هذا جائز؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-7"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "answer": "نعم، هذا جائز.\n\n- النظام يسمح بمعالجة البيانات الشخصية لأغراض التسويق المباشر إذا كان جمعها من صاحبها مباشرةً ووافق عليه وفق أحكام النظام. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-26",
+    "pdpl_ir:art-29",
+    "pdpl_ir:art-11",
+    "pdpl:art-7",
+    "pdpl:art-5"
+   ],
+   "citation_ok": [
+    false,
+    false,
+    false,
+    true,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 7.990710099998978,
+   "timings": {
+    "embed": 0.2138288999994984,
+    "vector": 0.12972259998787194,
+    "bm25": 0.002338399994187057,
+    "rerank": 3.9778623999882257,
+    "retrieval_total": 4.323977899999591,
+    "llm": 3.665694800001802,
+    "total": 7.9896727000013925
+   },
+   "cite_precision": 0.2,
+   "cite_precision_lenient": 0.2,
+   "cite_hit": 1.0,
+   "cite_recall": 1.0,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "نظام حماية البيانات الشخصية يسمح بمعالجة البيانات الشخصية لأغراض التسويق المباشر إذا كان جمعها من صاحبها مباشرةً ووافق عليه وفق أحكام النظام.",
+     "supported": true
+    },
+    {
+     "claim": "اللائحة التنفيذية لنظام حماية البيانات الشخصية تحدد الضوابط اللازمة لذلك.",
+     "supported": true
+    },
+    {
+     "claim": "اللائحة التنفيذية لنظام حماية البيانات الشخصية تلزم جهة التحكم بالحصول على موافقة صاحب البيانات الشخصية وفقاً لأحكام المادة الحادية عشرة من اللائحة.",
+     "supported": true
+    },
+    {
+     "claim": "اللائحة التنفيذية لنظام حماية البيانات الشخصية تحدد آلية تمكن صاحب البيانات الشخصية من إيقاف تلقي المواد التسويقية متى ما رغب في ذلك.",
+     "supported": true
+    },
+    {
+     "claim": "اللائحة التنفيذية لنظام حماية البيانات الشخصية تحدد أن إجراءات إيقاف تلقي المواد التسويقية يجب أن تكون سهلة ومبسطة ومماثلة أو أكثر سهولةً من إجراءات الحصول على الموافقة على استقبالها.",
+     "supported": true
+    },
+    {
+     "claim": "اللائحة التنفيذية لنظام حماية البيانات الشخصية تحدد أن اسم الجهة المرسلة يجب ذكره بوضوح عند إرسال مواد التسويق المباشر لصاحب البيانات الشخصية.",
+     "supported": true
+    },
+    {
+     "claim": "اللائحة التنفيذية لنظام حماية البيانات الشخصية تحدد أن جهة التحكم يجب أن تتوقف عن توجيه المواد التسويقية إلى صاحب البيانات الشخصية عند عدوله عن موافقته على التسويق المباشر.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "s-13",
+   "lang": "en",
+   "question": "We want to analyse customers' purchase history to improve our product recommendations without asking for consent. Can we rely on legitimate interest?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-16"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-6"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "answer": "Yes, we can rely on legitimate interest.\n\n- The legitimate interest of the controller is not subject to the consent of the data subject, as stated in Article 6 of the PDPL. [S1]",
+   "abstained": false,
+   "abstain_correct": true,
+   "citations": [
+    "pdpl:art-6"
+   ],
+   "citation_ok": [
+    true
+   ],
+   "quote_verified": [
+    true
+   ],
+   "latency": 4.743788699997822,
+   "timings": {
+    "embed": 0.2161268000054406,
+    "vector": 0.16196640000271145,
+    "bm25": 0.0025687000015750527,
+    "rerank": 2.8912700999935623,
+    "retrieval_total": 3.272134900005767,
+    "llm": 1.471224599998095,
+    "total": 4.743359500003862
+   },
+   "cite_precision": 1.0,
+   "cite_precision_lenient": 1.0,
+   "cite_hit": 1.0,
+   "cite_recall": 0.5,
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": "The legitimate interest of the controller is not subject to the consent of the data subject, as stated in Article 6 of the PDPL.",
+     "supported": true
+    }
+   ]
+  },
+  {
+   "id": "s-14",
+   "lang": "ar",
+   "question": "يعمل لدينا موظفون ساعات إضافية دون أجر إضافي بموافقتهم. هل هذا نظامي؟",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "scenario",
+    "unanswerable"
+   ],
+   "answer": "نعم، هذا نظامي. الموظفون أو العاملون الذين يصدر بتسميتهم قرار من رئيس الجهة المختصة يمتلكون صلاحيات الضبط والتفتيش المتعلقة بالمخالفات المنصوص عليها في النظام أو اللوائح. يحق لهم الاستعانة بجهات الضبط الجنائي أو الجهات المختصة الأخرى في سبيل قيامهم بمهمات وإجراءات الضبط والتفتيش المتعلقة بالمخالفات المنصوص عليها في النظام أو اللوائح. رئيس الجهة المختصة يصدر قواعد وإجراءات عملهم بما يتفق مع النصوص النظامية ذات الصلة.\n\n- الموظفون أو العاملون الذين يصدر بتسميتهم قرار من رئيس الجهة المختصة يمتلكون صلاحيات الضبط والتفتيش المتعلقة بالمخالفات المنصوص عليها في النظام أو اللوائح. [S1][S2][S3][S4][S5]",
+   "abstained": false,
+   "abstain_correct": false,
+   "citations": [
+    "pdpl:art-37",
+    "pdpl:art-27",
+    "pdpl:art-23",
+    "pdpl:art-36",
+    "pdpl_ir:art-13"
+   ],
+   "citation_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "latency": 7.716820999994525,
+   "timings": {
+    "embed": 0.24587719999544788,
+    "vector": 0.16301049999310635,
+    "bm25": 0.0021474999957717955,
+    "rerank": 2.9383819999929983,
+    "retrieval_total": 3.349634199999855,
+    "llm": 4.366007900011027,
+    "total": 7.715642100010882
+   },
+   "faithfulness": 1.0,
+   "claims": [
+    {
+     "claim": " الموظفون أو العاملون الذين يصدر بتسميتهم قرار من رئيس الجهة المختصة يمتلكون صلاحيات الضبط والتفتيش المتعلقة بالمخالفات المنصوص عليها في النظام أو اللوائح.",
+     "supported": true
+    },
+    {
+     "claim": "يحق لهم الاستعانة بجهات الضبط الجنائي أو الجهات المختصة الأخرى في سبيل قيامهم بمهمات وإجراءات الضبط والتفتيش المتعلقة بالمخالفات المنصوص عليها في النظام أو اللوائح.",
+     "supported": true
+    },
+    {
+     "claim": "رئيس الجهة المختصة يصدر قواعد وإجراءات عملهم بما يتفق مع النصوص النظامية ذات الصلة.",
+     "supported": true
+    }
+   ]
+  }
+ ]
+}

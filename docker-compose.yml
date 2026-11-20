@@ -16,7 +16,10 @@ services:
       retries: 10
 
   api:
-    build: .
+    build:
+      context: .
+      args:
+        RERANKER: ${RERANKER:-none}
     env_file:
       - path: .env
         required: false

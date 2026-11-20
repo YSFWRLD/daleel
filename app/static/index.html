@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<title>Compliance Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Tokens: graphite neutrals, one accent (statute green), hairlines at 8% of text. */
+  :root {
+    --page: #fafafa; --card: #ffffff; --raised: #f4f4f5; --text: #171717; --text-2: #525252; --muted: #6b6b6b;
+    --hair: rgba(23, 23, 23, .08); --hair-strong: rgba(23, 23, 23, .14);
+    --accent: #0b5e45; --accent-soft: #e7f1ed; --on-accent: #ffffff;
+    --warn: #8a5300; --warn-soft: #fbf3e4; --neg: #b42318; --neg-soft: #fdecea;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .05); --float: 0 8px 24px rgba(0, 0, 0, .06);
+    --ease: cubic-bezier(.22, 1, .36, 1);
+    --font: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --font-ar: "IBM Plex Sans Arabic", "Segoe UI", "Noto Sans Arabic", Tahoma, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--page); color: var(--text); font: 400 15px/22px var(--font);
+    display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
+  [lang="ar"] { font-family: var(--font-ar); letter-spacing: 0; }
+  button, select, textarea { font: inherit; color: inherit; }
+  svg.i { width: 16px; height: 16px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.5;
+    stroke-linecap: round; stroke-linejoin: round; }
+  [dir="rtl"] svg.i.dir { transform: scaleX(-1); }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* Top bar */
+  .bar { height: 56px; flex: none; display: flex; align-items: center; gap: 16px; padding: 0 24px;
+    border-bottom: 1px solid var(--hair); background: var(--page); }
+  .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .mark { width: 28px; height: 28px; border-radius: 6px; background: var(--text); color: var(--page);
+    display: grid; place-items: center; font: 600 13px/1 var(--font-ar); flex: none; }
+  .brand b { font-weight: 600; font-size: 15px; white-space: nowrap; }
+  .brand span { color: var(--muted); font-size: 13px; white-space: nowrap; }
+  .bar .grow { flex: 1; }
+  .status { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; white-space: nowrap; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+  .dot.ok { background: var(--accent); } .dot.bad { background: var(--neg); } .dot.wait { background: var(--warn); }
+  .ctl { height: 32px; border-radius: 8px; border: 1px solid var(--hair-strong); background: var(--card);
+    padding: 0 12px; font-size: 13px; color: var(--text); cursor: pointer;
+    transition: background-color 150ms var(--ease), border-color 150ms var(--ease); }
+  .ctl:hover { background: var(--raised); }
+  button.ctl { display: inline-flex; align-items: center; gap: 8px; }
+
+  /* Thread */
+  main { flex: 1; overflow-y: auto; scroll-behavior: smooth; position: relative; }
+  .col { max-width: 800px; margin: 0 auto; padding: 32px 24px 24px; }
+  .turn { padding: 24px 0; }
+  .turn + .turn { border-top: 1px solid var(--hair); }
+  .user { display: flex; justify-content: flex-end; }
+  .user[dir="rtl"] { justify-content: flex-start; }
+  .bubble { max-width: 85%; background: var(--raised); border-radius: 14px; padding: 10px 14px; white-space: pre-wrap;
+    overflow-wrap: anywhere; }
+  .reply { margin-top: 16px; }
+  .who { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+  .who .mark { width: 20px; height: 20px; border-radius: 5px; font-size: 10px; }
+
+  /* Formatted answer */
+  .md { font-size: 15px; line-height: 24px; overflow-wrap: anywhere; }
+  .md[lang="ar"] { font-size: 16px; line-height: 28px; }
+  .md p { margin: 0 0 12px; }
+  .md p:first-child { font-weight: 500; }
+  .md ul, .md ol { margin: 0 0 12px; padding-inline-start: 20px; }
+  .md li { margin: 4px 0; padding-inline-start: 4px; }
+  .md li::marker { color: var(--muted); }
+  .md > :last-child { margin-bottom: 0; }
+  .md strong { font-weight: 600; }
+  .ref { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px;
+    padding: 0 5px; margin-inline: 2px; vertical-align: 1px; border-radius: 4px; border: 1px solid var(--hair-strong);
+    background: var(--card); color: var(--text-2); font: 500 11px/1 var(--mono); text-decoration: none; cursor: pointer;
+    unicode-bidi: isolate; transition: background-color 150ms var(--ease), color 150ms var(--ease), border-color 150ms var(--ease); }
+  .ref:hover, .ref:focus-visible { background: var(--accent); border-color: var(--accent); color: var(--on-accent); outline: none; }
+
+  .abstain { border: 1px solid var(--hair-strong); border-radius: 12px; padding: 14px 16px; background: var(--card); }
+  .abstain .head { display: flex; gap: 8px; align-items: center; font-weight: 500; margin-bottom: 4px; }
+  .abstain .head svg { color: var(--muted); }
+
+  /* Sources */
+  .label { font-size: 12px; line-height: 16px; color: var(--muted); margin: 24px 0 8px; display: flex; gap: 8px; align-items: center; }
+  .label .count { color: var(--text-2); }
+  .sources { display: grid; gap: 8px; }
+  .src { border: 1px solid var(--hair-strong); border-radius: 12px; background: var(--card); box-shadow: var(--shadow);
+    transition: border-color 300ms var(--ease), box-shadow 300ms var(--ease); }
+  .src.flash { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .src > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: auto 1fr auto; gap: 12px;
+    align-items: start; padding: 12px 14px; border-radius: 12px; }
+  .src > summary::-webkit-details-marker { display: none; }
+  .src > summary:hover { background: var(--raised); }
+  .src[open] > summary { border-bottom: 1px solid var(--hair); border-end-start-radius: 0; border-end-end-radius: 0; }
+  .src .n { margin: 1px 0 0; }
+  .src .t { min-width: 0; }
+  .src .doc { font-size: 12px; line-height: 16px; color: var(--muted); }
+  .src .art { font-weight: 500; line-height: 20px; }
+  .src .art .key { font-family: var(--mono); font-size: 13px; color: var(--text-2); }
+  .src .chev { color: var(--muted); margin-top: 2px; transition: transform 200ms var(--ease); }
+  .src[open] .chev { transform: rotate(180deg); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .tag { display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 6px; border-radius: 4px;
+    font-size: 12px; line-height: 1; background: var(--raised); color: var(--text-2); white-space: nowrap; }
+  .tag.ok { background: var(--accent-soft); color: var(--accent); }
+  .tag.warn { background: var(--warn-soft); color: var(--warn); }
+  .tag.neg { background: var(--neg-soft); color: var(--neg); }
+  .tag svg.i { width: 12px; height: 12px; }
+  .body { padding: 12px 14px 14px; }
+  .quote { margin: 0 0 12px; padding: 2px 0; padding-inline-start: 12px; border-inline-start: 2px solid var(--accent);
+    color: var(--text); }
+  .quote[lang="ar"] { line-height: 28px; }
+  .note { display: flex; gap: 8px; align-items: flex-start; margin: 0 0 12px; padding: 8px 10px; border-radius: 8px;
+    background: var(--warn-soft); color: var(--warn); font-size: 13px; line-height: 20px; }
+  .note svg.i { margin-top: 2px; }
+  .seg { display: inline-flex; padding: 2px; border-radius: 8px; background: var(--raised); gap: 2px; margin-bottom: 8px; }
+  .seg button { border: 0; background: transparent; height: 28px; padding: 0 10px; border-radius: 6px; font-size: 13px;
+    color: var(--text-2); cursor: pointer; transition: background-color 150ms var(--ease), color 150ms var(--ease); }
+  .seg button[aria-pressed="true"] { background: var(--card); color: var(--text); box-shadow: var(--shadow); }
+  .full { font-size: 14px; line-height: 22px; color: var(--text-2); max-height: 360px;
+    overflow-y: auto; padding-inline-end: 8px; }
+  .it { display: flex; gap: 8px; margin: 0 0 8px; }
+  .it:last-child { margin-bottom: 0; }
+  .it.lead { display: block; }
+  .it.l1 { padding-inline-start: 24px; margin-bottom: 4px; }
+  .it.l0:not(:first-child) { margin-top: 12px; }
+  .it .lbl { flex: none; min-width: 20px; font: 500 12px/22px var(--mono); color: var(--muted); }
+  .full[lang="ar"] .it .lbl, .quote[lang="ar"] .it .lbl { line-height: 26px; }
+  .quote[lang="ar"] .it .lbl { line-height: 28px; }
+  .it .dot-l { font-family: var(--font); text-align: center; }
+  .full[lang="ar"] { font-size: 15px; line-height: 26px; }
+
+  .related { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+  .related li { display: flex; gap: 8px; align-items: center; color: var(--text-2); font-size: 14px; }
+  .related svg { color: var(--muted); }
+
+  .foot { margin-top: 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; color: var(--muted);
+    font-size: 12px; line-height: 16px; }
+  .foot .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--hair-strong); }
+  .icon-btn { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 8px; border-radius: 6px;
+    border: 0; background: transparent; color: var(--muted); font-size: 12px; cursor: pointer;
+    transition: background-color 150ms var(--ease), color 150ms var(--ease); }
+  .icon-btn:hover { background: var(--raised); color: var(--text); }
+  .actions { display: flex; gap: 4px; margin: 8px 0 0; margin-inline-start: -8px; }
+  .disclaimer { margin-top: 8px; color: var(--muted); font-size: 12px; line-height: 18px; }
+
+  .pending { display: flex; align-items: center; gap: 8px; color: var(--text-2); font-size: 14px; }
+  .pending .num { color: var(--muted); }
+  .error { border-radius: 12px; padding: 12px 14px; background: var(--neg-soft); color: var(--neg); font-size: 14px; }
+
+  /* Empty state */
+  .empty { padding: 48px 0 16px; }
+  .empty h1 { font-size: 28px; line-height: 1.2; font-weight: 500; letter-spacing: -.01em; margin: 0 0 8px; }
+  .empty h1 + p { color: var(--text-2); margin: 0 0 32px; max-width: 36rem; }
+  .docs { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; margin-bottom: 32px; }
+  .docs div { border: 1px solid var(--hair); border-radius: 10px; padding: 10px 12px; background: var(--card); }
+  .docs b { display: block; font-weight: 500; font-size: 14px; line-height: 20px; }
+  .docs span { color: var(--muted); font-size: 12px; line-height: 16px; }
+  .suggest { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .suggest button { text-align: start; border: 1px solid var(--hair-strong); background: var(--card); border-radius: 10px;
+    padding: 10px 12px; cursor: pointer; display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 20px;
+    color: var(--text); transition: background-color 150ms var(--ease), border-color 150ms var(--ease); }
+  .suggest button:hover { background: var(--raised); }
+  .suggest button svg { color: var(--muted); margin-top: 2px; }
+  .suggest button[lang="ar"] { line-height: 24px; }
+
+  /* Composer */
+  .dock { flex: none; padding: 0 24px 16px; background: linear-gradient(to bottom, transparent, var(--page) 24px); }
+  .composer { max-width: 752px; margin: 0 auto; border: 1px solid var(--hair-strong); border-radius: 16px; background: var(--card);
+    box-shadow: var(--float); padding: 10px 10px 10px 16px; display: flex; gap: 8px; align-items: flex-end;
+    transition: border-color 150ms var(--ease); }
+  .composer:focus-within { border-color: var(--text-2); }
+  .composer textarea { flex: 1; border: 0; outline: none; background: transparent; resize: none; max-height: 200px;
+    min-height: 24px; line-height: 24px; padding: 4px 0; font-size: 15px; }
+  .composer textarea::placeholder { color: var(--muted); }
+  .send { width: 36px; height: 36px; border-radius: 10px; border: 0; background: var(--text); color: var(--page);
+    display: grid; place-items: center; cursor: pointer; flex: none;
+    transition: opacity 150ms var(--ease), transform 150ms var(--ease); }
+  .send:active { transform: scale(.97); }
+  .send:disabled { opacity: .3; cursor: default; }
+  .send svg.i { width: 18px; height: 18px; stroke-width: 2; }
+  .fine { max-width: 752px; margin: 8px auto 0; text-align: center; color: var(--muted); font-size: 12px; line-height: 16px; }
+  kbd { font: 500 11px/1 var(--mono); padding: 2px 5px; border-radius: 4px; border: 1px solid var(--hair-strong);
+    background: var(--card); color: var(--text-2); }
+
+  .enter { animation: rise 360ms var(--ease) both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .enter { animation: none; } main { scroll-behavior: auto; } }
+
+  @media (max-width: 640px) {
+    .bar { padding: 0 16px; gap: 10px; }
+    .brand span, .status .txt, .hide-sm { display: none; }
+    .col { padding: 16px 16px 16px; }
+    .empty { padding-top: 24px; }
+    .empty h1 { font-size: 22px; }
+    .suggest { grid-template-columns: 1fr; }
+    .dock { padding: 0 16px 12px; }
+    .bubble { max-width: 92%; }
+    .fine .hide-sm { display: none; }
+  }
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="brand">
+    <div class="mark" aria-hidden="true">م</div>
+    <b>Compliance Assistant</b>
+    <span>PDPL · NCA</span>
+  </div>
+  <div class="grow"></div>
+  <div class="status" title="Service status"><span class="dot" id="dot"></span><span class="txt" id="status">Checking</span></div>
+  <select class="ctl" id="provider" aria-label="Model">
+    <option value="">Qwen 2.5 7B · local</option>
+    <option value="gemini">Gemini · API</option>
+  </select>
+  <button class="ctl" id="new" type="button" title="New chat">
+    <svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span class="hide-sm">New chat</span>
+  </button>
+</header>
+
+<main id="scroller">
+  <div class="col" id="thread"></div>
+</main>
+
+<div class="dock">
+  <form class="composer" id="ask">
+    <textarea id="question" rows="1" dir="auto" maxlength="1000"
+      placeholder="Ask about PDPL or NCA controls, in Arabic or English" aria-label="Question"></textarea>
+    <button class="send" id="send" type="submit" aria-label="Send" disabled>
+      <svg class="i" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </button>
+  </form>
+  <p class="fine">Answers come only from the loaded regulation texts and cite them. Not legal advice. <span class="hide-sm"><kbd>Enter</kbd> to send, <kbd>Shift</kbd> + <kbd>Enter</kbd> for a new line</span></p>
+</div>
+
+<script>
+const DOCS = [
+  ["Personal Data Protection Law", "SDAIA · نظام حماية البيانات الشخصية"],
+  ["PDPL Implementing Regulation", "SDAIA · اللائحة التنفيذية"],
+  ["Personal Data Transfer Regulation", "SDAIA · لائحة نقل البيانات"],
+  ["Essential Cybersecurity Controls", "NCA · ECC-2:2024"],
+  ["Cloud Cybersecurity Controls", "NCA · CCC-2:2024"],
+  ["Data Cybersecurity Controls", "NCA · DCC-1:2022"],
+];
+const EXAMPLES = [
+  "Can we store customer data on a server outside KSA?",
+  "هل يمكننا تخزين بيانات العملاء على خادم خارج المملكة؟",
+  "How quickly must we report a personal data breach?",
+  "ما متطلبات النسخ الاحتياطي في الضوابط الأساسية للأمن السيبراني؟",
+];
+const T = {
+  en: { sources: "Sources", related: "Closest sources checked", ar: "Arabic", en: "English", binding: "Arabic binding",
+        official: "Arabic official", ocr: "Arabic via OCR", unverified: "Quote not verified", note: "Version note",
+        copy: "Copy", copied: "Copied", retrieval: "Search", answer: "Answer", searching: "Searching the regulations",
+        writing: "Writing the answer", noAnswer: "No supported answer" },
+  ar: { sources: "المصادر", related: "أقرب المصادر التي تم فحصها", ar: "العربية", en: "الإنجليزية", binding: "النص العربي ملزم",
+        official: "النص العربي رسمي", ocr: "نص عربي بالتعرف الضوئي", unverified: "الاقتباس غير مطابق", note: "ملاحظة الإصدار",
+        copy: "نسخ", copied: "تم النسخ", retrieval: "البحث", answer: "الإجابة", searching: "البحث في الأنظمة",
+        writing: "كتابة الإجابة", noAnswer: "لا توجد إجابة مدعومة" },
+};
+const ICON = {
+  arrow: '<path d="M7 17 17 7M8 7h9v9"/>',
+  book: '<path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Zm0 0A2 2 0 0 0 6 22h13"/>',
+  chev: '<path d="m6 9 6 6 6-6"/>',
+  copy: '<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/>',
+  check: '<path d="M20 6 9 17l-5-5"/>',
+  alert: '<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/>',
+  help: '<circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/>',
+  scan: '<path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/>',
+  shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+};
+const $ = (id) => document.getElementById(id);
+const thread = $("thread"), scroller = $("scroller"), input = $("question"), sendBtn = $("send");
+let turnSeq = 0, busy = false;
+
+function el(tag, attrs = {}, ...kids) {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (v == null || v === false) continue;
+    if (k === "class") n.className = v;
+    else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+    else n.setAttribute(k, v === true ? "" : v);
+  }
+  for (const k of kids.flat()) if (k != null && k !== false) n.append(k.nodeType ? k : document.createTextNode(String(k)));
+  return n;
+}
+function icon(name, extra = "") {  // static, trusted SVG paths only
+  const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  s.setAttribute("viewBox", "0 0 24 24"); s.setAttribute("class", "i " + extra); s.setAttribute("aria-hidden", "true");
+  s.innerHTML = ICON[name];
+  return s;
+}
+const isAr = (s) => /[؀-ۿ]/.test(s || "");
+const fmt = (s) => (s || 0).toFixed(1) + " s";
+
+/* ---------- Answer formatting: a small, safe Markdown subset ---------- */
+// "[S1]", "[S1][S3]", "[S1, S3]" -> numbered reference chips; **bold**; "- " / "1." lists; paragraphs.
+function inline(text, refs, turn) {
+  const out = [];
+  const re = /(\*\*[^*]+\*\*)|(\[\s*S\d+(?:\s*[,،]\s*S?\d+)*\s*\])/g;
+  let last = 0, m;
+  while ((m = re.exec(text))) {
+    if (m.index > last) out.push(document.createTextNode(text.slice(last, m.index)));
+    if (m[1]) out.push(el("strong", {}, m[1].slice(2, -2)));
+    else {
+      const ids = m[2].match(/\d+/g).map((d) => "S" + d);
+      for (const id of ids) {
+        const r = refs.get(id);
+        if (!r) continue;  // a citation the server dropped as invalid
+        out.push(el("a", { class: "ref", href: `#src-${turn}-${id}`, title: r.title, "data-target": `src-${turn}-${id}` }, String(r.n)));
+      }
+    }
+    last = re.lastIndex;
+  }
+  if (last < text.length) out.push(document.createTextNode(text.slice(last)));
+  // drop the space left before a chip that ended a sentence: "text [1]." reads fine either way
+  return out;
+}
+
+function markdown(text, refs, turn, lang) {
+  const box = el("div", { class: "md", lang, dir: lang === "ar" ? "rtl" : "ltr" });
+  const lines = text.replace(/\r/g, "").split("\n");
+  let list = null, listType = null, para = [];
+  const flushPara = () => { if (para.length) { box.append(el("p", {}, inline(para.join(" "), refs, turn))); para = []; } };
+  const flushList = () => { if (list) { box.append(list); list = null; listType = null; } };
+  for (const raw of lines) {
+    const line = raw.trim();
+    const ul = line.match(/^[-*•]\s+(.*)$/);
+    const ol = line.match(/^(?:\d+|[٠-٩]+)[.)\-]\s+(.*)$/);
+    if (ul || ol) {
+      flushPara();
+      const type = ul ? "ul" : "ol";
+      if (listType !== type) { flushList(); list = el(type); listType = type; }
+      list.append(el("li", {}, inline((ul || ol)[1], refs, turn)));
+    } else if (!line) { flushPara(); flushList(); }
+    else { flushList(); para.push(line.replace(/^#+\s*/, "")); }
+  }
+  flushPara(); flushList();
+  return box;
+}
+
+/* ---------- Sources ---------- */
+function splitTitle(title) {  // "PDPL Implementing Regulation — Article 24: Notification of …"
+  const [doc, rest = ""] = title.split(/\s+—\s+/, 2);
+  const m = rest.match(/^([^:]+?)(?::\s*(.*))?$/);
+  return { doc, ref: m ? m[1] : rest, name: m && m[2] ? m[2] : "" };
+}
+
+/* Article text arrives as one run of text; split it back into its paragraphs and items.
+   A marker only counts at the start or right after ".", ":" or ";", so in-sentence references
+   ("subcontrol 2-6-1-1", "paragraph (2)") stay inline. */
+const MARKER = /(?:^|(?<=[.:;؛]\s*))\s*(\d+(?:-[\dPT]+){3,}|\d{1,2}\s*-(?=\s*[^\d\s])|-(?=\s)|[a-hA-H][.)](?=\s)|[أبجدهوزحطي]\s?[-.)](?=\s))\s*/g;
+function structure(text) {
+  const items = [];
+  let cur = { label: "", level: 0, text: "" }, last = 0;
+  for (const m of text.matchAll(MARKER)) {
+    cur.text += text.slice(last, m.index);
+    items.push(cur);
+    const label = m[1].replace(/\s+/g, "");
+    const isLetter = /^[a-hA-Hأبجدهوزحطي]/.test(label);
+    const isSubId = /^\d+(?:-[\dPT]+){3,}$/.test(label) && items[0].text.trim() !== "";  // sub-control under an intro
+    const level = isLetter || isSubId ? 1 : 0;
+    cur = { label: label === "-" ? "" : label.replace(/-$/, "."), level, text: "", bullet: label === "-" };
+    last = m.index + m[0].length;
+  }
+  cur.text += text.slice(last);
+  items.push(cur);
+  return items.map((x) => ({ ...x, text: x.text.trim() })).filter((x) => x.text || x.label);
+}
+
+function structured(text, lang, cls) {
+  const box = el("div", { class: cls, lang, dir: lang === "ar" ? "rtl" : "ltr" });
+  const items = structure(text);
+  if (items.length <= 1) { box.append(text); return box; }
+  for (const it of items) {
+    box.append(el("div", { class: `it l${it.level}${it.label || it.bullet ? "" : " lead"}` },
+      it.label ? el("span", { class: "lbl", dir: /[؀-ۿ]/.test(it.label) ? "rtl" : "ltr" }, it.label) : it.bullet ? el("span", { class: "lbl dot-l" }, "•") : null,
+      el("span", {}, it.text)));
+  }
+  return box;
+}
+
+function sourceCard(c, n, turn, ui, open) {
+  const t = splitTitle(c.title);
+  const tags = [];
+  if (c.authority_ar === "binding") tags.push(el("span", { class: "tag ok", title: "NCA states the Arabic version is binding" }, icon("shield"), ui.binding));
+  else if (c.authority_ar === "official") tags.push(el("span", { class: "tag", title: "Official Arabic text; English is a translation" }, ui.official));
+  if (c.source_ar === "ocr") tags.push(el("span", { class: "tag warn", title: "Arabic text was read with OCR; check numbers against the English" }, icon("scan"), ui.ocr));
+  if (c.quote && !c.quote_verified) tags.push(el("span", { class: "tag neg", title: "The quoted words were not found verbatim in the source" }, icon("alert"), ui.unverified));
+
+  const quoteLang = isAr(c.quote) ? "ar" : "en";
+  const body = el("div", { class: "body" });
+  if (c.quote) body.append(structured(c.quote, quoteLang, "quote"));
+  if (c.note) body.append(el("div", { class: "note", dir: "auto" }, icon("alert"), el("span", {}, el("strong", {}, ui.note + ": "), c.note)));
+
+  const versions = [];
+  if (c.text_ar) versions.push(["ar", ui.ar, c.text_ar]);
+  if (c.text_en) versions.push(["en", ui.en, c.text_en]);
+  if (versions.length) {
+    const panes = versions.map(([lang, , text]) => structured(text, lang, "full"));
+    const seg = el("div", { class: "seg", role: "group" });
+    versions.forEach(([lang, label], k) => {
+      const b = el("button", { type: "button", "aria-pressed": String(k === 0) }, label);
+      b.addEventListener("click", () => {
+        seg.querySelectorAll("button").forEach((x, j) => x.setAttribute("aria-pressed", String(j === k)));
+        panes.forEach((p, j) => { p.hidden = j !== k; });
+      });
+      seg.append(b);
+    });
+    panes.forEach((p, j) => { p.hidden = j !== 0; });
+    if (versions.length > 1) body.append(seg);
+    body.append(...panes);
+  }
+
+  return el("details", { class: "src", id: `src-${turn}-${c.id}`, open },
+    el("summary", {},
+      el("span", { class: "ref n" }, String(n)),
+      el("div", { class: "t" },
+        el("div", { class: "doc", dir: "auto" }, t.doc),
+        el("div", { class: "art", dir: "auto" }, t.ref, t.name ? " · " : "", t.name),
+        tags.length ? el("div", { class: "tags" }, tags) : null),
+      icon("chev", "chev")),
+    body);
+}
+
+/* ---------- Turns ---------- */
+function renderAnswer(a, turn) {
+  const ui = T[a.lang] || T.en;
+  const dir = a.lang === "ar" ? "rtl" : "ltr";
+  const refs = new Map(a.citations.map((c, k) => [c.id, { n: k + 1, title: c.title }]));
+  const box = el("div", { class: "reply enter", lang: a.lang, dir });
+
+  if (a.abstained) {
+    box.append(el("div", { class: "abstain" },
+      el("div", { class: "head" }, icon("help"), ui.noAnswer),
+      markdown(a.answer, refs, turn, a.lang)));
+    if (a.related && a.related.length) {
+      box.append(el("div", { class: "label" }, ui.related),
+        el("ul", { class: "related" }, a.related.map((r) => el("li", { dir: "auto" }, icon("book"), r))));
+    }
+  } else {
+    box.append(markdown(a.answer, refs, turn, a.lang));
+  }
+
+  const copy = el("button", { class: "icon-btn", type: "button", title: ui.copy }, icon("copy"), el("span", {}, ui.copy));
+  box.append(el("div", { class: "actions" }, copy));
+
+  if (a.citations.length) {
+    box.append(el("div", { class: "label" }, ui.sources, el("span", { class: "count num" }, String(a.citations.length))),
+      el("div", { class: "sources" }, a.citations.map((c, k) => sourceCard(c, k + 1, turn, ui, false))));
+  }
+
+  const t = a.timings || {};
+  copy.addEventListener("click", async () => {
+    const lines = [a.answer.replace(/\s*\[\s*S\d+(?:\s*[,،]\s*S?\d+)*\s*\]/g, (m) => {
+      const n = (m.match(/\d+/g) || []).map((d) => refs.get("S" + d)?.n).filter(Boolean);
+      return n.length ? " [" + n.join(", ") + "]" : "";
+    }), ""];
+    a.citations.forEach((c, k) => lines.push(`[${k + 1}] ${c.title}`));
+    try { await navigator.clipboard.writeText(lines.join("\n")); } catch { return; }
+    copy.replaceChildren(icon("check"), el("span", {}, ui.copied));
+    setTimeout(() => copy.replaceChildren(icon("copy"), el("span", {}, ui.copy)), 1600);
+  });
+  box.append(el("div", { class: "foot" },
+    el("span", { class: "num" }, ui.retrieval + " ", el("bdi", { dir: "ltr" }, fmt(t.retrieval_total))),
+    el("span", { class: "sep" }),
+    el("span", { class: "num" }, ui.answer + " ", el("bdi", { dir: "ltr" }, fmt(t.llm))),
+    el("span", { class: "sep" }),
+    el("span", { dir: "ltr" }, (a.model || "").replace(/^ollama:/, ""))));
+  box.append(el("div", { class: "disclaimer" }, a.disclaimer));
+  return box;
+}
+
+function emptyState() {
+  thread.replaceChildren(el("section", { class: "empty" },
+    el("h1", {}, "Ask about Saudi data protection and cybersecurity rules"),
+    el("p", {}, "Answers are drawn only from the documents below, in Arabic or English, and cite the article or control they rely on. When the texts don't cover a question, the assistant says so."),
+    el("div", { class: "docs" }, DOCS.map(([name, sub]) => el("div", {}, el("b", {}, name), el("span", { dir: "auto" }, sub)))),
+    el("div", { class: "suggest" }, EXAMPLES.map((q) => {
+      const ar = isAr(q);
+      return el("button", { type: "button", lang: ar ? "ar" : "en", dir: ar ? "rtl" : "ltr", onclick: () => ask(q) },
+        icon("arrow", "dir"), el("span", {}, q));
+    }))));
+}
+
+function scrollToEnd(node) {
+  requestAnimationFrame(() => scroller.scrollTo({ top: node.offsetTop - 16, behavior: "smooth" }));
+}
+
+async function ask(question) {
+  if (busy) return;
+  busy = true; updateSend();
+  if (thread.querySelector(".empty")) thread.replaceChildren();
+  const turn = ++turnSeq;
+  const qLang = isAr(question) ? "ar" : "en";
+  const ui = T[qLang];
+  const user = el("div", { class: "user enter", dir: qLang === "ar" ? "rtl" : "ltr", lang: qLang },
+    el("div", { class: "bubble", dir: "auto" }, question));
+  const status = el("span", {}, ui.searching);
+  const timer = el("span", { class: "num", dir: "ltr" }, "0 s");
+  const pending = el("div", { class: "reply", lang: qLang, dir: qLang === "ar" ? "rtl" : "ltr" },
+    el("div", { class: "pending" }, icon("clock"), status, timer));
+  const box = el("section", { class: "turn" }, user, pending);
+  thread.append(box);
+  scrollToEnd(box);
+
+  const started = Date.now();
+  const tick = setInterval(() => {
+    const s = Math.round((Date.now() - started) / 1000);
+    timer.textContent = s + " s";
+    if (s >= 3) status.textContent = ui.writing;  // retrieval takes about 3 s, then the model writes
+  }, 500);
+  try {
+    const res = await fetch("/ask", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question, provider: $("provider").value || null }) });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(typeof data.detail === "string" ? data.detail : res.statusText || "Request failed");
+    pending.replaceWith(renderAnswer(data, turn));
+    scrollToEnd(box);  // bring the question and the start of its answer into view
+  } catch (e) {
+    pending.replaceWith(el("div", { class: "reply" }, el("div", { class: "error" }, "The request failed: " + e.message)));
+  } finally {
+    clearInterval(tick);
+    busy = false; updateSend();
+  }
+}
+
+/* ---------- Composer & events ---------- */
+function updateSend() { sendBtn.disabled = busy || input.value.trim().length < 3; }
+function autosize() { input.style.height = "auto"; input.style.height = Math.min(input.scrollHeight, 200) + "px"; }
+input.addEventListener("input", () => { autosize(); updateSend(); });
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); $("ask").requestSubmit(); }
+});
+$("ask").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const q = input.value.trim();
+  if (q.length < 3 || busy) return;
+  input.value = ""; autosize(); ask(q);
+});
+$("new").addEventListener("click", () => { if (!busy) { emptyState(); input.focus(); } });
+thread.addEventListener("click", (e) => {  // reference chip -> open, scroll to and flash its source
+  const a = e.target.closest("a.ref");
+  if (!a) return;
+  e.preventDefault();
+  const src = document.getElementById(a.dataset.target);
+  if (!src) return;
+  src.open = true;
+  src.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  src.classList.add("flash");
+  setTimeout(() => src.classList.remove("flash"), 1200);
+});
+
+async function health() {
+  try {
+    const h = await (await fetch("/health")).json();
+    $("dot").className = "dot " + (!h.ok ? "bad" : h.warmed_up ? "ok" : "wait");
+    $("status").textContent = !h.ok ? "Service down" : h.warmed_up ? "Ready" : "Loading models";
+    $("status").parentElement.title = !h.ok ? "A service is down. Open /health for details." : "Service status";
+    if (h.ok && !h.warmed_up) setTimeout(health, 3000);
+  } catch { $("dot").className = "dot bad"; $("status").textContent = "API unreachable"; }
+}
+
+emptyState();
+health();
+input.focus();
+</script>
+</body>
+</html>

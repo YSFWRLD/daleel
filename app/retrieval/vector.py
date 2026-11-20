@@ -15,14 +15,15 @@ FIELDS = (
 )
 
 
-def vector_search(query_vec: list[float], strategy: str, k: int) -> list[tuple[dict, float]]:
+def vector_search(query_vec: list[float], strategy: str, k: int, lang: str | None = None) -> list[tuple[dict, float]]:
+    """Nearest chunks by cosine similarity; `lang` restricts the search to one language version."""
     with psycopg.connect(get_settings().database_url, row_factory=dict_row) as conn:
         register_vector(conn)
         conn.execute("SET hnsw.ef_search = 100")
         q = np.array(query_vec, dtype=np.float32)
         rows = conn.execute(
             f"SELECT {FIELDS}, 1 - (embedding <=> %s) AS sim FROM chunks "
-            "WHERE strategy = %s ORDER BY embedding <=> %s LIMIT %s",
-            (q, strategy, q, k),
+            "WHERE strategy = %s AND (%s::text IS NULL OR lang = %s) ORDER BY embedding <=> %s LIMIT %s",
+            (q, strategy, lang, lang, q, k),
         ).fetchall()
     return [({k_: v for k_, v in r.items() if k_ != "sim"}, float(r["sim"])) for r in rows]

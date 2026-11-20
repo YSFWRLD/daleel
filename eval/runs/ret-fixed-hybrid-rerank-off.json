@@ -1,0 +1,2365 @@
+{
+ "name": "ret-fixed-hybrid-rerank-off",
+ "config": {
+  "strategy": "fixed",
+  "mode": "hybrid",
+  "reranker": "off",
+  "answers": false,
+  "provider": "ollama",
+  "model": null,
+  "judge": false,
+  "per_lang": "on",
+  "rerank_top": 10,
+  "per_list": 2
+ },
+ "summary": {
+  "n": 69,
+  "n_answerable": 60,
+  "n_unanswerable": 9,
+  "all": {
+   "hit@1": 0.6833333333333333,
+   "hit@3": 0.8833333333333333,
+   "hit@5": 0.9166666666666666,
+   "mrr": 0.7886111111111112,
+   "latency_p50": 0.3725317000062205,
+   "latency_p95": 0.39607790000445675
+  },
+  "en": {
+   "hit@1": 0.65625,
+   "hit@3": 0.90625,
+   "hit@5": 0.9375,
+   "mrr": 0.775,
+   "latency_p50": 0.37141479999991134,
+   "latency_p95": 0.39607790000445675
+  },
+  "ar": {
+   "hit@1": 0.7142857142857143,
+   "hit@3": 0.8571428571428571,
+   "hit@5": 0.8928571428571429,
+   "mrr": 0.8041666666666666,
+   "latency_p50": 0.3756141000048956,
+   "latency_p95": 0.3964734000037424
+  },
+  "scenario": {
+   "hit@1": 0.5384615384615384,
+   "hit@3": 0.7692307692307693,
+   "hit@5": 0.7692307692307693,
+   "mrr": 0.6820512820512821,
+   "latency_p50": 0.3725317000062205,
+   "latency_p95": 0.39199469999584835
+  },
+  "direct": {
+   "hit@1": 0.723404255319149,
+   "hit@3": 0.9148936170212766,
+   "hit@5": 0.9574468085106383,
+   "mrr": 0.8180851063829788,
+   "latency_p50": 0.37243909999961033,
+   "latency_p95": 0.3964734000037424
+  }
+ },
+ "rows": [
+  {
+   "id": "q-01",
+   "lang": "en",
+   "question": "What rights does a data subject have under the PDPL?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-4"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "retrieved": [
+    "pdpl:art-1",
+    "pdpl:art-4",
+    "pdpl:art-6",
+    "pdpl_ir:art-12",
+    "pdpl_ir:art-24"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.36831350000284147,
+   "timings": {
+    "embed": 0.2215247999993153,
+    "vector": 0.14577750000171363,
+    "bm25": 0.0008476000075461343
+   }
+  },
+  {
+   "id": "q-02",
+   "lang": "ar",
+   "question": "ما الحالات التي يجوز فيها معالجة البيانات الشخصية دون موافقة صاحبها؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-6"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "retrieved": [
+    "pdpl:art-4",
+    "pdpl_ir:art-11",
+    "pdpl_ir:art-12",
+    "pdpl:art-25",
+    "pdpl_ir:art-27"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.4001942000031704,
+   "timings": {
+    "embed": 0.22972819999267813,
+    "vector": 0.16903330000059213,
+    "bm25": 0.0012377000093692914
+   }
+  },
+  {
+   "id": "q-03",
+   "lang": "en",
+   "question": "Can a company make consent to personal data processing a condition for providing its service?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-7"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "retrieved": [
+    "pdpl:art-4",
+    "pdpl_ir:art-11",
+    "pdpl:art-6",
+    "pdpl_ir:art-9",
+    "pdpl_ir:art-12"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3594195000041509,
+   "timings": {
+    "embed": 0.21920930000487715,
+    "vector": 0.13917910000600386,
+    "bm25": 0.0008820999937597662
+   }
+  },
+  {
+   "id": "q-04",
+   "lang": "ar",
+   "question": "متى يجب على جهة التحكم إتلاف البيانات الشخصية؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-18"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-8"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "retrieved": [
+    "pdpl:art-16",
+    "pdpl_ir:art-6",
+    "pdpl_ir:art-7",
+    "pdpl:art-18",
+    "pdpl:art-10"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3480833000066923,
+   "timings": {
+    "embed": 0.21406929999648128,
+    "vector": 0.13288580000516959,
+    "bm25": 0.000968100008321926
+   }
+  },
+  {
+   "id": "q-05",
+   "lang": "en",
+   "question": "Do we need a privacy policy before collecting personal data?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-12"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "retrieved": [
+    "pdpl:art-10",
+    "pdpl_ir:art-29",
+    "pdpl:art-11",
+    "pdpl_ir:art-20",
+    "pdpl:art-22"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.39607790000445675,
+   "timings": {
+    "embed": 0.22798699999111705,
+    "vector": 0.16706610000983346,
+    "bm25": 0.0008759000047575682
+   }
+  },
+  {
+   "id": "q-06",
+   "lang": "ar",
+   "question": "ما الذي يجب على جهة التحكم إبلاغ صاحب البيانات به عند جمع بياناته منه مباشرة؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-13"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-4"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-4",
+    "pdpl_ir:art-29",
+    "pdpl_ir:art-24",
+    "pdpl:art-11",
+    "pdpl:art-10"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.38822979999531526,
+   "timings": {
+    "embed": 0.22086010000202805,
+    "vector": 0.16575270000612363,
+    "bm25": 0.0014200000005075708
+   }
+  },
+  {
+   "id": "q-07",
+   "lang": "en",
+   "question": "What is the maximum penalty for disclosing sensitive data with the intent to harm the data subject?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-35"
+    }
+   ],
+   "tags": [
+    "pdpl",
+    "penalty"
+   ],
+   "retrieved": [
+    "pdpl:art-35",
+    "pdpl:art-31",
+    "pdpl:art-34",
+    "pdpl:art-40",
+    "pdpl:art-13"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.35958999999274965,
+   "timings": {
+    "embed": 0.20665079999889713,
+    "vector": 0.15177880000555888,
+    "bm25": 0.0009277000062866136
+   }
+  },
+  {
+   "id": "q-08",
+   "lang": "ar",
+   "question": "ما مقدار الغرامة على مخالفة أحكام نظام حماية البيانات الشخصية في غير حالات إفشاء البيانات الحساسة؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-36"
+    }
+   ],
+   "tags": [
+    "pdpl",
+    "penalty"
+   ],
+   "retrieved": [
+    "pdpl:art-35",
+    "pdpl:art-31",
+    "pdpl:art-34",
+    "pdpl:art-40",
+    "pdpl:art-29"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3885637999919709,
+   "timings": {
+    "embed": 0.22483790000842419,
+    "vector": 0.16183129999262746,
+    "bm25": 0.0017298000020673499
+   }
+  },
+  {
+   "id": "q-09",
+   "lang": "en",
+   "question": "Can personal data be used for marketing purposes?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-26"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-29"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "retrieved": [
+    "pdpl:art-25",
+    "pdpl_ir:art-29",
+    "pdpl:art-24",
+    "pdpl_ir:art-28",
+    "pdpl_ir:art-1"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3470085000008112,
+   "timings": {
+    "embed": 0.21943739999551326,
+    "vector": 0.1265824000001885,
+    "bm25": 0.0008453999907942489
+   }
+  },
+  {
+   "id": "q-10",
+   "lang": "ar",
+   "question": "هل يجوز تصوير أو نسخ الوثائق الرسمية التي تحدد هوية أصحاب البيانات الشخصية؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-28"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-31"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "retrieved": [
+    "pdpl:art-25",
+    "pdpl_ir:art-1",
+    "pdpl_ir:art-30",
+    "pdpl_ir:art-29",
+    "pdpl_ir:art-8"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.36471810001239646,
+   "timings": {
+    "embed": 0.23079109999525826,
+    "vector": 0.13239210000028834,
+    "bm25": 0.001305900004808791
+   }
+  },
+  {
+   "id": "q-11",
+   "lang": "en",
+   "question": "Can personal data be processed for scientific research without the consent of the data subject?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-27"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-30"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "retrieved": [
+    "pdpl:art-4",
+    "pdpl_ir:art-29",
+    "pdpl_ir:art-12",
+    "pdpl:art-24",
+    "pdpl_ir:art-28"
+   ],
+   "rank": 2,
+   "hit@1": 0.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 0.5,
+   "latency": 0.3793777999962913,
+   "timings": {
+    "embed": 0.22714919999998529,
+    "vector": 0.1510813000058988,
+    "bm25": 0.0010011999984271824
+   }
+  },
+  {
+   "id": "q-12",
+   "lang": "ar",
+   "question": "هل يجب على جهة التحكم إجراء تقييم للآثار المترتبة على معالجة البيانات الشخصية؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-22"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-25"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-15",
+    "pdpl:art-16",
+    "pdpl_ir:art-25",
+    "pdpl_ir:art-24",
+    "pdpl:art-20"
+   ],
+   "rank": 2,
+   "hit@1": 0.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 0.5,
+   "latency": 0.37243909999961033,
+   "timings": {
+    "embed": 0.21982840000418946,
+    "vector": 0.1511328000051435,
+    "bm25": 0.001317000002018176
+   }
+  },
+  {
+   "id": "q-13",
+   "lang": "en",
+   "question": "Where can a data subject file a complaint about a violation of the PDPL?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-34"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-37"
+    }
+   ],
+   "tags": [
+    "pdpl"
+   ],
+   "retrieved": [
+    "pdpl:art-36",
+    "pdpl:art-35",
+    "pdpl:art-34",
+    "pdpl_ir:art-36",
+    "pdpl_ir:art-32"
+   ],
+   "rank": 3,
+   "hit@1": 0.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 0.3333333333333333,
+   "latency": 0.37525100000493694,
+   "timings": {
+    "embed": 0.2238361000054283,
+    "vector": 0.1504994999995688,
+    "bm25": 0.0007626000005984679
+   }
+  },
+  {
+   "id": "q-14",
+   "lang": "en",
+   "question": "Can we store customer data on a server outside KSA?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-29"
+    }
+   ],
+   "tags": [
+    "pdpl",
+    "transfer"
+   ],
+   "retrieved": [
+    "pdpl:art-29",
+    "pdpl_transfer:art-4",
+    "pdpl_transfer:art-3",
+    "pdpl_transfer:art-1",
+    "ccc:ctl-2-3-P-1"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.37651699999696575,
+   "timings": {
+    "embed": 0.21995880000758916,
+    "vector": 0.15551510000659619,
+    "bm25": 0.0008888000011211261
+   }
+  },
+  {
+   "id": "q-15",
+   "lang": "ar",
+   "question": "هل يمكننا تخزين بيانات العملاء على خادم خارج المملكة؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-29"
+    }
+   ],
+   "tags": [
+    "pdpl",
+    "transfer"
+   ],
+   "retrieved": [
+    "pdpl_transfer:art-4",
+    "pdpl:art-29",
+    "pdpl_transfer:art-1",
+    "pdpl_transfer:art-3",
+    "pdpl_transfer:art-7"
+   ],
+   "rank": 2,
+   "hit@1": 0.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 0.5,
+   "latency": 0.36379250000754837,
+   "timings": {
+    "embed": 0.21998140000505373,
+    "vector": 0.14255589999083895,
+    "bm25": 0.001079199995729141
+   }
+  },
+  {
+   "id": "q-16",
+   "lang": "en",
+   "question": "How quickly must we notify the authority of a personal data breach?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-24"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-20"
+    }
+   ],
+   "tags": [
+    "pdpl_ir",
+    "breach"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-24",
+    "pdpl_ir:art-4",
+    "pdpl_ir:art-22",
+    "pdpl:art-40",
+    "pdpl:art-18"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3798093999939738,
+   "timings": {
+    "embed": 0.2287171999923885,
+    "vector": 0.15004540000518318,
+    "bm25": 0.0008960999984992668
+   }
+  },
+  {
+   "id": "q-17",
+   "lang": "ar",
+   "question": "خلال كم يوماً يجب على جهة التحكم الاستجابة لطلب صاحب البيانات لممارسة حقوقه؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-3"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-21"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-4",
+    "pdpl_ir:art-3",
+    "pdpl_ir:art-24",
+    "pdpl_ir:art-1",
+    "pdpl_ir:art-6"
+   ],
+   "rank": 2,
+   "hit@1": 0.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 0.5,
+   "latency": 0.37655450000602286,
+   "timings": {
+    "embed": 0.2225932000001194,
+    "vector": 0.15240999999514315,
+    "bm25": 0.00134529999922961
+   }
+  },
+  {
+   "id": "q-18",
+   "lang": "en",
+   "question": "When is a company required to appoint a data protection officer?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-32"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-31",
+    "pdpl_ir:art-32",
+    "pdpl_ir:art-30",
+    "pdpl:art-6",
+    "pdpl_ir:art-17"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.36738949999562465,
+   "timings": {
+    "embed": 0.22249049998936243,
+    "vector": 0.14383890001045074,
+    "bm25": 0.0009049000072991475
+   }
+  },
+  {
+   "id": "q-19",
+   "lang": "ar",
+   "question": "ما المدة المتاحة لصاحب البيانات لتقديم شكوى إلى الجهة المختصة؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-37"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-37",
+    "pdpl_ir:art-35",
+    "pdpl_ir:art-36",
+    "pdpl_ir:art-24",
+    "pdpl_transfer:art-4"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3681260999874212,
+   "timings": {
+    "embed": 0.2204706000047736,
+    "vector": 0.14637069999298546,
+    "bm25": 0.0010941999935312197
+   }
+  },
+  {
+   "id": "q-20",
+   "lang": "en",
+   "question": "Can a data subject withdraw consent, and what must the controller do afterwards?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-12"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-29",
+    "pdpl_ir:art-8",
+    "pdpl_ir:art-11",
+    "pdpl_ir:art-12",
+    "pdpl:art-4"
+   ],
+   "rank": 3,
+   "hit@1": 0.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 0.3333333333333333,
+   "latency": 0.371576699995785,
+   "timings": {
+    "embed": 0.23759020000579767,
+    "vector": 0.13283809999120422,
+    "bm25": 0.0008425999985774979
+   }
+  },
+  {
+   "id": "q-21",
+   "lang": "ar",
+   "question": "ما شروط التسويق المباشر باستخدام البيانات الشخصية؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-29"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-26"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-29",
+    "pdpl_ir:art-1",
+    "pdpl_ir:art-28",
+    "pdpl:art-24",
+    "pdpl:art-25"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3762535999994725,
+   "timings": {
+    "embed": 0.23429079999914393,
+    "vector": 0.14081050000095274,
+    "bm25": 0.000994600006379187
+   }
+  },
+  {
+   "id": "q-22",
+   "lang": "en",
+   "question": "What must a controller verify when choosing a processor?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-17"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-17",
+    "ecc:ctl-2-2-3",
+    "dcc:ctl-2-5-1",
+    "pdpl_transfer:art-4",
+    "pdpl_ir:art-16"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.33574560000852216,
+   "timings": {
+    "embed": 0.20389459999569226,
+    "vector": 0.1308324999990873,
+    "bm25": 0.0008474000060232356
+   }
+  },
+  {
+   "id": "q-23",
+   "lang": "ar",
+   "question": "ما الضوابط التي يجب الالتزام بها عند إخفاء هوية البيانات الشخصية؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-9"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-8",
+    "pdpl_ir:art-19",
+    "pdpl_ir:art-9",
+    "pdpl_ir:art-1",
+    "pdpl_ir:art-29"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3764501999976346,
+   "timings": {
+    "embed": 0.22458409999671858,
+    "vector": 0.1503155000100378,
+    "bm25": 0.0012882000009994954
+   }
+  },
+  {
+   "id": "q-24",
+   "lang": "en",
+   "question": "Can a private company process personal data based on its legitimate interest?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-16"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-6"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-15",
+    "pdpl:art-1",
+    "pdpl_ir:art-14",
+    "pdpl_ir:art-16",
+    "pdpl:art-13"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.37141479999991134,
+   "timings": {
+    "embed": 0.21220709999033716,
+    "vector": 0.1581486000068253,
+    "bm25": 0.0009095999994315207
+   }
+  },
+  {
+   "id": "q-25",
+   "lang": "ar",
+   "question": "ما المعلومات التي يجب أن يتضمنها الإشعار بحادثة تسرب البيانات الشخصية؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-24"
+    }
+   ],
+   "tags": [
+    "pdpl_ir",
+    "breach"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-24",
+    "pdpl_ir:art-22",
+    "dcc:ctl-3-1-1",
+    "pdpl_ir:art-4",
+    "pdpl_ir:art-20"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.36024239999824204,
+   "timings": {
+    "embed": 0.20622029999503866,
+    "vector": 0.1527302000031341,
+    "bm25": 0.0011264999920967966
+   }
+  },
+  {
+   "id": "q-26",
+   "lang": "en",
+   "question": "Does the PDPL apply to an individual processing personal data for personal or family use?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-2"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-2"
+    }
+   ],
+   "tags": [
+    "pdpl_ir"
+   ],
+   "retrieved": [
+    "pdpl:art-1",
+    "pdpl_ir:art-1",
+    "pdpl_ir:art-4",
+    "pdpl:art-10",
+    "pdpl:art-16"
+   ],
+   "rank": 2,
+   "hit@1": 0.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 0.5,
+   "latency": 0.3559205999918049,
+   "timings": {
+    "embed": 0.22002870000142138,
+    "vector": 0.134589599998435,
+    "bm25": 0.0011408999998820946
+   }
+  },
+  {
+   "id": "q-27",
+   "lang": "en",
+   "question": "Which safeguards can a controller use to transfer personal data abroad when the destination does not offer an adequate level of protection?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_transfer",
+     "canonical_key": "art-4"
+    }
+   ],
+   "tags": [
+    "transfer"
+   ],
+   "retrieved": [
+    "pdpl_transfer:art-3",
+    "pdpl_transfer:art-4",
+    "pdpl:art-27",
+    "pdpl_transfer:art-1",
+    "pdpl_transfer:art-7"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3599836000066716,
+   "timings": {
+    "embed": 0.20688359999621753,
+    "vector": 0.15162489999784157,
+    "bm25": 0.0012796999944839627
+   }
+  },
+  {
+   "id": "q-28",
+   "lang": "ar",
+   "question": "متى يجب على جهة التحكم إجراء تقويم للمخاطر قبل نقل البيانات الشخصية إلى خارج المملكة؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_transfer",
+     "canonical_key": "art-7"
+    }
+   ],
+   "tags": [
+    "transfer"
+   ],
+   "retrieved": [
+    "pdpl_transfer:art-4",
+    "pdpl:art-29",
+    "pdpl_transfer:art-1",
+    "pdpl_transfer:art-3",
+    "pdpl_transfer:art-7"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3763708000042243,
+   "timings": {
+    "embed": 0.2258328000025358,
+    "vector": 0.1487702000013087,
+    "bm25": 0.001574199995957315
+   }
+  },
+  {
+   "id": "q-29",
+   "lang": "en",
+   "question": "How often does the competent authority review the list of countries with an adequate level of data protection?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_transfer",
+     "canonical_key": "art-3"
+    }
+   ],
+   "tags": [
+    "transfer"
+   ],
+   "retrieved": [
+    "pdpl_transfer:art-2",
+    "pdpl_transfer:art-3",
+    "pdpl_transfer:art-1",
+    "dcc:ctl-2-1-3",
+    "dcc:sub-1-3"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.37563629999931436,
+   "timings": {
+    "embed": 0.2259448999975575,
+    "vector": 0.14842769999813754,
+    "bm25": 0.0011020000092685223
+   }
+  },
+  {
+   "id": "q-30",
+   "lang": "ar",
+   "question": "متى لا ينطبق الإعفاء الممنوح لجهة التحكم عند نقل البيانات الشخصية إلى خارج المملكة؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_transfer",
+     "canonical_key": "art-6"
+    }
+   ],
+   "tags": [
+    "transfer"
+   ],
+   "retrieved": [
+    "pdpl_transfer:art-4",
+    "pdpl_transfer:art-3",
+    "pdpl_transfer:art-1",
+    "pdpl:art-29",
+    "pdpl_transfer:art-7"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.35628420001012273,
+   "timings": {
+    "embed": 0.2189894000039203,
+    "vector": 0.13542069999675732,
+    "bm25": 0.0016850999963935465
+   }
+  },
+  {
+   "id": "q-31",
+   "lang": "en",
+   "question": "Is multi-factor authentication required for remote access?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-2-3"
+    },
+    {
+     "doc_id": "ccc",
+     "canonical_key": "ctl-2-2-P-1"
+    },
+    {
+     "doc_id": "dcc",
+     "canonical_key": "ctl-2-1-1"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "retrieved": [
+    "ecc:ctl-2-2-3",
+    "ccc:ctl-2-2-P-1",
+    "ecc:sub-2-2",
+    "ecc:ctl-2-14-3",
+    "ecc:ctl-2-3-3"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3751553000038257,
+   "timings": {
+    "embed": 0.2345486999984132,
+    "vector": 0.13971329999912996,
+    "bm25": 0.0007287000044016168
+   }
+  },
+  {
+   "id": "q-32",
+   "lang": "ar",
+   "question": "ما متطلبات النسخ الاحتياطي في الضوابط الأساسية للأمن السيبراني؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-9-3"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "retrieved": [
+    "ccc:sub-2-8",
+    "ecc:ctl-2-14-3",
+    "ecc:ctl-2-7-4",
+    "dcc:ctl-2-7-3",
+    "ecc:ctl-2-3-3"
+   ],
+   "rank": 3,
+   "hit@1": 0.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 0.3333333333333333,
+   "latency": 0.3648428000014974,
+   "timings": {
+    "embed": 0.2222258999972837,
+    "vector": 0.1412897999980487,
+    "bm25": 0.0011525000008987263
+   }
+  },
+  {
+   "id": "q-33",
+   "lang": "en",
+   "question": "How long must cybersecurity event logs be retained under the ECC?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-12-3"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "retrieved": [
+    "ecc:ctl-2-12-3",
+    "ecc:ctl-2-14-3",
+    "ecc:ctl-2-11-1",
+    "ccc:ctl-2-10-P-1",
+    "ccc:ctl-2-11-T-1"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3673073999962071,
+   "timings": {
+    "embed": 0.21882919999188744,
+    "vector": 0.14729439999791794,
+    "bm25": 0.0010076999897137284
+   }
+  },
+  {
+   "id": "q-34",
+   "lang": "ar",
+   "question": "هل يجب أن تُشغل وظائف الأمن السيبراني بمواطنين سعوديين؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-1-2-2"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "retrieved": [
+    "ecc:ctl-2-2-3",
+    "ecc:ctl-2-3-3",
+    "ecc:ctl-4-1-3",
+    "dcc:sub-1-3",
+    "ccc:ctl-1-2-T-1"
+   ],
+   "rank": 6,
+   "hit@1": 0.0,
+   "hit@3": 0.0,
+   "hit@5": 0.0,
+   "rr": 0.16666666666666666,
+   "latency": 0.3400003000133438,
+   "timings": {
+    "embed": 0.20617060000950005,
+    "vector": 0.13261129999591503,
+    "bm25": 0.0010482000070624053
+   }
+  },
+  {
+   "id": "q-35",
+   "lang": "en",
+   "question": "When must a cybersecurity risk assessment be performed under the ECC?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-1-5-3"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "retrieved": [
+    "ecc:ctl-1-5-2",
+    "ecc:ctl-1-6-3",
+    "dcc:sub-1-1",
+    "ecc:ctl-1-4-1",
+    "pdpl:art-27"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3800579000089783,
+   "timings": {
+    "embed": 0.21901539999817032,
+    "vector": 0.15994420000060927,
+    "bm25": 0.0009320000099251047
+   }
+  },
+  {
+   "id": "q-36",
+   "lang": "ar",
+   "question": "ما نطاق اختبار الاختراق المطلوب في الضوابط الأساسية للأمن السيبراني؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-11-3"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "retrieved": [
+    "ecc:ctl-2-10-3",
+    "ecc:ctl-2-14-3",
+    "ecc:ctl-2-11-1",
+    "ecc:ctl-2-7-4",
+    "ccc:sub-2-9"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.36006479999923613,
+   "timings": {
+    "embed": 0.21990749999531545,
+    "vector": 0.1387553999957163,
+    "bm25": 0.0012292000028537586
+   }
+  },
+  {
+   "id": "q-37",
+   "lang": "en",
+   "question": "Which cryptographic standards must an entity follow under the ECC?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-8-3"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "retrieved": [
+    "ecc:ctl-2-8-3",
+    "ecc:ctl-2-6-2",
+    "ecc:ctl-2-7-4",
+    "ccc:ctl-1-2-T-1",
+    "dcc:ctl-2-3-1"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3517643999948632,
+   "timings": {
+    "embed": 0.2066225000016857,
+    "vector": 0.14409250000608154,
+    "bm25": 0.0008847999997669831
+   }
+  },
+  {
+   "id": "q-38",
+   "lang": "ar",
+   "question": "هل يجب أن تكون إدارة الأمن السيبراني مستقلة عن إدارة تقنية المعلومات؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-1-2-1"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "retrieved": [
+    "ecc:sub-1-1",
+    "ecc:ctl-2-2-3",
+    "ecc:sub-2-5",
+    "ecc:ctl-1-10-4",
+    "ecc:ctl-1-5-2"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.39220299999578856,
+   "timings": {
+    "embed": 0.2295816000114428,
+    "vector": 0.16130430001066998,
+    "bm25": 0.001139500003773719
+   }
+  },
+  {
+   "id": "q-39",
+   "lang": "en",
+   "question": "What does the ECC require from cloud computing and hosting service providers that hold the entity's data?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-4-2-3"
+    }
+   ],
+   "tags": [
+    "ecc"
+   ],
+   "retrieved": [
+    "ecc:ctl-4-1-3",
+    "ecc:ctl-2-14-3",
+    "ecc:sub-3-1",
+    "ccc:ctl-3-1-T-1",
+    "dcc:ctl-2-7-3"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3917947000009008,
+   "timings": {
+    "embed": 0.22428700000455137,
+    "vector": 0.1662130999902729,
+    "bm25": 0.0011146000033477321
+   }
+  },
+  {
+   "id": "q-40",
+   "lang": "en",
+   "question": "What cryptographic key management requirements apply to cloud service providers?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ccc",
+     "canonical_key": "ctl-2-15-P-3"
+    }
+   ],
+   "tags": [
+    "ccc"
+   ],
+   "retrieved": [
+    "ccc:ctl-2-15-P-2",
+    "ccc:sub-2-1",
+    "ecc:ctl-4-1-3",
+    "ccc:ctl-2-15-P-4",
+    "ccc:sub-2-13"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3638086999999359,
+   "timings": {
+    "embed": 0.2195508000004338,
+    "vector": 0.1430736999900546,
+    "bm25": 0.0010160999954678118
+   }
+  },
+  {
+   "id": "q-41",
+   "lang": "ar",
+   "question": "ما متطلبات الأمن السيبراني لإدارة التغيير لدى مقدم الخدمات السحابية؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ccc",
+     "canonical_key": "ctl-1-5-P-3"
+    }
+   ],
+   "tags": [
+    "ccc"
+   ],
+   "retrieved": [
+    "ccc:ctl-1-4-P-1",
+    "ccc:ctl-2-15-P-2",
+    "ecc:ctl-4-1-3",
+    "ccc:ctl-1-4-P-2",
+    "ccc:sub-2-8"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3604016000026604,
+   "timings": {
+    "embed": 0.20815449999645352,
+    "vector": 0.15069530000619125,
+    "bm25": 0.0013048000109847635
+   }
+  },
+  {
+   "id": "q-42",
+   "lang": "en",
+   "question": "How long must usage logs of printers, scanners and copy machines be kept under the DCC?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "dcc",
+     "canonical_key": "ctl-2-7-3"
+    }
+   ],
+   "tags": [
+    "dcc"
+   ],
+   "retrieved": [
+    "dcc:ctl-2-3-1",
+    "ecc:ctl-2-12-3",
+    "dcc:ctl-2-7-3",
+    "dcc:ctl-2-5-1",
+    "dcc:sub-1-3"
+   ],
+   "rank": 3,
+   "hit@1": 0.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 0.3333333333333333,
+   "latency": 0.3996622999984538,
+   "timings": {
+    "embed": 0.22950949998630676,
+    "vector": 0.16884320000826847,
+    "bm25": 0.0011394000030122697
+   }
+  },
+  {
+   "id": "q-43",
+   "lang": "ar",
+   "question": "ما متطلبات الإتلاف الآمن للبيانات في ضوابط الأمن السيبراني للبيانات؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "dcc",
+     "canonical_key": "ctl-2-6-1"
+    }
+   ],
+   "tags": [
+    "dcc"
+   ],
+   "retrieved": [
+    "dcc:ctl-2-5-1",
+    "dcc:ctl-2-1-3",
+    "ecc:ctl-2-7-4",
+    "dcc:sub-1-3",
+    "dcc:ctl-2-3-1"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3799954999994952,
+   "timings": {
+    "embed": 0.22146660000726115,
+    "vector": 0.15720160001365002,
+    "bm25": 0.0011503999994602054
+   }
+  },
+  {
+   "id": "vd-01",
+   "lang": "en",
+   "question": "Under the NCA Essential Cybersecurity Controls, which control requires compliance with nationally approved international agreements that include cybersecurity requirements?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-1-7-2"
+    }
+   ],
+   "tags": [
+    "version-difference"
+   ],
+   "retrieved": [
+    "ecc:ctl-2-14-3",
+    "ecc:ctl-3-1-1",
+    "ecc:ctl-2-7-4",
+    "dcc:sub-1-3",
+    "ecc:sub-1-6"
+   ],
+   "rank": 5,
+   "hit@1": 0.0,
+   "hit@3": 0.0,
+   "hit@5": 1.0,
+   "rr": 0.2,
+   "latency": 0.3720939000049839,
+   "timings": {
+    "embed": 0.21735059999627993,
+    "vector": 0.15323389999684878,
+    "bm25": 0.0012862000003224239
+   }
+  },
+  {
+   "id": "vd-02",
+   "lang": "ar",
+   "question": "ما الضابط في الضوابط الأساسية للأمن السيبراني الذي يلزم الجهة بالالتزام بالمتطلبات التشريعية والتنظيمية الوطنية المتعلقة بالأمن السيبراني؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-1-7-1"
+    }
+   ],
+   "tags": [
+    "version-difference"
+   ],
+   "retrieved": [
+    "ecc:ctl-1-6-3",
+    "dcc:sub-1-1",
+    "ecc:ctl-4-1-3",
+    "ecc:ctl-2-7-4",
+    "ccc:ctl-1-2-T-1"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3728575999994064,
+   "timings": {
+    "embed": 0.22571959999913815,
+    "vector": 0.14475199999287724,
+    "bm25": 0.0021896999969612807
+   }
+  },
+  {
+   "id": "vd-03",
+   "lang": "en",
+   "question": "Does ECC-2:2024 require an entity's data protection requirements to cover NCA's Data Cybersecurity Controls (DCC) as a minimum?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-7-3"
+    }
+   ],
+   "tags": [
+    "version-difference"
+   ],
+   "retrieved": [
+    "ecc:ctl-2-14-3",
+    "ecc:ctl-3-1-1",
+    "ecc:ctl-2-7-4",
+    "ccc:sub-2-1",
+    "ccc:ctl-2-3-P-1"
+   ],
+   "rank": null,
+   "hit@1": 0.0,
+   "hit@3": 0.0,
+   "hit@5": 0.0,
+   "rr": 0.0,
+   "latency": 0.3392852999968454,
+   "timings": {
+    "embed": 0.20823350000136998,
+    "vector": 0.12956539999868255,
+    "bm25": 0.0013144999975338578
+   }
+  },
+  {
+   "id": "vd-04",
+   "lang": "ar",
+   "question": "هل يجب مراجعة تطبيق متطلبات الأمن السيبراني لحماية بيانات ومعلومات الجهة دورياً؟ وما رقم الضابط؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-7-4"
+    }
+   ],
+   "tags": [
+    "version-difference"
+   ],
+   "retrieved": [
+    "ecc:ctl-1-6-3",
+    "ecc:ctl-2-8-3",
+    "ecc:ctl-2-3-3",
+    "ecc:ctl-2-7-4",
+    "ecc:ctl-2-6-2"
+   ],
+   "rank": 4,
+   "hit@1": 0.0,
+   "hit@3": 0.0,
+   "hit@5": 1.0,
+   "rr": 0.25,
+   "latency": 0.3964734000037424,
+   "timings": {
+    "embed": 0.23184880000189878,
+    "vector": 0.16237570000521373,
+    "bm25": 0.0019863000052282587
+   }
+  },
+  {
+   "id": "u-01",
+   "lang": "en",
+   "question": "What is the penalty for running a red light in Riyadh?",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "retrieved": [
+    "pdpl:art-35",
+    "pdpl:art-39",
+    "pdpl:art-34",
+    "pdpl:art-40",
+    "pdpl:art-37"
+   ],
+   "rank": null,
+   "latency": 0.3743040999979712,
+   "timings": {
+    "embed": 0.21965840000484604,
+    "vector": 0.1538488999940455,
+    "bm25": 0.0006453999958466738
+   }
+  },
+  {
+   "id": "u-02",
+   "lang": "ar",
+   "question": "كم عدد ساعات العمل الأسبوعية المسموح بها في نظام العمل السعودي؟",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "retrieved": [
+    "pdpl:art-39",
+    "pdpl_transfer:art-1",
+    "pdpl:art-40",
+    "pdpl:art-34",
+    "pdpl_ir:art-25"
+   ],
+   "rank": null,
+   "latency": 0.3891544000071008,
+   "timings": {
+    "embed": 0.23487299999396782,
+    "vector": 0.15267640000092797,
+    "bm25": 0.0014231999957701191
+   }
+  },
+  {
+   "id": "u-03",
+   "lang": "en",
+   "question": "What is the VAT rate in Saudi Arabia?",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "retrieved": [
+    "pdpl:art-39",
+    "pdpl:art-29",
+    "pdpl:art-40",
+    "ecc:ctl-4-1-3",
+    "ccc:ctl-3-1-T-1"
+   ],
+   "rank": null,
+   "latency": 0.37506189999112394,
+   "timings": {
+    "embed": 0.2210032000002684,
+    "vector": 0.1530715999979293,
+    "bm25": 0.0007949999999254942
+   }
+  },
+  {
+   "id": "u-04",
+   "lang": "ar",
+   "question": "ما متطلبات الإطار التنظيمي للأمن السيبراني الصادر عن البنك المركزي السعودي (ساما)؟",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "retrieved": [
+    "ecc:ctl-2-3-3",
+    "ecc:ctl-2-2-3",
+    "ecc:ctl-2-7-4",
+    "ecc:ctl-2-12-3",
+    "pdpl_ir:art-26"
+   ],
+   "rank": null,
+   "latency": 0.38877689999935683,
+   "timings": {
+    "embed": 0.2207775999995647,
+    "vector": 0.16630099999019876,
+    "bm25": 0.00147639999340754
+   }
+  },
+  {
+   "id": "u-05",
+   "lang": "en",
+   "question": "What is the maximum GDPR fine as a percentage of global annual turnover?",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "retrieved": [
+    "pdpl:art-35",
+    "pdpl:art-31",
+    "pdpl:art-34",
+    "pdpl_ir:art-1",
+    "pdpl:art-36"
+   ],
+   "rank": null,
+   "latency": 0.3510986000037519,
+   "timings": {
+    "embed": 0.2230959000007715,
+    "vector": 0.12699109999812208,
+    "bm25": 0.0008520999981556088
+   }
+  },
+  {
+   "id": "u-06",
+   "lang": "ar",
+   "question": "ما متطلبات الحصول على سجل تجاري لمتجر إلكتروني؟",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "retrieved": [
+    "ecc:ctl-2-3-3",
+    "pdpl_ir:art-27",
+    "ecc:ctl-2-11-1",
+    "ecc:ctl-2-14-3",
+    "dcc:ctl-2-5-1"
+   ],
+   "rank": null,
+   "latency": 0.380795399993076,
+   "timings": {
+    "embed": 0.22589839999272954,
+    "vector": 0.15345660000457428,
+    "bm25": 0.0012287999998079613
+   }
+  },
+  {
+   "id": "u-07",
+   "lang": "en",
+   "question": "How many days of annual leave is a private-sector employee in Saudi Arabia entitled to?",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "retrieved": [
+    "pdpl:art-39",
+    "pdpl_ir:art-24",
+    "pdpl:art-40",
+    "pdpl:art-29",
+    "dcc:sub-1-3"
+   ],
+   "rank": null,
+   "latency": 0.37139569999999367,
+   "timings": {
+    "embed": 0.2213254000089364,
+    "vector": 0.1487228000041796,
+    "bm25": 0.0011800999927800149
+   }
+  },
+  {
+   "id": "u-08",
+   "lang": "ar",
+   "question": "ما عقوبة التهرب الضريبي في المملكة؟",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "unanswerable"
+   ],
+   "retrieved": [
+    "pdpl_transfer:art-7",
+    "pdpl:art-31",
+    "pdpl:art-34",
+    "pdpl_transfer:art-4",
+    "pdpl:art-35"
+   ],
+   "rank": null,
+   "latency": 0.3756141000048956,
+   "timings": {
+    "embed": 0.22119510000629816,
+    "vector": 0.15349119999154937,
+    "bm25": 0.0007722000009380281
+   }
+  },
+  {
+   "id": "s-01",
+   "lang": "en",
+   "question": "We are a Saudi e-commerce company and plan to host our customer database with a cloud provider in Germany. Is that allowed, and what do we need to check first?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-29"
+    },
+    {
+     "doc_id": "pdpl_transfer",
+     "canonical_key": "art-3"
+    },
+    {
+     "doc_id": "pdpl_transfer",
+     "canonical_key": "art-4"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "retrieved": [
+    "ecc:ctl-4-1-3",
+    "pdpl_transfer:art-4",
+    "dcc:sub-1-3",
+    "pdpl_ir:art-25",
+    "ccc:ctl-3-1-T-1"
+   ],
+   "rank": 2,
+   "hit@1": 0.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 0.5,
+   "latency": 0.38887129999056924,
+   "timings": {
+    "embed": 0.2234079999907408,
+    "vector": 0.16377149999607354,
+    "bm25": 0.0015082000027177855
+   }
+  },
+  {
+   "id": "s-02",
+   "lang": "ar",
+   "question": "تعرضت شركتنا لاختراق تسربت فيه بيانات العملاء قبل أسبوع، ولم نبلغ أي جهة حتى الآن. هل هذا مقبول؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-24"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-20"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-24",
+    "pdpl_transfer:art-4",
+    "pdpl:art-25",
+    "pdpl:art-16",
+    "pdpl:art-39"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.35601400000450667,
+   "timings": {
+    "embed": 0.2077041000011377,
+    "vector": 0.14633690001210198,
+    "bm25": 0.0017902000108733773
+   }
+  },
+  {
+   "id": "s-03",
+   "lang": "en",
+   "question": "We send promotional SMS messages to every customer in our database, including people who never opted in. Is that fine?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-25"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-28"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-29"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-26"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-27",
+    "pdpl_ir:art-1",
+    "pdpl:art-24",
+    "pdpl:art-34",
+    "pdpl_ir:art-28"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3916290999914054,
+   "timings": {
+    "embed": 0.23593479998817202,
+    "vector": 0.15409910000744276,
+    "bm25": 0.0013830000098096207
+   }
+  },
+  {
+   "id": "s-04",
+   "lang": "ar",
+   "question": "نحتفظ بنسخة من الهوية الوطنية لكل عميل عند فتح الحساب لأن ذلك أسهل لنا. هل هذا جائز؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-28"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-31"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-15",
+    "pdpl_ir:art-8",
+    "ecc:sub-2-2",
+    "pdpl_transfer:art-3",
+    "ccc:ctl-2-2-P-1"
+   ],
+   "rank": 10,
+   "hit@1": 0.0,
+   "hit@3": 0.0,
+   "hit@5": 0.0,
+   "rr": 0.1,
+   "latency": 0.3883695999975316,
+   "timings": {
+    "embed": 0.2216667999891797,
+    "vector": 0.16474570000718813,
+    "bm25": 0.0017619999998714775
+   }
+  },
+  {
+   "id": "s-05",
+   "lang": "en",
+   "question": "Our IT team shares one administrator account and logs in remotely with only a username and password. Does this comply with the ECC?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-2-3"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "retrieved": [
+    "ecc:ctl-2-2-3",
+    "ecc:ctl-1-10-3",
+    "ecc:sub-2-2",
+    "dcc:sub-1-3",
+    "ccc:sub-2-1"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3635275999986334,
+   "timings": {
+    "embed": 0.223511200005305,
+    "vector": 0.13864529998681974,
+    "bm25": 0.0011713999992934987
+   }
+  },
+  {
+   "id": "s-06",
+   "lang": "ar",
+   "question": "نحتفظ بسجلات أحداث الأمن السيبراني لمدة ستة أشهر فقط ثم نحذفها. هل هذا متوافق مع الضوابط الأساسية للأمن السيبراني؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-2-12-3"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "retrieved": [
+    "ecc:ctl-2-12-3",
+    "ccc:sub-2-8",
+    "dcc:ctl-2-5-1",
+    "ecc:ctl-2-7-4",
+    "ccc:ctl-2-11-P-1"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3725317000062205,
+   "timings": {
+    "embed": 0.2203087000088999,
+    "vector": 0.1500785999960499,
+    "bm25": 0.0019513000006554648
+   }
+  },
+  {
+   "id": "s-07",
+   "lang": "en",
+   "question": "Our cybersecurity function reports to the IT director and is staffed by two contractors from an outsourcing firm. Does that meet the ECC?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-1-2-1"
+    },
+    {
+     "doc_id": "ecc",
+     "canonical_key": "ctl-1-2-2"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "retrieved": [
+    "ecc:ctl-1-10-3",
+    "ecc:ctl-3-1-1",
+    "ecc:ctl-4-1-3",
+    "dcc:sub-1-1",
+    "ccc:ctl-1-2-T-1"
+   ],
+   "rank": 10,
+   "hit@1": 0.0,
+   "hit@3": 0.0,
+   "hit@5": 0.0,
+   "rr": 0.1,
+   "latency": 0.3678118999960134,
+   "timings": {
+    "embed": 0.21719159999338444,
+    "vector": 0.14896279999811668,
+    "bm25": 0.0014315000007627532
+   }
+  },
+  {
+   "id": "s-08",
+   "lang": "ar",
+   "question": "نجمع رقم الجوال وتاريخ الميلاد والعنوان والحالة الاجتماعية من كل من يشترك في نشرتنا البريدية. هل هذا مقبول؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-19"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-11"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "retrieved": [
+    "pdpl:art-10",
+    "pdpl:art-25",
+    "pdpl:art-24",
+    "pdpl_ir:art-4",
+    "ecc:sub-1-1"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.37156210000102874,
+   "timings": {
+    "embed": 0.22310630000720266,
+    "vector": 0.14663539998582564,
+    "bm25": 0.0015687999984947965
+   }
+  },
+  {
+   "id": "s-09",
+   "lang": "en",
+   "question": "A customer asked us to delete their personal data, but we must keep their invoices for tax purposes. What should we do?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-18"
+    },
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-8"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-29",
+    "pdpl:art-16",
+    "pdpl:art-18",
+    "pdpl_ir:art-7",
+    "pdpl:art-4"
+   ],
+   "rank": 2,
+   "hit@1": 0.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 0.5,
+   "latency": 0.39199469999584835,
+   "timings": {
+    "embed": 0.23732630000449717,
+    "vector": 0.15294649999123067,
+    "bm25": 0.0015101000026334077
+   }
+  },
+  {
+   "id": "s-10",
+   "lang": "ar",
+   "question": "تطبيقنا يعالج البيانات الصحية للمستخدمين كنشاط أساسي، ولم نعيّن مسؤولاً لحماية البيانات الشخصية. هل يلزمنا تعيينه؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-32"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-31",
+    "pdpl_ir:art-32",
+    "pdpl_ir:art-30",
+    "pdpl_ir:art-25",
+    "pdpl:art-30"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3764732000126969,
+   "timings": {
+    "embed": 0.22267620000639,
+    "vector": 0.15170279999438208,
+    "bm25": 0.0018617999885464087
+   }
+  },
+  {
+   "id": "s-11",
+   "lang": "en",
+   "question": "We reuse hard drives from decommissioned servers after a quick format. Is that acceptable under the DCC?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "dcc",
+     "canonical_key": "ctl-2-6-1"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "retrieved": [
+    "dcc:ctl-2-5-1",
+    "dcc:ctl-2-3-1",
+    "dcc:ctl-2-7-3",
+    "pdpl_ir:art-5",
+    "ecc:ctl-4-1-3"
+   ],
+   "rank": 1,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 1.0,
+   "latency": 0.3871662000019569,
+   "timings": {
+    "embed": 0.2193629000103101,
+    "vector": 0.16653070000756998,
+    "bm25": 0.00109859999793116
+   }
+  },
+  {
+   "id": "s-12",
+   "lang": "ar",
+   "question": "نشترط على العملاء الموافقة على مشاركة بياناتهم مع شركائنا التسويقيين لكي نفتح لهم حساباً. هل هذا جائز؟",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-7"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-1",
+    "pdpl_ir:art-29",
+    "pdpl_ir:art-27",
+    "pdpl_transfer:art-4",
+    "dcc:ctl-3-1-1"
+   ],
+   "rank": 6,
+   "hit@1": 0.0,
+   "hit@3": 0.0,
+   "hit@5": 0.0,
+   "rr": 0.16666666666666666,
+   "latency": 0.36429270000371616,
+   "timings": {
+    "embed": 0.22026889999688137,
+    "vector": 0.14214379999611992,
+    "bm25": 0.001542500001960434
+   }
+  },
+  {
+   "id": "s-13",
+   "lang": "en",
+   "question": "We want to analyse customers' purchase history to improve our product recommendations without asking for consent. Can we rely on legitimate interest?",
+   "answerable": true,
+   "gold": [
+    {
+     "doc_id": "pdpl_ir",
+     "canonical_key": "art-16"
+    },
+    {
+     "doc_id": "pdpl",
+     "canonical_key": "art-6"
+    }
+   ],
+   "tags": [
+    "scenario"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-29",
+    "pdpl_ir:art-15",
+    "pdpl_ir:art-14",
+    "pdpl_ir:art-28",
+    "pdpl_ir:art-16"
+   ],
+   "rank": 2,
+   "hit@1": 0.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "rr": 0.5,
+   "latency": 0.36776629999803845,
+   "timings": {
+    "embed": 0.21610399999190122,
+    "vector": 0.1502617999940412,
+    "bm25": 0.0012150999973528087
+   }
+  },
+  {
+   "id": "s-14",
+   "lang": "ar",
+   "question": "يعمل لدينا موظفون ساعات إضافية دون أجر إضافي بموافقتهم. هل هذا نظامي؟",
+   "answerable": false,
+   "gold": [],
+   "tags": [
+    "scenario",
+    "unanswerable"
+   ],
+   "retrieved": [
+    "pdpl_ir:art-1",
+    "pdpl_ir:art-4",
+    "pdpl_ir:art-3",
+    "pdpl_ir:art-12",
+    "pdpl:art-36"
+   ],
+   "rank": null,
+   "latency": 0.38394469999184366,
+   "timings": {
+    "embed": 0.22157109998806845,
+    "vector": 0.1608330000017304,
+    "bm25": 0.0013170999882277101
+   }
+  }
+ ]
+}

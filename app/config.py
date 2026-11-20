@@ -20,14 +20,19 @@ class Settings(BaseSettings):
     gemini_model: str = "gemini-2.0-flash"
 
     chunking: Literal["article", "fixed"] = "article"
-    reranker: Literal["bge", "none"] = "bge"
+    # Off by default: with per-language vector search and the per-list pool, the reranker no longer improved
+    # answers on the eval set but added ~3 s per question (eval/results.md). It still ranks the best source
+    # first more often, so turn it on if fewer sources are passed to the model.
+    reranker: Literal["bge", "none"] = "none"
     reranker_model: str = "BAAI/bge-reranker-v2-m3"
     hf_home: str | None = None  # Hugging Face cache dir for the reranker model (e.g. D:/HFCache)
     reranker_max_length: int = 256  # tokens of query + passage; 256 keeps the same top-1 as 512, ~3x faster
     reranker_int8: bool = True  # dynamic int8 on CPU: ~1.6x faster, same top-1 on the benchmark
     top_k: int = 5  # chunks passed to the LLM
     candidates: int = 30  # per retriever, before fusion
+    vector_per_lang: bool = True  # separate vector search per language (reaches Arabic-only text)
     rerank_top: int = 10  # fused candidates sent to the reranker (CPU cost grows linearly)
+    rerank_per_list: int = 2  # each retriever's top results always enter the reranker pool
 
 
 @lru_cache
