@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Daleel">
+  <rect width="64" height="64" rx="14" fill="#171717"/>
+  <!-- the Arabic letter dal (د), drawn as one stroke -->
+  <path d="M23 16 C31 21 40 29 41.5 36.5 C42.6 42.5 39 46.5 32.5 46.5 L20 46.5" fill="none" stroke="#fafafa"
+        stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- the cited source -->
+  <rect x="43" y="13" width="8" height="8" rx="2" fill="#3aa57c"/>
+</svg>

@@ -3,10 +3,10 @@
 ## Current plan
 - [x] 1. Scaffold, Docker Compose (Postgres + pgvector), `/health`
 - [x] 2. PDF extraction (Arabic repair, OCR) and article/control-aware chunking
-- [x] 3. Embeddings (bge-m3), hybrid BM25 + vector retrieval, RRF, reranker
+- [x] 3. Embeddings (bge-m3), hybrid BM25 + vector retrieval, RRF, optional reranker
 - [x] 4. Grounded answers with verified citations, `/ask`, chat page
-- [ ] 5. Evaluation: ~50 bilingual questions, hit@5, MRR, citation accuracy, faithfulness, abstention, latency
-- [ ] 6. CI (GitHub Actions), API Docker image, README
+- [x] 5. Evaluation: 69 bilingual questions, hit@5, MRR, citation accuracy, faithfulness, abstention, latency
+- [x] 6. CI (GitHub Actions), API Docker image, README (CI not yet run on GitHub: no remote)
 
 ## Later phase (after evaluation)
 
